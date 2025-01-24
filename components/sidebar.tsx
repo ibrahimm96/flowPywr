@@ -1,10 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Upload, BarChart2, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { signOut } from "firebase/auth"
+import { auth } from "@/lib/firebase"
+import { useAuth } from "@/contexts/AuthContext"
 
 const menuItems = [
   { icon: Upload, label: "Upload Model Files", href: "/upload" },
@@ -13,6 +17,21 @@ const menuItems = [
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(true)
+  const router = useRouter()
+  const { user } = useAuth()
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+      router.push("/auth")
+    } catch (error) {
+      console.error("Failed to log out", error)
+    }
+  }
+
+  if (!user) {
+    return null
+  }
 
   return (
     <motion.aside
@@ -49,6 +68,7 @@ export function Sidebar() {
 
       <motion.div className="p-4" whileHover={{ scale: 1.05 }}>
         <button
+          onClick={handleLogout}
           className={cn("flex items-center w-full p-3 rounded-lg transition-colors duration-200", "hover:bg-gray-700")}
         >
           <LogOut className="w-6 h-6 mr-3" />

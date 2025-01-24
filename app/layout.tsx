@@ -1,4 +1,5 @@
 import { Sidebar } from "@/components/sidebar"
+import { AuthProvider } from "@/contexts/AuthContext"
 import "@/app/globals.css"
 
 export default function RootLayout({
@@ -9,12 +10,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="flex">
-          <Sidebar />
-          <main className="flex-1 p-8 bg-white">{children}</main>
-        </div>
+        <AuthProvider>
+          <div className="flex">
+            <Sidebar />
+            <main className="flex-1 p-8 bg-white">{children}</main>
+          </div>
+        </AuthProvider>
       </body>
     </html>
   )
 }
-
