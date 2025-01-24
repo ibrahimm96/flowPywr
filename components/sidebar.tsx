@@ -22,7 +22,7 @@ export function Sidebar() {
     >
       <motion.div className="p-4 flex items-center justify-between" whileHover={{ scale: 1.05 }}>
         <motion.h1 initial={{ opacity: 1 }} animate={{ opacity: isOpen ? 1 : 0 }} className="text-xl font-bold">
-          Your App
+          FlowPywr
         </motion.h1>
         <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
           {isOpen ? "<<" : ">>"}
