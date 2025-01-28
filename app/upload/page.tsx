@@ -1,100 +1,85 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useToast } from "@/components/ui/use-toast"
-import { Upload } from "lucide-react"
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
-import { storage } from "@/lib/firebase"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import Image from "next/image"
+import { useAuth } from "@/contexts/AuthContext"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
-export default function UploadModelFiles() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
-  const { toast } = useToast()
+const images = ["/home_img1.jpg", "/home_img2.jpg"]
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file && file.type === "application/json") {
-      setSelectedFile(file)
-      toast({
-        title: "File selected",
-        description: `${file.name} has been selected.`,
-      })
-    } else {
-      toast({
-        title: "Invalid file type",
-        description: "Please select a .json file.",
-        variant: "destructive",
-      })
+export default function Home() {
+  const { user, loading } = useAuth()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.push("/auth")
     }
+  }, [user, loading, router])
+
+  if (loading) {
+    return <div>Loading...</div>
   }
 
-  const handleUpload = async () => {
-    if (!selectedFile) {
-      toast({
-        title: "No file selected",
-        description: "Please select a .json file before uploading.",
-        variant: "destructive",
-      })
-      return
-    }
+  if (!user) {
+    return null
+  }
 
-    toast({
-      title: "Upload started",
-      description: "Uploading your file...",
-    })
-
-    try {
-      const storageRef = ref(storage, `model_files/${selectedFile.name}`)
-      await uploadBytes(storageRef, selectedFile)
-      const downloadURL = await getDownloadURL(storageRef)
-
-      toast({
-        title: "Upload complete",
-        description: `${selectedFile.name} has been uploaded successfully.`,
-      })
-
-      console.log("File available at", downloadURL)
-    } catch (error) {
-      console.error("Upload failed", error)
-      toast({
-        title: "Upload failed",
-        description: "There was an error uploading your file.",
-        variant: "destructive",
-      })
-    }
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Upload Model Files</h1>
-      <div className="mb-4">
-        <Label htmlFor="modelFile">Select Model JSON File</Label>
-        <Input
-          id="modelFile"
-          type="file"
-          accept=".json"
-          onChange={handleFileSelect}
-          ref={fileInputRef}
-          className="hidden"
-        />
-        <div className="flex gap-4 mt-2">
-          <Button type="button" onClick={() => fileInputRef.current?.click()} className="bg-blue-500 hover:bg-blue-600">
-            Select File
-          </Button>
-          <Button
-            type="button"
-            onClick={handleUpload}
-            className="bg-green-500 hover:bg-green-600"
-            disabled={!selectedFile}
+    <div className="flex flex-col min-h-screen">
+      <div className="w-full mb-8">
+        <Slider {...settings}>
+          {images.map((src, index) => (
+            <div key={index} className="outline-none">
+              <div className="relative w-full h-[400px]">
+                <Image
+                  src={src || "/placeholder.svg"}
+                  alt={`Slide ${index + 1}`}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  priority={index === 0}
+                />
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+      <div className="flex-grow px-4 py-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl font-bold mb-4 text-gray-900">Welcome to FlowPywr Model</h1>
+          <h2 className="text-2xl font-semibold mb-6 text-gray-700">
+            Water Resource and Hydropower Generation Optimization Framework
+          </h2>
+          <p className="text-lg text-gray-600 mb-8">
+            FlowPywr is an advanced optimization framework designed to maximize the efficiency of water resource
+            management and hydropower generation. By leveraging cutting-edge algorithms and real-time data analysis,
+            FlowPywr helps stakeholders make informed decisions to balance environmental sustainability with energy
+            production needs.
+          </p>
+          <div
+            className="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 rounded inline-block text-left"
+            role="alert"
           >
-            <Upload className="mr-2 h-4 w-4" /> Upload File
-          </Button>
+            <p className="font-bold">Get Started</p>
+            <p>
+              Use the sidebar to navigate through the application. Upload your model files or view analysis results.
+            </p>
+          </div>
         </div>
       </div>
-      {selectedFile && <p className="text-sm text-gray-600">Selected file: {selectedFile.name}</p>}
     </div>
   )
 }
