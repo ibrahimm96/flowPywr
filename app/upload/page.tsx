@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/components/ui/use-toast"
 import { Upload } from "lucide-react"
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { storage } from "@/lib/firebase"
 
 export default function UploadModelFiles() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -39,20 +41,30 @@ export default function UploadModelFiles() {
       return
     }
 
-    // Here you would typically send the file to your server
-    // For now, we'll just simulate an upload
     toast({
       title: "Upload started",
       description: "Uploading your file...",
     })
 
-    // Simulate upload delay
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      const storageRef = ref(storage, `model_files/${selectedFile.name}`)
+      await uploadBytes(storageRef, selectedFile)
+      const downloadURL = await getDownloadURL(storageRef)
 
-    toast({
-      title: "Upload complete",
-      description: `${selectedFile.name} has been uploaded successfully.`,
-    })
+      toast({
+        title: "Upload complete",
+        description: `${selectedFile.name} has been uploaded successfully.`,
+      })
+
+      console.log("File available at", downloadURL)
+    } catch (error) {
+      console.error("Upload failed", error)
+      toast({
+        title: "Upload failed",
+        description: "There was an error uploading your file.",
+        variant: "destructive",
+      })
+    }
   }
 
   return (
