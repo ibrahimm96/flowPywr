@@ -4,13 +4,14 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Upload, BarChart2, LogOut } from "lucide-react"
+import { Home, Upload, BarChart2, LogOut } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { signOut } from "firebase/auth"
 import { auth } from "@/lib/firebase"
 import { useAuth } from "@/contexts/AuthContext"
 
 const menuItems = [
+  { icon: Home, label: "Home", href: "/" },
   { icon: Upload, label: "Upload Model Files", href: "/upload" },
   { icon: BarChart2, label: "Analysis", href: "/analysis" },
 ]
