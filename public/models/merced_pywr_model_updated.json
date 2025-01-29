@@ -137,7 +137,12 @@
                 -1
             ],
             "max_flows": [null],
-            "nsteps":1 
+            "nsteps":1,
+            "coordinates": [
+                37.585470, 
+                -120.270493
+            ]
+
         } 
     ],
     "edges": [
