@@ -2,11 +2,14 @@
 
 import React, { useState } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Map from "@/components/map"
 
 const models = ["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]
 
 export default function ModelVisualization() {
   const [selectedModel, setSelectedModel] = useState(models[0])
+
+
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -27,8 +30,12 @@ export default function ModelVisualization() {
             </SelectContent>
           </Select>
         </div>
-        <div className="flex-1">{/* We will add more components for visualization here later */}</div>
+
+        {/* Map component positioned to the right */}
+        <div className="flex-1 ml-8">
+          <Map />
+        </div>
       </div>
     </div>
-  )
+  );
 }
