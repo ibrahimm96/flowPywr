@@ -8,9 +8,7 @@ const models = ["Merced River", "Tuolumne River", "San Joaquin River", "Stanisla
 
 export default function ModelVisualization() {
   const [selectedModel, setSelectedModel] = useState(models[0])
-
-
-
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold text-center mb-8">Visualize FlowPywr Model Components</h1>
@@ -31,7 +29,7 @@ export default function ModelVisualization() {
           </Select>
         </div>
 
-        {/* Map component positioned to the right */}
+        {/* Map component */}
         <div className="flex-1 ml-8">
           <Map />
         </div>

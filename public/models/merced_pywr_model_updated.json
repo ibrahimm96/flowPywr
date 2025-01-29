@@ -55,7 +55,11 @@
             "min_volume": "Lake McClure/Inactive Pool",
             "cost": "Lake McClure/Cost",
             "level": "Lake McClure/Elevation",
-            "gauge": "USGS 11269500 LK MCCLURE A EXCHEQUER CA"
+            "gauge": "USGS 11269500 LK MCCLURE A EXCHEQUER CA",
+            "coordinates": [
+                37.598485, 
+                -120.264806
+            ]
         },
         {
             "name": "Lake McSwain",
@@ -65,7 +69,11 @@
             "max_volume": "Lake McSwain/Storage Capacity",
             "min_volume": "Lake McSwain/Inactive Pool",
             "cost": -100,
-            "gauge": "USGS 11270600 MCSWAIN RES NR SNELLING CA"
+            "gauge": "USGS 11270600 MCSWAIN RES NR SNELLING CA",
+            "coordinates": [
+                37.518732, 
+                -120.304977
+            ]
         },
         {
             "name": "McSwain PH",
@@ -130,7 +138,7 @@
             ],
             "max_flows": [null],
             "nsteps":1 
-        }
+        } 
     ],
     "edges": [
         [

@@ -4,6 +4,11 @@ import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 
+  /* 
+  To add coordinates for all possible nodes in each model:
+        - Write a script that retrieves the coordinate attribute from each model's json file 
+        - Use map.addLayer in a loop to map the array of retrieved coordinates objects
+  */
 
 const Map: React.FC = () => {
     const mapRef = useRef<mapboxgl.Map | null>(null);
@@ -29,8 +34,8 @@ const Map: React.FC = () => {
       <div
         ref={mapContainerRef}
         style={{
-          width: "600px", // Adjusted width
-          height: "400px", // Adjusted height
+          width: "1100px", // Adjusted width
+          height: "800px", // Adjusted height
           borderRadius: "10px",
           overflow: "hidden",
         }}
