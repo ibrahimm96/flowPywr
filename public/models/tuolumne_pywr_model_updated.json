@@ -113,7 +113,11 @@
             "max_volume": 338.2,
             "level": "Cherry Lake/Elevation",
             "cost": "Cherry Lake/Cost",
-            "gauge": "USGS 11277200 CHERRY LK NR HETCH HETCHY CA"
+            "gauge": "USGS 11277200 CHERRY LK NR HETCH HETCHY CA",
+            "coordinates": [
+                38.000886, 
+                -119.907607
+            ]
         },
         {
             "name": "Dion R Holm PH",
@@ -128,7 +132,11 @@
             ],
             "max_flows": [
                 "Dion R Holm PH/Demand",null
-            ], "nsteps":2
+            ], "nsteps":2,
+            "coordinates":[
+                37.8966, 
+                -119.968 
+            ]
         },
         {
             "name": "Don Pedro Lake Spillway",
@@ -151,7 +159,11 @@
                 1
             ],
             "max_flows": [null],
-            "nsteps":1
+            "nsteps":1,
+            "coordinates":[
+                37.697139, 
+                -120.420028
+            ]
         },
         {
             "name": "Don Pedro Reservoir",
@@ -162,7 +174,11 @@
             "min_volume": 1000,
             "level": "Don Pedro Reservoir/Elevation",
             "cost": "Don Pedro Reservoir/Cost",
-            "gauge": "USGS 11287500 DON PEDRO RES NR LA GRANGE CA"
+            "gauge": "USGS 11287500 DON PEDRO RES NR LA GRANGE CA",
+            "coordinates":[
+                37.713297, 
+                -120.388356
+            ]
         },
         {
             "name": "Eleanor-Cherry Pumping",
@@ -199,7 +215,11 @@
             "min_volume": 35,
             "level": "Hetch Hetchy Reservoir/Elevation",
             "cost": "Hetch Hetchy Reservoir/Cost",
-            "gauge": "USGS 11275500 HETCH HETCHY RES A HETCH HETCHY CA"
+            "gauge": "USGS 11275500 HETCH HETCHY RES A HETCH HETCHY CA",
+            "coordinates":[
+                37.956273, 
+                -119.754096
+            ]
         },
         {
             "name": "IFR bl Cherry Lake",
@@ -268,7 +288,11 @@
             ],
             "max_flows": [
                 "Kirkwood PH/Demand",null
-            ],"nsteps":2
+            ],"nsteps":2,
+            "coordinates":[
+                37.877476, 
+                -119.952843
+            ]
         },
         {
             "name": "La Grange",
@@ -284,7 +308,11 @@
             "min_volume": 0,
             "level": "Lake Eleanor/Elevation",
             "cost": "Lake Eleanor/Cost",
-            "gauge": "USGS 11277500 LK ELEANOR NR HETCH HETCHY CA"
+            "gauge": "USGS 11277500 LK ELEANOR NR HETCH HETCHY CA",
+            "coordinates":[
+                37.986252, 
+                -119.858267
+            ]
         },
         {
             "name": "Moccasin PH",
@@ -297,7 +325,11 @@
                 -2350
             ],
             "max_flows": [null],
-            "nsteps":1
+            "nsteps":1,
+            "coordinates":[
+                37.809268, 
+                -120.299562
+            ]
         },
         {
             "name": "Moccasin Reservoir",
