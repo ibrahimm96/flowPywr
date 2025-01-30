@@ -5,12 +5,6 @@ import mapboxgl from "mapbox-gl";
 import useGetCoordinates from "@/hooks/useGetCoordinates";
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-  /* 
-  To add coordinates for all possible nodes in each model:
-        - Write a script that retrieves the coordinate attribute from each model's json file 
-        - Use map.addLayer in a loop to map the array of retrieved coordinates objects
-  */
-
 mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
 interface MapProps {
@@ -33,12 +27,21 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
         zoom: 9,
       });
 
+      mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right'); // Add zoom buttons to top-right corner
+      
       // Add markers for each coordinate only if mapRef.current is available
       coordinates.forEach((item) => {
         if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
+          // Create and add the marker to the map
           new mapboxgl.Marker()
             .setLngLat([item.coordinates.lon, item.coordinates.lat])
             .addTo(mapRef.current);
+      
+          // Create the popup using the name from the coordinates
+          new mapboxgl.Popup({ offset: 25 })
+            .setHTML(`<h3>${item.name}</h3>`) // Name
+            .setLngLat([item.coordinates.lon, item.coordinates.lat]) // Position
+            .addTo(mapRef.current); // Always show 
         }
       });
     }
@@ -49,9 +52,10 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
         mapRef.current.remove();
       }
     };
-  }, [coordinates]); // Re-run when coordinates change
+  }, [coordinates]); // Re-run on coordinates change
 
-  return <div ref={mapContainerRef} style={{ height: "800px", width: "100%" }} />;
+  return <div ref={mapContainerRef} style={{ height: "700px", width: "100%" }} />;
 };
 
 export default Map;
+

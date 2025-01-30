@@ -11,7 +11,7 @@ export default function ModelVisualization() {
   const modelNames = {
     "Merced River": "merced_pywr_model_updated",
     "Tuolumne River": "tuolumne_pywr_model_updated",
-    "San Joaquin River": "san_joaquin_pywr_model_updated",
+    "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
     "Stanislaus River": "stanislaus_pywr_model_updated",
   };
 
@@ -38,7 +38,8 @@ export default function ModelVisualization() {
         <div className="flex-1 ml-8">
           <h2 className="text-xl font-semibold mb-4">{selectedModel} Model</h2>
           {/* Pass the modelName to the Map component */}
-          <Map modelName={modelNames[selectedModel as keyof typeof modelNames]} />
+          <Map modelName={modelNames[selectedModel as keyof typeof modelNames]}
+           />
         </div>
       </div>
     </div>
