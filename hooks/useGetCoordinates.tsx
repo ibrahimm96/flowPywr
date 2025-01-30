@@ -37,3 +37,4 @@ const useGetCoordinates = (modelName: string) => {
   
 
 export default useGetCoordinates;
+

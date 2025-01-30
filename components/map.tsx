@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import useGetCoordinates from "@/hooks/useGetCoordinates";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
   /* 
   To add coordinates for all possible nodes in each model:
@@ -10,36 +11,47 @@ import "mapbox-gl/dist/mapbox-gl.css";
         - Use map.addLayer in a loop to map the array of retrieved coordinates objects
   */
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTY2dGphN3cwM3FoMmpvbGhicmw0dmpsIn0.jbBqfx5UiMuZ5lzxlQgXpg";
+mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
-const Map = () => {
+interface MapProps {
+  modelName: string;
+}
+
+const Map: React.FC<MapProps> = ({ modelName }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null); // Reference to map container
   const mapRef = useRef<mapboxgl.Map | null>(null); // Reference to the map instance
+
+  const { coordinates } = useGetCoordinates(modelName); // Get coordinates directly
 
   useEffect(() => {
     if (mapContainerRef.current) {
       // Create a Mapbox map instance
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: 'mapbox://styles/mapbox/satellite-streets-v11', // Hybrid style (satellite + streets)
-        center: [-120.4820, 37.3021], // [Longitude, Latitude]
-        zoom: 10,
+        style: "mapbox://styles/mapbox/satellite-streets-v11", // Hybrid style (satellite + streets)
+        center: [coordinates[0]?.coordinates.lon || -120.4820, coordinates[0]?.coordinates.lat || 37.3021], // Center on first coordinate (or fallback)
+        zoom: 9,
       });
 
-      // Add a waypoint (marker) at the given coordinates
-      new mapboxgl.Marker()
-        .setLngLat([-120.4820, 37.3021]) // [Longitude, Latitude]
-        .addTo(mapRef.current);
+      // Add markers for each coordinate only if mapRef.current is available
+      coordinates.forEach((item) => {
+        if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
+          new mapboxgl.Marker()
+            .setLngLat([item.coordinates.lon, item.coordinates.lat])
+            .addTo(mapRef.current);
+        }
+      });
     }
 
     return () => {
+      // Cleanup the map on component unmount
       if (mapRef.current) {
-        mapRef.current.remove(); // Cleanup the map on component unmount
+        mapRef.current.remove();
       }
     };
-  }, []);
+  }, [coordinates]); // Re-run when coordinates change
 
-  return <div ref={mapContainerRef} style={{ height: '800px', width: '100%' }} />;
+  return <div ref={mapContainerRef} style={{ height: "800px", width: "100%" }} />;
 };
-  
+
 export default Map;
