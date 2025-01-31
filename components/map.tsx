@@ -2,8 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import useGetCoordinates from "@/hooks/useGetCoordinates";
 import 'mapbox-gl/dist/mapbox-gl.css';
+import useGetModelData from "@/hooks/useGetModelData";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
@@ -16,7 +16,7 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
   const mapRef = useRef<mapboxgl.Map | null>(null); // Reference to the map instance
   const [selectedType, setSelectedType] = useState("All"); // State for selected filter type
 
-  const { coordinates } = useGetCoordinates(modelName); // Get coordinates directly
+  const { coordinates } = useGetModelData(modelName); // Get coordinates directly
 
   // Store markers so they can be removed when the filter changes
   const markers = useRef<mapboxgl.Marker[]>([]);

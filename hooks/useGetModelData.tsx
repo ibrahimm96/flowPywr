@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const useGetCoordinates = (modelName: string) => {
+const useGetModelData = (modelName: string) => {
     const [coordinates, setCoordinates] = useState<{ 
         name: string; 
         coordinates: { lat: number | null; lon: number | null }; 
@@ -40,4 +40,4 @@ const useGetCoordinates = (modelName: string) => {
     return { coordinates, title };
 };
 
-export default useGetCoordinates;
+export default useGetModelData;
