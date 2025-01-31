@@ -32,16 +32,21 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
       // Add markers for each coordinate only if mapRef.current is available
       coordinates.forEach((item) => {
         if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
-          // Create and add the marker to the map
-          new mapboxgl.Marker()
+          // Determine marker color based on type
+          const markerColor = item.type === "Hydropower" ? "#ff4d4d" : //
+                              item.type === "Reservoir" ? "#007bff" : //
+                              "#dc3545"; // Default to red if type is unknown
+      
+          const marker = new mapboxgl.Marker({ color: markerColor }) // Set color
             .setLngLat([item.coordinates.lon, item.coordinates.lat])
             .addTo(mapRef.current);
       
-          // Create the popup using the name from the coordinates
-          new mapboxgl.Popup({ offset: 25 })
-            .setHTML(`<h3>${item.name}</h3>`) // Name
-            .setLngLat([item.coordinates.lon, item.coordinates.lat]) // Position
-            .addTo(mapRef.current); // Always show 
+          // Create the popup (hidden by default)
+          const popup = new mapboxgl.Popup({ offset: 25 })
+            .setHTML(`<h3>${item.name}</h3><p>Type: ${item.type || "Unknown"}</p>`);
+      
+          // Show popup only when marker is clicked
+          marker.setPopup(popup);
         }
       });
     }
