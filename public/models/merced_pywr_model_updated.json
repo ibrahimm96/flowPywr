@@ -85,7 +85,11 @@
                 "McSwain PH/Excess Value"
             ],
             "max_flows": [null, null],
-            "nsteps":2
+            "nsteps":2,
+            "coordinates":[
+                37.522398, 
+                -120.310262
+            ]
         },
         {
             "name": "Merced Falls PH",
@@ -97,7 +101,11 @@
                 "Merced Falls PH/Excess Value"
             ],
             "max_flows": [null, null],
-            "nsteps":2
+            "nsteps":2,
+            "coordinates":[
+                37.523101366367335, 
+                -120.32970740541774
+            ]
         },
         {
             "name": "IFR at Shaffer Bridge",

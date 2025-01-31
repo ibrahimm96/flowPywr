@@ -88,19 +88,34 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
   }, [selectedType, coordinates]); // Re-run on filter or coordinates change
 
   return (
-    <div>
-      {/* Filter menu */}
-      <div>
+    <div style={{ position: "relative", height: "700px", width: "100%" }}>
+      {/* Map container */}
+      <div ref={mapContainerRef} style={{ height: "100%", width: "100%" }} />
+
+      {/* Filter menu positioned on the map */}
+      <div 
+        style={{
+          position: "absolute", 
+          top: "20px", 
+          left: "20px", 
+          backgroundColor: "white", 
+          padding: "10px", 
+          borderRadius: "5px", 
+          boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)",
+          zIndex: 1
+        }}
+      >
         <label htmlFor="typeFilter">Select Type: </label>
-        <select id="typeFilter" value={selectedType} onChange={(e) => setSelectedType(e.target.value)}>
+        <select 
+          id="typeFilter" 
+          value={selectedType} 
+          onChange={(e) => setSelectedType(e.target.value)}
+        >
           <option value="All">All</option>
           <option value="Reservoir">Reservoir</option>
           <option value="Hydropower">Hydropower</option>
         </select>
       </div>
-
-      {/* Map container */}
-      <div ref={mapContainerRef} style={{ height: "700px", width: "100%" }} />
     </div>
   );
 };
