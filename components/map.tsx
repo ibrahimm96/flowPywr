@@ -27,8 +27,8 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: "mapbox://styles/mapbox/satellite-streets-v11", // Hybrid style (satellite + streets)
-        center: [coordinates[0]?.coordinates.lon || -120.4820, coordinates[0]?.coordinates.lat || 37.3021], // Center on first coordinate (or fallback)
-        zoom: 9,
+        center: [-119.97534121245972, 37.169944968515274], // Center, need to add dynamic centering based on model region!
+        zoom: 7.5,
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right'); // Add zoom buttons to top-right corner
@@ -49,23 +49,28 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
   };
 
   // Function to add markers based on filtered coordinates
-  const addMarkers = (filteredCoordinates: typeof coordinates) => {
-    clearMarkers(); // Clear existing markers
+  const addMarkers = (markerCoordinates: typeof coordinates) => {
+    clearMarkers(); // Clear existing markers on data change, and add new markers.
 
-    filteredCoordinates.forEach((item) => {
+    markerCoordinates.forEach((item) => {
       if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
         // Determine marker color based on type
-        const markerColor = item.type === "Hydropower" ? "#ff4d4d" : //
-                            item.type === "Reservoir" ? "#007bff" : //
-                            "#dc3545"; // Default to red if type is unknown
+        const markerColor = item.type === "Hydropower" ? "#ff4d4d" : // Red
+                            item.type === "Reservoir" ? "#007bff" : // Blue
+                            "#dc3545"; // Default
         
         const marker = new mapboxgl.Marker({ color: markerColor })
           .setLngLat([item.coordinates.lon, item.coordinates.lat])
           .addTo(mapRef.current);
 
         // Create the popup (hidden by default)
-        const popup = new mapboxgl.Popup({ offset: 25 })
-          .setHTML(`<h3>${item.name}</h3><p>Type: ${item.type || "Unknown"}</p>`);
+        const popup = new mapboxgl.Popup({ offset: 33 })
+        .setHTML(`
+          <div style="text-align: center;">  
+            <h3 class="text-md font-bold mb-2">${item.name}</h3>  
+            <p class="text-xs font-medium mb-2">${item.type || "Unknown Node"}</p>
+          </div>
+        `);
 
         // Show popup only when marker is clicked
         marker.setPopup(popup);
@@ -76,14 +81,14 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
   };
 
   // Filter coordinates based on selected type
-  const filteredCoordinates = selectedType === "All" 
+  const markerCoordinates = selectedType === "All" 
     ? coordinates 
     : coordinates.filter((item) => item.type === selectedType);
 
   // Update markers when the filter changes
   useEffect(() => {
     if (mapRef.current) {
-      addMarkers(filteredCoordinates);
+      addMarkers(markerCoordinates);
     }
   }, [selectedType, coordinates]); // Re-run on filter or coordinates change
 

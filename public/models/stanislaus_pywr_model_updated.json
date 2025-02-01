@@ -146,7 +146,11 @@
             "level": "Beardsley Reservoir/Elevation",
             "cost": "Beardsley Reservoir/Storage Value",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11292800 BEARDSLEY LAKE NEAR STRAWBERRY CA"
+            "gauge": "USGS 11292800 BEARDSLEY LAKE NEAR STRAWBERRY CA",
+            "coordinates": [
+                38.213463, 
+                -120.060787
+            ]
         },
         {
             "name": "Beardsley PH",
@@ -158,7 +162,11 @@
             "costs": [-10000],
             "max_flows": [null],
             "nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.202586, 
+                -120.077035
+            ]
         },
         {
             "name": "Beaver Creek Diversion",
@@ -198,7 +206,11 @@
                 "Donnells PH/Cost/2",
                 "Donnells PH/Cost/3"
             ],"nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.246479, 
+                -120.034065
+            ]
         },
         {
             "name": "Donnells Reservoir",
@@ -209,7 +221,11 @@
             "cost": "Donnells Reservoir/Storage Value",
             "level": "Donnells Reservoir/Elevation",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11292600 DONNELL LK NR DARDANELLE CA"
+            "gauge": "USGS 11292600 DONNELL LK NR DARDANELLE CA",
+            "coordinates": [
+                38.336744, 
+                -119.940371
+            ]
         },
         {
             "name": "Donnell Lake Low Flow Release",
@@ -454,7 +470,11 @@
             "max_volume": 0.1,
             "min_volume": 0.1,
             "cost": -60,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.199816, 
+                -120.359766
+            ]
         },
         {
             "name": "Lyons Reservoir",
@@ -464,7 +484,11 @@
             "min_volume": 1.25,
             "cost": "Lyons Reservoir/Storage Value",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11297700 LYONS RES NR LONG BARN CA"
+            "gauge": "USGS 11297700 LYONS RES NR LONG BARN CA",
+            "coordinates": [
+                38.097824, 
+                -120.166213
+            ]
         },
         {
             "name": "McKays Point Diversion",
@@ -489,7 +513,11 @@
             "cost": "New Melones Lake/Storage Value",
             "level": "New Melones Lake/Elevation",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11299000 NEW MELONES RES NR SONORA CA"
+            "gauge": "USGS 11299000 NEW MELONES RES NR SONORA CA",
+            "coordinates": [
+                37.970417, 
+                -120.521711
+            ]
         },
         {
             "name": "New Melones PH",
@@ -501,7 +529,11 @@
             "costs": [-1],
             "max_flows":[null],
             "nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.946415, 
+                -120.530064
+            ]
         },
         {
             "name": "New Spicer Meadow Reservoir",
@@ -512,7 +544,11 @@
             "level": "New Spicer Meadow Reservoir/Elevation",
             "cost": "New Spicer Meadow Reservoir/Storage Value",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11293770 NEW SPICER MEADOW RES NR BIG MEADOW CA"
+            "gauge": "USGS 11293770 NEW SPICER MEADOW RES NR BIG MEADOW CA",
+            "coordinates": [
+                38.402665, 
+                -119.973055
+            ]
         },
         {
             "name": "New Spicer Meadow PH",
@@ -563,7 +599,11 @@
             "cost": "Pinecrest Reservoir/Storage Value",
             "level": "Pinecrest Reservoir/Elevation",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11295900 PINECREST LK NR STRAWBERRY CA"
+            "gauge": "USGS 11295900 PINECREST LK NR STRAWBERRY CA",
+            "coordinates": [
+                38.195939, 
+                -119.982166
+            ]
         },
         {
             "name": "Relief Reservoir",
@@ -574,7 +614,11 @@
             "cost": "Relief Reservoir/Storage Value",
             "level": "Relief Reservoir/Elevation",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11291000 RELIEF RES NR BAKER STATION CA"
+            "gauge": "USGS 11291000 RELIEF RES NR BAKER STATION CA",
+            "coordinates": [
+                38.271162, 
+                -119.738248
+            ]
         },
         {
             "name": "Sand Bar PH",
