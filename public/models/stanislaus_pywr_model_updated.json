@@ -189,7 +189,11 @@
                 "Collierville PH/Cost/2",
                 "Collierville PH/Cost/3"
             ], "nsteps":3, 
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.144820, 
+                -120.379881
+            ]
         },
         {
             "name": "Donnells PH",
@@ -560,7 +564,11 @@
             "costs": [-1000000],
             "max_flows":[null],
             "nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.391850, 
+                -120.000705
+            ]
         },
         {
             "name": "Philadelphia Aquaduct Outflow",
@@ -636,7 +644,11 @@
                 "Sand Bar PH/Cost/3"
             ],            
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.186060, 
+                -120.150231
+            ]
         },
         {
             "name": "Beardsley Afterbay",
@@ -659,7 +671,11 @@
                 "Spring Gap PH/Cost/3"
             ],         
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.186634,
+                -120.111849
+            ]
         },
         {
             "name": "Stanislaus PH",
@@ -676,7 +692,11 @@
                 "Stanislaus PH/Cost/2",
                 "Stanislaus PH/Cost/3"
             ], "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.139003, 
+                -120.370433
+            ]
         },
         {
             "name": "Stanislaus Tunnel Outflow",
@@ -716,7 +736,11 @@
             "min_volume": 67.8,
             "cost": "Lake Tulloch/Storage Value",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS 11299995 TULLOCH RES NR KNIGHTS FERRY CA"
+            "gauge": "USGS 11299995 TULLOCH RES NR KNIGHTS FERRY CA",
+            "coordinates": [
+                37.896035, 
+                -120.584352
+            ]
         },
         {
             "name": "Lake Tulloch Flood Control",
@@ -754,7 +778,11 @@
             "max_volume": 6.76,
             "cost": "Union-Utica Reservoir/Storage Value",
             "comment": "{\"resource_class\": \"node\"}",
-            "gauge": "USGS UNION-UTICA"
+            "gauge": "USGS UNION-UTICA",
+            "coordinates": [
+                38.431768, 
+                -120.000772
+            ]
         },
         {
             "name": "UPA Tunnel Tap",

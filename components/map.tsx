@@ -11,24 +11,44 @@ interface MapProps {
   modelName: string;
 }
 
+// Dynamic map centering
+const getCenterCoordinate = (
+  coordinates: { name: string; coordinates: { lat: number | null; lon: number | null } }[]
+): { lat: number; lon: number } => {
+  let latSum = 0, lonSum = 0, count = 0;
+
+  coordinates.forEach(({ coordinates: { lat, lon } }) => {
+    if (lat !== null && lon !== null) {
+      latSum += lat;
+      lonSum += lon;
+      count++;
+    }
+  });
+
+  return count > 0 ? { lat: latSum / count, lon: lonSum / count } : { lat: 0, lon: 0 };
+};
+
+
 const Map: React.FC<MapProps> = ({ modelName }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null); // Reference to map container
   const mapRef = useRef<mapboxgl.Map | null>(null); // Reference to the map instance
   const [selectedType, setSelectedType] = useState("All"); // State for selected filter type
 
   const { coordinates } = useGetModelData(modelName); // Get coordinates directly
+  console.log(coordinates);
 
   // Store markers so they can be removed when the filter changes
   const markers = useRef<mapboxgl.Marker[]>([]);
 
   useEffect(() => { 
     if (mapContainerRef.current) {
+      const center = getCenterCoordinate(coordinates); // Dynamic Centering
       // Create a Mapbox map instance
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: "mapbox://styles/mapbox/satellite-streets-v11", // Hybrid style (satellite + streets)
-        center: [-119.97534121245972, 37.169944968515274], // Center, need to add dynamic centering based on model region!
-        zoom: 7.5,
+        center: center, 
+        zoom: 8.5,
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl(), 'top-right'); // Add zoom buttons to top-right corner

@@ -397,7 +397,7 @@
                 "Big Creek 2 PH/Water Demand/2",
                 null
             ],"nsteps":3,
-            "coordinates":[
+            "coordinates": [
                 37.198879803607795, 
                 -119.30610208398805
             ]
@@ -426,7 +426,7 @@
                 "Big Creek 2A PH/Water Demand/2",
                 null
             ],"nsteps":3,
-            "coordinates":[
+            "coordinates": [
                 37.19919667417847, 
                 -119.30547604216058
             ]
@@ -455,7 +455,7 @@
                 "Big Creek 3 PH/Water Demand/2",
                 null
             ],"nsteps":3,
-            "coordinates":[
+            "coordinates": [
                 37.1486401896798, 
                 -119.38662504206496
             ]
@@ -479,7 +479,7 @@
                 "Big Creek 4 PH/Water Demand/2",
                 null
             ],"nsteps":3,
-            "coordinates":[
+            "coordinates": [
                 37.13903420893181, 
                 -119.4898331359621
             ]
@@ -509,7 +509,7 @@
                 "Big Creek 8 PH/Water Demand/2",
                 null
             ],"nsteps":3,
-            "coordinates":[
+            "coordinates": [
                 37.20969747126024, 
                 -119.32901345370493
             ]
@@ -577,7 +577,11 @@
                 "Eastwood PH/Water Demand/1",
                 "Eastwood PH/Water Demand/2",
                 null
-            ],"nsteps":3
+            ],"nsteps":3,
+            "coordinates": [
+                37.135995, 
+                -119.260455
+            ]
         },
         {
             "name": "Florence Lake",
@@ -588,7 +592,7 @@
             "min_volume": 1.25,
             "cost": -130,
             "gauge": "USGS 11229600 FLORENCE LK NR BIG C CA",
-            "coordinates":[
+            "coordinates": [ 
                 37.74922950283498, 
                 -119.3448522083955
             ]
@@ -633,7 +637,7 @@
             "min_volume": 37.0,
             "cost": "Huntington Lake/Cost",
             "gauge": "USGS 11236000 HUNTINGTON LK NR BIG CREEK CA",
-            "coordinates":[
+            "coordinates": [
                 37.24003993113583, 
                 -119.1983600259511
             ]
@@ -949,7 +953,7 @@
             "min_volume": 4.2,
             "cost": -110,
             "gauge": "USGS 11246650 KERCKHOFF RES NR AUBERRY CA",
-            "coordinates":[
+            "coordinates": [
                 37.1432099409688, 
                 -119.5184209487987
             ]
@@ -963,7 +967,7 @@
             "min_volume": 10,
             "cost": -50,
             "gauge": "USGS 11231000 LK THOMAS A. EDISON NR BIG C CA",
-            "coordinates":[
+            "coordinates": [
                 37.38272377739692, 
                 -118.9707473198422
             ]
@@ -986,7 +990,11 @@
                 "Mammoth Pool PH/Water Demand/1",
                 "Mammoth Pool PH/Water Demand/2",
                 null
-            ],"nsteps":3
+            ],"nsteps":3,
+            "coordinates": [
+                37.220270, 
+                -119.338004
+            ]
         },
         {
             "name": "Mammoth Pool Reservoir",
@@ -1065,7 +1073,11 @@
                 "Portal PH/Water Demand/1",
                 "Portal PH/Water Demand/2",
                 null
-            ],"nsteps":3
+            ],"nsteps":3,
+            "coordinates": [
+                37.25689959314854, 
+                -119.1591508345574
+            ]
         },
         {
             "name": "Redinger Lake",
@@ -1190,7 +1202,11 @@
             "max_volume": 167.16,
             "min_volume": 92.5,
             "cost": -80,
-            "gauge": "USGS 11239500 SHAVER LK NR BIG C CA"
+            "gauge": "USGS 11239500 SHAVER LK NR BIG C CA",
+            "coordinates": [
+                37.126486, 
+                -119.292713
+            ]
         }
     ],
     "edges": [
