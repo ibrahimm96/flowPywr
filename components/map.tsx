@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import useGetModelData from "@/hooks/useGetModelData";
+import AnimatedPopup from "mapbox-gl-animated-popup";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
@@ -84,14 +85,25 @@ const Map: React.FC<MapProps> = ({ modelName }) => {
           .addTo(mapRef.current);
 
         // Create the popup (hidden by default)
-        const popup = new mapboxgl.Popup({ offset: 33 })
-        .setHTML(`
+        const popup = new AnimatedPopup({
+          openingAnimation: {
+            duration: 400,
+            easing: 'easeInOutElastic',
+            transform: 'scale',
+          },
+          closingAnimation: {
+            duration: 300,
+            easing: 'easeInBack',
+            transform: 'scale',
+          },
+          offset: 33
+        }).setHTML(`
           <div style="text-align: center;">  
             <h3 class="text-md font-bold mb-2">${item.name}</h3>  
             <p class="text-xs font-medium mb-2">${item.type || "Unknown Node"}</p>
           </div>
         `);
-
+        
         // Show popup only when marker is clicked
         marker.setPopup(popup);
 
