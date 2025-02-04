@@ -7,7 +7,7 @@ import Map from "@/components/map"
 const models = ["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"];
 
 export default function ModelVisualization() {
-  const [selectedModel, setSelectedModel] = useState(models[0]);   // No default display created yet
+  const [selectedModel, setSelectedModel] = useState(models[0]);   // default
   const modelNames = {
     "Merced River": "merced_pywr_model_updated",
     "Tuolumne River": "tuolumne_pywr_model_updated",
