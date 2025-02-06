@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import MapSideBar from "@/components/mapSideBar"; 
+import MapSidebar from "@/components/mapSidebar";
 import Map from "@/components/map";
 import { FaSpinner } from 'react-icons/fa';
 
@@ -48,7 +48,7 @@ export default function ModelVisualization() {
         <div className="flex h-full">
           {/* Menu */}
           <div className="h-screen w-[250px] bg-gray-800">
-            <MapSideBar
+            <MapSidebar
               onModelChange={(model) => setSelectedModel(model)}
               onStyleChange={(style) => setSelectedStyle(style)}
               onTypeChange={(type) => setSelectedType(type)}
