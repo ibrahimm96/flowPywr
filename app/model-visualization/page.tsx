@@ -1,13 +1,23 @@
-"use client"
+"use client";
 
-import React, { useState } from "react"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Map from "@/components/map"
+import React, { useState } from "react";
+import MapSideBar from "@/components/mapSideBar"; 
+import Map from "@/components/map";
 
-const models = ["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"];
+const models = [
+  "Merced River",
+  "Tuolumne River",
+  "San Joaquin River",
+  "Stanislaus River",
+];
 
 export default function ModelVisualization() {
-  const [selectedModel, setSelectedModel] = useState(models[0]);   // default
+  const [selectedModel, setSelectedModel] = useState(models[0]); // default
+  const [selectedStyle, setSelectedStyle] = useState(
+    "mapbox://styles/mapbox/streets-v11"
+  );
+  const [selectedType, setSelectedType] = useState("All");
+
   const modelNames = {
     "Merced River": "merced_pywr_model_updated",
     "Tuolumne River": "tuolumne_pywr_model_updated",
@@ -16,30 +26,25 @@ export default function ModelVisualization() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">Visualize FlowPywr Model Components</h1>
-      <div className="flex justify-between items-start">
-        <div className="w-64">
-          <p className="text-sm font-medium mb-2">Select Model</p>
-          <Select onValueChange={(value) => setSelectedModel(value)} defaultValue={selectedModel}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select a model" />
-            </SelectTrigger>
-            <SelectContent>
-              {models.map((model) => (
-                <SelectItem key={model} value={model}>
-                  {model}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+    <div className="relative h-screen">
+      {/* Map Section */}
+      <div className="flex h-full">
+        {/* Floating Sidebar */}
+        <div className="h-screen w-[250px] bg-gray-800">
+          <MapSideBar
+            onModelChange={(model) => setSelectedModel(model)}
+            onStyleChange={(style) => setSelectedStyle(style)}
+            onTypeChange={(type) => setSelectedType(type)}
+          />
         </div>
-
-        <div className="flex-1 ml-8">
-          <h2 className="text-xl font-semibold mb-4">{selectedModel} Model</h2>
-          {/* Pass the modelName to Map component */}
-          <Map modelName={modelNames[selectedModel as keyof typeof modelNames]}
-           />
+  
+        {/* Map Section, filling 250px to the left */}
+        <div className="h-full w-full -ml-[250px]">
+          <Map
+            modelName={modelNames[selectedModel as keyof typeof modelNames]}
+            type={selectedType}
+            style={selectedStyle}
+          />
         </div>
       </div>
     </div>
