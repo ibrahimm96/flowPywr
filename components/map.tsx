@@ -38,6 +38,7 @@ const Map: React.FC<MapProps> = ({ style, type, modelName }) => {
   const mapRef = useRef<mapboxgl.Map | null>(null); // Reference to map instance
 
   const { coordinates } = useGetModelData(modelName); // Fetch model data based on model name
+  console.log("* MAP DATA REQUEST *",  coordinates)
   const markers = useRef<mapboxgl.Marker[]>([]); // Reference to marker instances
 
   const addMarkers = (markerCoordinates: typeof coordinates) => { // Function to add markers to map
@@ -122,4 +123,4 @@ const Map: React.FC<MapProps> = ({ style, type, modelName }) => {
   );
 }
 
-export default Map; // Export Map component
+export default Map; 

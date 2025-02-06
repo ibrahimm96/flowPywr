@@ -3,18 +3,30 @@
 import { useEffect, useState } from 'react';
 
 const useGetModelData = (modelName: string) => {
-    const [coordinates, setCoordinates] = useState<{ 
+  const [coordinates, setCoordinates] = useState<{ 
         name: string; 
         coordinates: { lat: number | null; lon: number | null }; 
         type?: string;
-    }[]>([]);
+  }[]>([]);
     
-    const [title, setTitle] = useState<string>('');
+  const [title, setTitle] = useState<string>('');
 
-    useEffect(() => {
+  // Mapping model names to internal model filenames
+  const modelNames: Record<string, string> = {
+    "Merced River": "merced_pywr_model_updated",
+    "Tuolumne River": "tuolumne_pywr_model_updated",
+    "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
+    "Stanislaus River": "stanislaus_pywr_model_updated",
+  };
+
+  // Get the internal model filename based on the selected model name
+  const internalModelName = modelNames[modelName];
+
+  useEffect(() => {
+    if (internalModelName) {
       const fetchData = async () => {
         try {
-          const filePath = `/models/${modelName}.json`; // Adjust the path based on modelName input
+          const filePath = `/models/${internalModelName}.json`; // Use internal model filename here
           const response = await fetch(filePath);
           const data = await response.json();
 
@@ -35,9 +47,10 @@ const useGetModelData = (modelName: string) => {
       };
 
       fetchData();
-    }, [modelName]);
+    }
+  }, [modelName, internalModelName]); // Re-fetch data when modelName changes
 
-    return { coordinates, title };
+  return { coordinates, title };
 };
 
 export default useGetModelData;

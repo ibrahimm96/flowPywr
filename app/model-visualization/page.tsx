@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import MapSideBar from "@/components/mapSideBar"; 
 import Map from "@/components/map";
 import { FaSpinner } from 'react-icons/fa';
-import { Label } from "@radix-ui/react-label";
 
 const models = [
   "Merced River",
@@ -16,16 +15,9 @@ const models = [
 
 export default function ModelVisualization() {
   const [selectedModel, setSelectedModel] = useState(models[0]); // default model
-  const [selectedType, setSelectedType] = useState("All");  
-  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/mapbox/streets-v11");
-  const [loading, setLoading] = useState(true);
-
-  const modelNames = {
-    "Merced River": "merced_pywr_model_updated",
-    "Tuolumne River": "tuolumne_pywr_model_updated",
-    "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
-    "Stanislaus River": "stanislaus_pywr_model_updated",
-  };
+  const [selectedType, setSelectedType] = useState("All"); // default filter
+  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/mapbox/streets-v11"); // default map style
+  const [loading, setLoading] = useState(true); // loading state
 
   useEffect(() => { // Timer for initial mount
     const timer = setTimeout(() => {
@@ -66,7 +58,7 @@ export default function ModelVisualization() {
           {/* Map */}
           <div className="h-full w-full -ml-[250px]">
             <Map
-              modelName={modelNames[selectedModel as keyof typeof modelNames]}
+              modelName={selectedModel} // Directly pass the selected model
               type={selectedType}
               style={selectedStyle}
             />
