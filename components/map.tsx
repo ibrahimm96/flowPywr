@@ -1,59 +1,60 @@
-"use client"
+"use client" 
 
-import React, { useEffect, useRef } from "react";
-import mapboxgl from "mapbox-gl";
-import 'mapbox-gl/dist/mapbox-gl.css';
-import useGetModelData from "@/hooks/useGetModelData";
-import AnimatedPopup from "mapbox-gl-animated-popup";
+import React, { useEffect, useRef } from "react"; 
+import mapboxgl from "mapbox-gl"; 
+import 'mapbox-gl/dist/mapbox-gl.css'; 
+import useGetModelData from "@/hooks/useGetModelData"; 
+import AnimatedPopup from "mapbox-gl-animated-popup"; 
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
+mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA"; // Mapbox access token
 
-interface MapProps {
-  modelName: string;
-  style: string;
-  type: string;
+// Define TypeScript interface for map component props
+interface MapProps { 
+  modelName: string; 
+  style: string; 
+  type: string; 
 }
 
-const getCenterCoordinate = (
+// Function to compute the center of a set of coordinates
+const getCenterCoordinate = ( 
   coordinates: { name: string; coordinates: { lat: number | null; lon: number | null } }[]
 ): { lat: number; lon: number } => {
   let latSum = 0, lonSum = 0, count = 0;
 
-  coordinates.forEach(({ coordinates: { lat, lon } }) => {
-    if (lat !== null && lon !== null) {
+  coordinates.forEach(({ coordinates: { lat, lon } }) => { 
+    if (lat !== null && lon !== null) { 
       latSum += lat;
       lonSum += lon;
       count++;
     }
   });
 
-  return count > 0 ? { lat: latSum / count, lon: lonSum / count } : { lat: 0, lon: 0 };
+  return count > 0 ? { lat: latSum / count, lon: lonSum / count } : { lat: 0, lon: 0 }; 
 };
 
-const Map: React.FC<MapProps> = ({ style, type, modelName }) => {
-  const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<mapboxgl.Map | null>(null);
+// Map Component 
+const Map: React.FC<MapProps> = ({ style, type, modelName }) => { 
+  const mapContainerRef = useRef<HTMLDivElement | null>(null); // Reference to map container
+  const mapRef = useRef<mapboxgl.Map | null>(null); // Reference to map instance
 
-  const { coordinates } = useGetModelData(modelName);
+  const { coordinates } = useGetModelData(modelName); // Fetch model data based on model name
+  const markers = useRef<mapboxgl.Marker[]>([]); // Reference to marker instances
 
-  const markers = useRef<mapboxgl.Marker[]>([]);
+  const addMarkers = (markerCoordinates: typeof coordinates) => { // Function to add markers to map
+    markers.current.forEach(marker => marker.remove()); // Remove existing markers
+    markers.current = []; // Reset markers array
 
-  const addMarkers = (markerCoordinates: typeof coordinates) => {
-    // Remove any existing markers first
-    markers.current.forEach(marker => marker.remove());
-    markers.current = [];
-
-    markerCoordinates.forEach((item) => {
-      if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
-        const markerColor = item.type === "Hydropower" ? "#ff4d4d" :
+    markerCoordinates.forEach((item) => { // Loop through marker coordinates
+      if (item.coordinates.lat && item.coordinates.lon && mapRef.current) { // Check for valid coordinates
+        const markerColor = item.type === "Hydropower" ? "#ff4d4d" : // Assign marker color based on type
                             item.type === "Reservoir" ? "#007bff" :
                             "#dc3545";
 
-        const marker = new mapboxgl.Marker({ color: markerColor })
-          .setLngLat([item.coordinates.lon, item.coordinates.lat])
-          .addTo(mapRef.current);
+        const marker = new mapboxgl.Marker({ color: markerColor }) // Create a new marker
+          .setLngLat([item.coordinates.lon, item.coordinates.lat]) // Set marker position
+          .addTo(mapRef.current); // Add marker to map
 
-        const popup = new AnimatedPopup({
+        const popup = new AnimatedPopup({ // Popup Logic
           openingAnimation: {
             duration: 600,
             easing: 'easeInOutElastic',
@@ -64,65 +65,61 @@ const Map: React.FC<MapProps> = ({ style, type, modelName }) => {
             easing: 'easeInBack',
             transform: 'scale',
           },
-          offset: 33
-        }).setHTML(`
+          offset: 33 
+        }).setHTML(` 
           <div style="text-align: center;">  
             <h3 class="text-md font-bold mb-2">${item.name}</h3>  
             <p class="text-xs font-medium mb-2">${item.type || "Unknown Node"}</p>
           </div>
         `);
 
-        marker.setPopup(popup);
-
-        markers.current.push(marker);
+        marker.setPopup(popup); // Attach popup to marker
+        markers.current.push(marker); // Store marker in reference array
       }
     });
   };
 
-  const markerCoordinates = type === "All" 
+  const markerCoordinates = type === "All"  // Filter markers based on selected type
     ? coordinates 
     : coordinates.filter((item) => item.type === type);
 
-  // Initialize the map only once
-  useEffect(() => {
-    if (mapContainerRef.current) {
-      const center = getCenterCoordinate(coordinates);
-      mapRef.current = new mapboxgl.Map({
+  useEffect(() => { // Effect to initialize the map
+    if (mapContainerRef.current) { // Ensure container exists
+      const center = getCenterCoordinate(coordinates); // Compute map center
+      mapRef.current = new mapboxgl.Map({ // Create new Mapbox instance
         container: mapContainerRef.current,
-        style: style,  // You can update this to change the map's style without reinitializing
+        style: style, // Apply selected map style
         center: center,
-        zoom: 8.25,
+        zoom: 8.1,
       });
     }
 
-    return () => {
+    return () => { // Cleanup function to remove map on unmount
       if (mapRef.current) {
         mapRef.current.remove();
       }
     };
-  }, [coordinates]); // Only runs once when coordinates are initially available
+  }, [coordinates]); // Runs only when coordinates change
 
-  // Only update markers when model or type changes
-  useEffect(() => {
-    if (mapRef.current) {
-      addMarkers(markerCoordinates);
+  useEffect(() => { // Effect to update markers when data changes
+    if (mapRef.current) { // Ensure map exists
+      addMarkers(markerCoordinates); // Add new markers
     }
-  }, [modelName, type, coordinates]); // Only reload markers when the model or type changes
+  }, [modelName, type, coordinates]); // Runs when model, type, or coordinates change
 
-  // Update the map style without resetting the map
-  useEffect(() => {
-    if (mapRef.current && style) {
-      mapRef.current.setStyle(style);
+  useEffect(() => { // Effect to update map style dynamically
+    if (mapRef.current && style) { // Ensure map instance exists
+      mapRef.current.setStyle(style); // Apply new map style
     }
-  }, [style]); // When style changes, update the map style without resetting
+  }, [style]); // Runs when style changes
 
-  return (
+  return ( // Render map container
     <div   
       className="max-w-full max-h-full"
-      ref={mapContainerRef} 
+      ref={mapContainerRef}  // Attach ref to div
       style={{ height: "100%", width: "100%" }}
      />
   );
 }
 
-export default Map;
+export default Map; // Export Map component

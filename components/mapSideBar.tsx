@@ -3,12 +3,15 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+/* Will Add Sidebar functionality soon, for now it is a fixed floating menu */
+
 type MapSideBarProps = {
   onModelChange: (model: string) => void;
   onStyleChange: (style: string) => void;
   onTypeChange: (type: string) => void;
 };
 
+// Map Sidebar Component
 const MapSideBar: React.FC<MapSideBarProps> = ({
   onModelChange,
   onStyleChange,
@@ -51,11 +54,11 @@ const MapSideBar: React.FC<MapSideBarProps> = ({
           top: "20px",
           left: "20px",
           backgroundColor: "white",
-          padding: "20px", // Keep padding for overall space
+          padding: "20px", 
           borderRadius: "5px",
           boxShadow: "0 2px 5px rgba(0, 0, 0, 0.3)",
           zIndex: 1,
-          width: "260px", // Reduced width for the menu
+          width: "260px", 
           height: "auto",
           display: "flex",
           flexDirection: "column",
@@ -73,9 +76,9 @@ const MapSideBar: React.FC<MapSideBarProps> = ({
                 setSelectedModel(newModel);
                 onModelChange(newModel); // Notify parent of model change
                 }}
-                whileHover={{ scale: 1.05 }} // Add hover effect to the select
-                whileTap={{ scale: 0.95 }} // Add tap effect to the select
-                style={{ width: "100%" }} // Optionally, you can make the select fill the available width
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }} 
+                style={{ width: "100%" }} 
             >
                 {models.map((model) => (
                 <option key={model} value={model}>
@@ -87,7 +90,7 @@ const MapSideBar: React.FC<MapSideBarProps> = ({
   
         {/* Type Selection */}
         <motion.div
-          style={{ marginBottom: "20px" }} // Increased vertical spacing
+          style={{ marginBottom: "20px" }} 
           whileHover={{ scale: 1.00 }}
           whileTap={{ scale: 1.00 }}
         >
@@ -119,7 +122,7 @@ const MapSideBar: React.FC<MapSideBarProps> = ({
             color: "#fff",
             border: "none",
             borderRadius: "3px",
-            height: "40px", // Make button a bit taller
+            height: "40px", 
             minWidth: "100px",
           }}
           whileHover={{ scale: 1.04 }}
