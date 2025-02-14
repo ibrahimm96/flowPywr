@@ -154,58 +154,6 @@
         } 
     ],
     "edges": [
-        [
-            "Lake McClure",
-            "New Exchequer PH"
-        ],
-        [
-            "New Exchequer PH",
-            "Exchequer Dam Flood Release"
-        ],
-        [
-            "Exchequer Dam Flood Release",
-            "IFR bl New Exchequer Dam"
-        ],
-        [
-            "IFR bl New Exchequer Dam",
-            "Lake McSwain"
-        ],
-        [
-            "Crocker-Huffman Diversion Reservoir",
-            "MID Main"
-        ],
-        [
-            "Lake McSwain",
-            "McSwain PH"
-        ],
-        [
-            "Crocker-Huffman Diversion Reservoir",
-            "IFR at Shaffer Bridge"
-        ],
-        [
-            "Merced Falls PH",
-            "MID Northside"
-        ],
-        [
-            "Merced Falls PH",
-            "Crocker-Huffman Diversion Reservoir"
-        ],
-        [
-            "Lake McClure",
-            "Exchequer Dam Flood Release"
-        ],
-        [
-            "McSwain PH",
-            "Merced Falls PH"
-        ],
-        [
-            "Lake McClure Inflow",
-            "Lake McClure"
-        ],
-        [
-            "IFR at Shaffer Bridge",
-            "Merced River Outflow"
-        ]
     ],
     "tables": {
         "San Joaquin Valley Index": {

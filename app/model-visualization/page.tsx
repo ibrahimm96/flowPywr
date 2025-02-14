@@ -24,6 +24,8 @@ export default function ModelVisualization() {
     coordinates: { lat: number | null; lon: number | null };
     type?: string;
   } | null>(null);
+  // New state for showing flow edges
+  const [showFlow, setShowFlow] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -55,6 +57,7 @@ export default function ModelVisualization() {
               onModelChange={(models) => setSelectedModels(models)}
               onStyleChange={(style) => setSelectedStyle(style)}
               onTypeChange={(type) => setSelectedType(type)}
+              onShowFlowChange={(show) => setShowFlow(show)}
               selectedComponent={selectedComponent}
             />
           </div>
@@ -64,6 +67,7 @@ export default function ModelVisualization() {
               modelNames={selectedModels}
               type={selectedType}
               style={selectedStyle}
+              showFlow={showFlow}
               onComponentClick={(component) => setSelectedComponent(component)}
             />
           </div>

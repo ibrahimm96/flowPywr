@@ -14,6 +14,7 @@ type MapSideBarProps = {
   onModelChange: (models: string[]) => void;
   onStyleChange: (style: string) => void;
   onTypeChange: (type: string) => void;
+  onShowFlowChange: (showFlow: boolean) => void;
   selectedComponent?: ComponentData | null;
 };
 
@@ -21,13 +22,14 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   onModelChange,
   onStyleChange,
   onTypeChange,
+  onShowFlowChange,
   selectedComponent,
 }) => {
-  // Multi-select models (default one selected)
   const [selectedModels, setSelectedModels] = useState<string[]>(["Merced River"]);
   const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/mapbox/streets-v11");
   const [selectedType, setSelectedType] = useState("All");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [showFlow, setShowFlow] = useState(false);
 
   const models = [
     "Merced River",
@@ -36,7 +38,6 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
     "Stanislaus River",
   ];
 
-  // Updated type options with the new node types
   const typeOptions = [
     "All",
     "Reservoir",
@@ -71,6 +72,12 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
     });
   };
 
+  const toggleShowFlow = () => {
+    const newShowFlow = !showFlow;
+    setShowFlow(newShowFlow);
+    onShowFlowChange(newShowFlow);
+  };
+
   return (
     <div className="sidebar-container">
       <div className="sidebar-content">
@@ -79,7 +86,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
           onClick={toggleMapStyle}
           className="style-toggle-button"
           style={{
-            backgroundColor: "#1e3a8a", // dark blue
+            backgroundColor: "#1e3a8a",
             color: "#fff",
             padding: "10px 15px",
             border: "none",
@@ -132,10 +139,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
         </div>
 
         {/* Custom Component Type Dropdown */}
-        <div
-          className="type-select"
-          style={{ marginBottom: "20px", position: "relative" }}
-        >
+        <div className="type-select" style={{ marginBottom: "20px", position: "relative" }}>
           <label
             htmlFor="typeFilter"
             style={{
@@ -191,8 +195,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
                     style={{
                       padding: "8px",
                       cursor: "pointer",
-                      backgroundColor:
-                        selectedType === option ? "#f0f0f0" : "#fff",
+                      backgroundColor: selectedType === option ? "#f0f0f0" : "#fff",
                     }}
                   >
                     {option}
@@ -203,26 +206,39 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
           </AnimatePresence>
         </div>
 
+        {/* Show Flow Button */}
+        <motion.button
+          onClick={toggleShowFlow}
+          className="flow-toggle-button"
+          style={{
+            backgroundColor: "#4a5568", // dark gray
+            color: "#fff",
+            padding: "10px 15px",
+            border: "none",
+            borderRadius: "5px",
+            marginBottom: "20px",
+            width: "100%",
+          }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+        >
+          {showFlow ? "Hide Flow" : "Show Flow"}
+        </motion.button>
+
         {/* Selected Component Info Display */}
         {selectedComponent && (
           <div
             className="component-info"
             style={{
               marginTop: "20px",
-              backgroundColor: "#f0f0f0", // light gray box
+              backgroundColor: "#f0f0f0",
               color: "#000",
               padding: "15px",
               borderRadius: "8px",
               boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
             }}
           >
-            <h3
-              style={{
-                marginBottom: "10px",
-                fontWeight: "bold",
-                fontSize: "1.4rem",
-              }}
-            >
+            <h3 style={{ marginBottom: "10px", fontWeight: "bold", fontSize: "1.4rem" }}>
               {selectedComponent.name}
             </h3>
             <p style={{ marginBottom: "5px" }}>

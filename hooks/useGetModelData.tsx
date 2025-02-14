@@ -10,7 +10,7 @@ const useGetModelData = (modelNames: string[]) => {
       type?: string;
     }[]
   >([]);
-
+  const [edges, setEdges] = useState<string[][]>([]);
   const [title, setTitle] = useState<string>("");
 
   // Map from friendly names to internal filenames
@@ -27,14 +27,14 @@ const useGetModelData = (modelNames: string[]) => {
         const allData = await Promise.all(
           modelNames.map(async (modelName) => {
             const internalModelName = modelNameMap[modelName];
-            if (!internalModelName) return { nodes: [], metadata: {} };
+            if (!internalModelName) return { nodes: [], metadata: {}, edges: [] };
             const response = await fetch(`/models/${internalModelName}.json`);
             const data = await response.json();
             return data;
           })
         );
 
-        // Combine nodes from all models
+        // Combine nodes from all models.
         const combinedNodes = allData.flatMap((data) => {
           return data.nodes.map((node: { name: string; coordinates?: number[]; type?: string }) => ({
             name: node.name,
@@ -44,13 +44,16 @@ const useGetModelData = (modelNames: string[]) => {
             type: node.type || "Unknown",
           }));
         });
-
         setCoordinates(combinedNodes);
 
+        // Combine edges from all models (if available)
+        const combinedEdges = allData.flatMap((data) => data.edges ? data.edges : []);
+        setEdges(combinedEdges);
+
+        // Set title based on number of models
         if (modelNames.length === 1) {
           setTitle(allData[0].metadata?.title || "Untitled Model");
         } else {
-          // Combine titles from all selected models
           const titles = allData.map(
             (data, index) => data.metadata?.title || modelNames[index]
           );
@@ -59,6 +62,7 @@ const useGetModelData = (modelNames: string[]) => {
       } catch (error) {
         console.error("Error loading the JSON data:", error);
         setCoordinates([]);
+        setEdges([]);
         setTitle("Error Loading Title");
       }
     };
@@ -67,11 +71,13 @@ const useGetModelData = (modelNames: string[]) => {
       fetchAllData();
     } else {
       setCoordinates([]);
+      setEdges([]);
       setTitle("");
     }
   }, [modelNames]);
 
-  return { coordinates, title };
+  return { coordinates, title, edges };
 };
 
 export default useGetModelData;
+
