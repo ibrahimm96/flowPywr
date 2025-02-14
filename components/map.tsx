@@ -1,126 +1,167 @@
-"use client" 
+"use client";
 
-import React, { useEffect, useRef } from "react"; 
-import mapboxgl from "mapbox-gl"; 
-import 'mapbox-gl/dist/mapbox-gl.css'; 
-import useGetModelData from "@/hooks/useGetModelData"; 
-import AnimatedPopup from "mapbox-gl-animated-popup"; 
+import React, { useEffect, useRef } from "react";
+import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import useGetModelData from "@/hooks/useGetModelData";
+import AnimatedPopup from "mapbox-gl-animated-popup";
 
-mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA"; // Mapbox access token
+mapboxgl.accessToken =
+  "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
-// Define TypeScript interface for map component props
-interface MapProps { 
-  modelName: string; 
-  style: string; 
-  type: string; 
+interface MapProps {
+  modelNames: string[];
+  style: string;
+  type: string;
+  onComponentClick?: (node: {
+    name: string;
+    coordinates: { lat: number | null; lon: number | null };
+    type?: string;
+  } | null) => void;
 }
 
-// Function to compute the center of a set of coordinates
-const getCenterCoordinate = ( 
-  coordinates: { name: string; coordinates: { lat: number | null; lon: number | null } }[]
+const getCenterCoordinate = (
+  coordinates: {
+    name: string;
+    coordinates: { lat: number | null; lon: number | null };
+  }[]
 ): { lat: number; lon: number } => {
-  let latSum = 0, lonSum = 0, count = 0;
-
-  coordinates.forEach(({ coordinates: { lat, lon } }) => { 
-    if (lat !== null && lon !== null) { 
+  let latSum = 0,
+    lonSum = 0,
+    count = 0;
+  coordinates.forEach(({ coordinates: { lat, lon } }) => {
+    if (lat !== null && lon !== null) {
       latSum += lat;
       lonSum += lon;
       count++;
     }
   });
-
-  return count > 0 ? { lat: latSum / count, lon: lonSum / count } : { lat: 0, lon: 0 }; 
+  return count > 0 ? { lat: latSum / count, lon: lonSum / count } : { lat: 0, lon: 0 };
 };
 
-// Map Component 
-const Map: React.FC<MapProps> = ({ style, type, modelName }) => { 
-  const mapContainerRef = useRef<HTMLDivElement | null>(null); // Reference to map container
-  const mapRef = useRef<mapboxgl.Map | null>(null); // Reference to map instance
+const Map: React.FC<MapProps> = ({ style, type, modelNames, onComponentClick }) => {
+  const mapContainerRef = useRef<HTMLDivElement | null>(null);
+  const mapRef = useRef<mapboxgl.Map | null>(null);
 
-  const { coordinates } = useGetModelData(modelName); // Fetch model data based on model name
-  console.log("* MAP DATA REQUEST *",  coordinates)
-  const markers = useRef<mapboxgl.Marker[]>([]); // Reference to marker instances
+  const { coordinates } = useGetModelData(modelNames);
+  const markers = useRef<mapboxgl.Marker[]>([]);
 
-  const addMarkers = (markerCoordinates: typeof coordinates) => { // Function to add markers to map
-    markers.current.forEach(marker => marker.remove()); // Remove existing markers
-    markers.current = []; // Reset markers array
+  const addMarkers = (markerCoordinates: typeof coordinates) => {
+    markers.current.forEach((marker) => marker.remove());
+    markers.current = [];
 
-    markerCoordinates.forEach((item) => { // Loop through marker coordinates
-      if (item.coordinates.lat && item.coordinates.lon && mapRef.current) { // Check for valid coordinates
-        const markerColor = item.type === "Hydropower" ? "#ff4d4d" : // Assign marker color based on type
-                            item.type === "Reservoir" ? "#007bff" :
-                            "#dc3545";
+    markerCoordinates.forEach((item) => {
+      if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
+        // Choose the appropriate icon based on the type:
+        let iconUrl = "/icons/default.svg"; // default fallback
+        if (item.type === "Hydropower") {
+          iconUrl = "/hydropower.png";
+        } else if (item.type === "Reservoir") {
+          iconUrl = "/reservoir.png";
+        } else if (item.type === "Catchment") {
+          iconUrl = "/catchment.png";
+        } else if (item.type === "Link") {
+          iconUrl = "/link.svg";
+        } else if (item.type === "InstreamFlowRequirement") {
+          iconUrl = "/instream_flow_requirement.png";
+        } else if (item.type === "BreakLink") {
+          iconUrl = "/breakline.png";
+        } else if (item.type === "Output") {
+          iconUrl = "/output.png";
+        }
 
-        const marker = new mapboxgl.Marker({ color: markerColor }) // Create a new marker
-          .setLngLat([item.coordinates.lon, item.coordinates.lat]) // Set marker position
-          .addTo(mapRef.current); // Add marker to map
+        // Create a custom marker element using an <img> element.
+        const markerEl = document.createElement("img");
+        markerEl.src = iconUrl;
+        markerEl.alt = item.type || "default marker";
+        markerEl.style.width = "30px";
+        markerEl.style.height = "30px";
 
-        const popup = new AnimatedPopup({ // Popup Logic
+        const marker = new mapboxgl.Marker({ element: markerEl })
+          .setLngLat([item.coordinates.lon, item.coordinates.lat])
+          .addTo(mapRef.current);
+
+        const popup = new AnimatedPopup({
           openingAnimation: {
             duration: 600,
-            easing: 'easeInOutElastic',
-            transform: 'scale',
+            easing: "easeInOutElastic",
+            transform: "scale",
           },
           closingAnimation: {
             duration: 300,
-            easing: 'easeInBack',
-            transform: 'scale',
+            easing: "easeInBack",
+            transform: "scale",
           },
-          offset: 33 
-        }).setHTML(` 
+          offset: 33,
+        }).setHTML(`
           <div style="text-align: center;">  
             <h3 class="text-md font-bold mb-2">${item.name}</h3>  
             <p class="text-xs font-medium mb-2">${item.type || "Unknown Node"}</p>
           </div>
         `);
 
-        marker.setPopup(popup); // Attach popup to marker
-        markers.current.push(marker); // Store marker in reference array
+        marker.setPopup(popup);
+
+        // Use mouseenter/mouseleave events for hover display.
+        const markerElement = marker.getElement();
+        markerElement.addEventListener("mouseenter", () => {
+          if (onComponentClick) {
+            onComponentClick(item);
+          }
+        });
+        markerElement.addEventListener("mouseleave", () => {
+          if (onComponentClick) {
+            onComponentClick(null);
+          }
+        });
+
+        markers.current.push(marker);
       }
     });
   };
 
-  const markerCoordinates = type === "All"  // Filter markers based on selected type
-    ? coordinates 
-    : coordinates.filter((item) => item.type === type);
+  const markerCoordinates =
+    type === "All"
+      ? coordinates
+      : coordinates.filter((item) => item.type === type);
 
-  useEffect(() => { // Effect to initialize the map
-    if (mapContainerRef.current) { // Ensure container exists
-      const center = getCenterCoordinate(coordinates); // Compute map center
-      mapRef.current = new mapboxgl.Map({ // Create new Mapbox instance
+  useEffect(() => {
+    if (mapContainerRef.current) {
+      const center = getCenterCoordinate(coordinates);
+      mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
-        style: style, // Apply selected map style
+        style: style,
         center: center,
         zoom: 8.1,
       });
     }
 
-    return () => { // Cleanup function to remove map on unmount
+    return () => {
       if (mapRef.current) {
         mapRef.current.remove();
       }
     };
-  }, [coordinates]); // Runs only when coordinates change
+  }, [coordinates]);
 
-  useEffect(() => { // Effect to update markers when data changes
-    if (mapRef.current) { // Ensure map exists
-      addMarkers(markerCoordinates); // Add new markers
+  useEffect(() => {
+    if (mapRef.current) {
+      addMarkers(markerCoordinates);
     }
-  }, [modelName, type, coordinates]); // Runs when model, type, or coordinates change
+  }, [modelNames, type, coordinates]);
 
-  useEffect(() => { // Effect to update map style dynamically
-    if (mapRef.current && style) { // Ensure map instance exists
-      mapRef.current.setStyle(style); // Apply new map style
+  useEffect(() => {
+    if (mapRef.current && style) {
+      mapRef.current.setStyle(style);
     }
-  }, [style]); // Runs when style changes
+  }, [style]);
 
-  return ( // Render map container
-    <div   
+  return (
+    <div
       className="max-w-full max-h-full"
-      ref={mapContainerRef}  // Attach ref to div
+      ref={mapContainerRef}
       style={{ height: "100%", width: "100%" }}
-     />
+    />
   );
-}
+};
 
-export default Map; 
+export default Map;

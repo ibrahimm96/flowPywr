@@ -15,7 +15,7 @@
     "nodes": [
         {
             "name": "TUO_01 Inflow Inflow",
-            "type": "Catchment",
+            "type": "Catchment", 
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "TUO_01 Inflow Inflow/Runoff"
         },
@@ -29,31 +29,51 @@
             "name": "Cherry Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Cherry Lake Inflow/Runoff"
+            "flow": "Cherry Lake Inflow/Runoff",
+            "coordinates": [
+                38.038279, 
+                -119.901688
+            ]
         },
         {
             "name": "Lake Eleanor Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Lake Eleanor Inflow/Runoff"
+            "flow": "Lake Eleanor Inflow/Runoff",
+            "coordinates": [
+                37.983978, 
+                -119.829566
+            ]
         },
         {
             "name": "Hetch Hetchy Reservoir Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Hetch Hetchy Reservoir Inflow/Runoff"
+            "flow": "Hetch Hetchy Reservoir Inflow/Runoff",
+            "coordinates" : [
+                37.918966, 
+                -119.628633
+            ]
         },
         {
             "name": "Moccasin Reservoir Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Moccasin Reservoir Inflow/Runoff"
+            "flow": "Moccasin Reservoir Inflow/Runoff",
+            "coordinates": [
+                37.805776, 
+                -120.294334
+            ]
         },
         {
             "name": "Priest Reservoir Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Priest Reservoir Inflow/Runoff"
+            "flow": "Priest Reservoir Inflow/Runoff",
+            "coordinates": [
+                37.81094, 
+                -120.24616
+            ]
         },
         {
             "name": "Hetch Hetchy Aquaduct Outflow Inflow",
@@ -96,7 +116,11 @@
             "max_flow": "Lower Cherry Aqueduct 1/Flow Requirement",
             "cost": -1000,
             "type": "Link",
-            "comment": "{\"resource_class\": \"link\"}"
+            "comment": "{\"resource_class\": \"link\"}",
+            "coordinates": [
+                37.883190, 
+                -119.968796
+            ]
         },
         {
             "name": "Moccasin Aquaduct.1.1",
@@ -145,7 +169,11 @@
             "min_flow_cost": -1000,
             "costs":[0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.700265, 
+                -120.431029
+            ]
         },
         {
             "name": "Don Pedro PH",
@@ -185,26 +213,42 @@
             "type": "Link",
             "comment": "{\"resource_class\": \"node\"}",
             "max_flow": "Eleanor-Cherry Pumping/Requirement",
-            "cost": -10000
+            "cost": -10000,
+            "coordinates": [
+                37.983835, 
+                -119.890644
+            ]
         },
         {
             "name": "Eleanor-Cherry Gravity",
             "type": "Link",
             "comment": "{\"resource_class\": \"node\"}",
             "max_flow": "Eleanor-Cherry Gravity/Requirement",
-            "cost": -10000
+            "cost": -10000,
+            "coordinates": [
+                37.936097, 
+                -119.896814
+            ]
         },
         {
             "name": "Groveland",
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
             "max_flow": 0.0048931,
-            "cost": -30000
+            "cost": -30000,
+            "coordinates": [
+                37.837802, 
+                -120.232577
+            ]
         },
         {
             "name": "Hetch Hetchy Aquaduct Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.80296, 
+                -120.33254
+            ]
         },
         {
             "name": "Hetch Hetchy Reservoir",
@@ -273,7 +317,11 @@
             "min_flow_cost": -10000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.814205, 
+                -120.310810
+            ]
         },
         {
             "name": "Kirkwood PH",
@@ -297,7 +345,11 @@
         {
             "name": "La Grange",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.663650, 
+                -120.462494
+            ]
         },
         {
             "name": "Lake Eleanor",
@@ -334,19 +386,31 @@
         {
             "name": "Moccasin Reservoir",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.810386, 
+                -120.303125
+            ]
         },
         {
             "name": "Modesto Irrigation District",
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
             "max_flow": "Modesto Irrigation District/Demand",
-            "cost": -10000000000
+            "cost": -10000000000,
+            "coordinates": [
+                37.667884, 
+                -120.658858
+            ]
         },
         {
             "name": "Priest Reservoir",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.803112, 
+                -120.267739
+            ]
         },
         {
             "name": "SFPUC",
@@ -369,7 +433,11 @@
         {
             "name": "Tuolumne River Outflow",
             "type": "Output",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.644685,
+                -120.496537
+            ]
         },
         {
             "name": "TUO_01 Inflow",
@@ -384,9 +452,13 @@
         {
             "name": "Turlock Irrigation District",
             "type": "Output",
-            "comment": "{\"resource_class\": \"node\"}",
+            "comment": "{\"re=source_class\": \"node\"}",
             "max_flow": "Turlock Irrigation District/Demand",
-            "cost": -10000000000
+            "cost": -10000000000,
+            "coordinates": [
+                37.610535, 
+                -120.572964
+            ]
         },
         {
             "name": "Upper Hetch Hetchy Tunnel Outflow",
@@ -396,224 +468,8 @@
     ],
     "edges": [
         [
-            "Hetch Hetchy Aquaduct Outflow",
-            "Below Hetch Hetchy Aquaduct Diverted Inflow"
-        ],
-        [
-            "Lake Eleanor",
-            "Below Lake Eleanor Tunnel Diverted Inflow.1"
-        ],
-        [
-            "Below Lake Eleanor Tunnel Diverted Inflow.1",
-            "Eleanor-Cherry Pumping"
-        ],
-        [
-            "Below Lake Eleanor Tunnel Diverted Inflow.1",
-            "Eleanor-Cherry Gravity"
-        ],
-        [
-            "Hetch Hetch Aquaduct.1.1",
-            "TUOLU-N-JUN1"
-        ],
-        [
-            "Upper Hetch Hetchy Tunnel Outflow",
-            "Lower Cherry Aqueduct 1"
-        ],
-        [
-            "Moccasin Reservoir",
-            "Moccasin Aquaduct.1.1"
-        ],
-        [
-            "Moccasin Aquaduct.1.1",
-            "Moccasin Fish Hatchery"
-        ],
-        [
-            "SFPUC requirement",
-            "SFPUC"
-        ],
-        [
-            "Cherry Lake",
-            "IFR bl Cherry Lake"
-        ],
-        [
-            "Cherry Lake",
-            "Dion R Holm PH"
-        ],
-        [
-            "Hetch Hetchy Reservoir",
-            "IFR bl Hetch Hetchy Reservoir"
-        ],
-        [
-            "Lake Eleanor",
-            "IFR bl Lake Eleanor"
-        ],
-        [
-            "Eleanor-Cherry Pumping",
-            "Cherry Lake"
-        ],
-        [
-            "Eleanor-Cherry Gravity",
-            "Cherry Lake"
-        ],
-        [
-            "TUO_01 Inflow Inflow",
-            "TUO_01 Inflow"
-        ],
-        [
-            "Hetch Hetchy Reservoir",
-            "Kirkwood PH"
-        ],
-        [
-            "TUOLU-N-JUN1",
-            "Groveland"
-        ],
-        [
-            "TUOLU-N-JUN1",
-            "TUO_R-N-JUN12"
-        ],
-        [
-            "TUO_R-N-JUN12",
-            "Priest Reservoir"
-        ],
-        [
-            "Kirkwood PH",
-            "Hetch Hetchy Aquaduct Outflow"
-        ],
-        [
-            "La Grange",
-            "IFR at La Grange"
-        ],
-        [
-            "Don Pedro Reservoir",
-            "Don Pedro Lake Spillway"
-        ],
-        [
-            "Don Pedro Reservoir",
-            "Don Pedro PH"
-        ],
-        [
-            "Don Pedro Lake Flood Control",
-            "La Grange"
-        ],
-        [
-            "TUO_01 Inflow",
-            "Don Pedro Reservoir"
-        ],
-        [
-            "Moccasin PH",
-            "Moccasin Reservoir"
-        ],
-        [
-            "Don Pedro Lake Spillway",
-            "Don Pedro Lake Flood Control"
-        ],
-        [
-            "Don Pedro PH",
-            "Don Pedro Lake Flood Control"
-        ],
-        [
-            "Upper Hetch Hetchy Tunnel Outflow Inflow",
-            "Upper Hetch Hetchy Tunnel Outflow"
-        ],
-        [
-            "Cherry Lake Inflow",
-            "Cherry Lake"
-        ],
-        [
-            "Lake Eleanor Inflow",
-            "Lake Eleanor"
-        ],
-        [
-            "Hetch Hetchy Reservoir Inflow",
-            "Hetch Hetchy Reservoir"
-        ],
-        [
-            "Moccasin Reservoir Inflow",
-            "Moccasin Reservoir"
-        ],
-        [
-            "Priest Reservoir",
-            "Moccasin Reservoir"
-        ],
-        [
-            "Priest Reservoir Inflow",
-            "Priest Reservoir"
-        ],
-        [
-            "Moccasin Reservoir",
-            "SFPUC requirement"
-        ],
-        [
-            "Moccasin PH",
-            "SFPUC requirement"
-        ],
-        [
-            "TUO_R-N-JUN12",
-            "Moccasin PH"
-        ],
-        [
-            "Priest Reservoir",
-            "Moccasin PH"
-        ],
-        [
-            "Below Hetch Hetchy Aquaduct Diverted Inflow",
-            "Hetch Hetch Aquaduct.1.1"
-        ],
-        [
-            "Kirkwood PH",
-            "Hetch Hetch Aquaduct.1.1"
-        ],
-        [
-            "Hetch Hetchy Aquaduct Outflow Inflow",
-            "Hetch Hetchy Aquaduct Outflow"
-        ],
-        [
-            "IFR bl Hetch Hetchy Reservoir",
-            "Hetch Hetchy Aquaduct Outflow"
-        ],
-        [
-            "IFR bl Cherry Lake",
-            "Upper Hetch Hetchy Tunnel Outflow"
-        ],
-        [
-            "IFR bl Lake Eleanor",
-            "Upper Hetch Hetchy Tunnel Outflow"
-        ],
-        [
-            "Lower Cherry Aqueduct 1",
-            "Hetch Hetchy Aquaduct Outflow"
-        ],
-        [
             "La Grange",
             "Modesto Irrigation District"
-        ],
-        [
-            "La Grange",
-            "Turlock Irrigation District"
-        ],
-        [
-            "IFR at La Grange",
-            "Tuolumne River Outflow"
-        ],
-        [
-            "Moccasin Reservoir",
-            "TUO_01 Inflow"
-        ],
-        [
-            "Moccasin Fish Hatchery",
-            "TUO_01 Inflow"
-        ],
-        [
-            "Hetch Hetchy Aquaduct Outflow",
-            "TUO_01 Inflow"
-        ],
-        [
-            "Dion R Holm PH",
-            "TUO_01 Inflow"
-        ],
-        [
-            "Upper Hetch Hetchy Tunnel Outflow",
-            "TUO_01 Inflow"
         ]
     ],
     "tables": {

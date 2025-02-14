@@ -1,54 +1,75 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-const useGetModelData = (modelName: string) => {
-  const [coordinates, setCoordinates] = useState<{ 
-        name: string; 
-        coordinates: { lat: number | null; lon: number | null }; 
-        type?: string;
-  }[]>([]);
-    
-  const [title, setTitle] = useState<string>('');
+const useGetModelData = (modelNames: string[]) => {
+  const [coordinates, setCoordinates] = useState<
+    {
+      name: string;
+      coordinates: { lat: number | null; lon: number | null };
+      type?: string;
+    }[]
+  >([]);
 
-  // Mapping model names to internal model filenames
-  const modelNames: Record<string, string> = {
+  const [title, setTitle] = useState<string>("");
+
+  // Map from friendly names to internal filenames
+  const modelNameMap: Record<string, string> = {
     "Merced River": "merced_pywr_model_updated",
     "Tuolumne River": "tuolumne_pywr_model_updated",
     "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
     "Stanislaus River": "stanislaus_pywr_model_updated",
   };
 
-  // Get the internal model filename based on the selected model name
-  const internalModelName = modelNames[modelName];
-
   useEffect(() => {
-    if (internalModelName) {
-      const fetchData = async () => {
-        try {
-          const filePath = `/models/${internalModelName}.json`; // Use internal model filename here
-          const response = await fetch(filePath);
-          const data = await response.json();
+    const fetchAllData = async () => {
+      try {
+        const allData = await Promise.all(
+          modelNames.map(async (modelName) => {
+            const internalModelName = modelNameMap[modelName];
+            if (!internalModelName) return { nodes: [], metadata: {} };
+            const response = await fetch(`/models/${internalModelName}.json`);
+            const data = await response.json();
+            return data;
+          })
+        );
 
-          // Extract names, coordinates, and type
-          const nodesWithCoordinates = data.nodes.map((node: { name: string, coordinates?: number[], type?: string }) => ({
+        // Combine nodes from all models
+        const combinedNodes = allData.flatMap((data) => {
+          return data.nodes.map((node: { name: string; coordinates?: number[]; type?: string }) => ({
             name: node.name,
-            coordinates: node.coordinates ? { lat: node.coordinates[0], lon: node.coordinates[1] } : { lat: null, lon: null },
-            type: node.type || "Unknown" // Default to "Unknown" if type is missing
+            coordinates: node.coordinates
+              ? { lat: node.coordinates[0], lon: node.coordinates[1] }
+              : { lat: null, lon: null },
+            type: node.type || "Unknown",
           }));
+        });
 
-          setCoordinates(nodesWithCoordinates);
-          setTitle(data.metadata?.title || "Untitled Model");
-        } catch (error) {
-          console.error('Error loading the JSON data:', error);
-          setCoordinates([]);
-          setTitle("Error Loading Title");
+        setCoordinates(combinedNodes);
+
+        if (modelNames.length === 1) {
+          setTitle(allData[0].metadata?.title || "Untitled Model");
+        } else {
+          // Combine titles from all selected models
+          const titles = allData.map(
+            (data, index) => data.metadata?.title || modelNames[index]
+          );
+          setTitle(titles.join(" | "));
         }
-      };
+      } catch (error) {
+        console.error("Error loading the JSON data:", error);
+        setCoordinates([]);
+        setTitle("Error Loading Title");
+      }
+    };
 
-      fetchData();
+    if (modelNames.length > 0) {
+      fetchAllData();
+    } else {
+      setCoordinates([]);
+      setTitle("");
     }
-  }, [modelName, internalModelName]); // Re-fetch data when modelName changes
+  }, [modelNames]);
 
   return { coordinates, title };
 };

@@ -1,27 +1,33 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import useGetModelData from "@/hooks/useGetModelData";
+import { motion, AnimatePresence } from "framer-motion";
 import "./mapSidebarStyles.css";
 
-/* Will Add Sidebar functionality soon, for now it is a fixed floating menu */
-
-type MapSideBarProps = {
-  onModelChange: (model: string) => void;
-  onStyleChange: (style: string) => void;
-  onTypeChange: (type: string) => void;
+type ComponentData = {
+  name: string;
+  coordinates: { lat: number | null; lon: number | null };
+  type?: string;
 };
 
-// Map Sidebar Component
+type MapSideBarProps = {
+  onModelChange: (models: string[]) => void;
+  onStyleChange: (style: string) => void;
+  onTypeChange: (type: string) => void;
+  selectedComponent?: ComponentData | null;
+};
+
 const MapSidebar: React.FC<MapSideBarProps> = ({
   onModelChange,
   onStyleChange,
   onTypeChange,
+  selectedComponent,
 }) => {
-  const [selectedModel, setSelectedModel] = useState("Merced River");
+  // Multi-select models (default one selected)
+  const [selectedModels, setSelectedModels] = useState<string[]>(["Merced River"]);
   const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/mapbox/streets-v11");
   const [selectedType, setSelectedType] = useState("All");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const models = [
     "Merced River",
@@ -30,12 +36,21 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
     "Stanislaus River",
   ];
 
-  const { coordinates, title } = useGetModelData(selectedModel); // Fetch data when model changes
-  console.log("*SIDEBAR DATA REQUEST*", coordinates)
-  
+  // Updated type options with the new node types
+  const typeOptions = [
+    "All",
+    "Reservoir",
+    "Hydropower",
+    "Catchment",
+    "Link",
+    "InstreamFlowRequirement",
+    "BreakLink",
+    "Output",
+  ];
+
   useEffect(() => {
-    onModelChange(selectedModel); // Notify parent of model change whenever the model changes
-  }, [selectedModel, onModelChange]);
+    onModelChange(selectedModels);
+  }, [selectedModels, onModelChange]);
 
   const toggleMapStyle = () => {
     const newStyle =
@@ -43,93 +58,181 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
         ? "mapbox://styles/mapbox/satellite-streets-v11"
         : "mapbox://styles/mapbox/streets-v11";
     setSelectedStyle(newStyle);
-    onStyleChange(newStyle); // Notify parent of style change
+    onStyleChange(newStyle);
+  };
+
+  const handleModelToggle = (model: string) => {
+    setSelectedModels((prev) => {
+      if (prev.includes(model)) {
+        return prev.filter((m) => m !== model);
+      } else {
+        return [...prev, model];
+      }
+    });
   };
 
   return (
     <div className="sidebar-container">
       <div className="sidebar-content">
-        {/* Model Selection */}
-        <div className="model-select">
-          <label htmlFor="modelSelect">Model:</label>
-          <motion.select
-            id="modelSelect"
-            value={selectedModel}
-            onChange={(e) => setSelectedModel(e.target.value)} // Set selected model
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {models.map((model) => (
-              <option key={model} value={model}>
-                {model}
-              </option>
-            ))}
-          </motion.select>
-        </div>
-  
-        {/* Type Selection */}
-        <div className="type-select">
-          <label htmlFor="typeFilter">Type:</label>
-          <motion.select
-            id="typeFilter"
-            value={selectedType}
-            onChange={(e) => {
-              const newType = e.target.value;
-              setSelectedType(newType);
-              onTypeChange(newType); // Notify parent of type change
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <option value="All">All</option>
-            <option value="Reservoir">Reservoir</option>
-            <option value="Hydropower">Hydropower</option>
-          </motion.select>
-        </div>
-  
-        {/* Style Toggle */}
+        {/* Map Style Toggle Button */}
         <motion.button
           onClick={toggleMapStyle}
           className="style-toggle-button"
+          style={{
+            backgroundColor: "#1e3a8a", // dark blue
+            color: "#fff",
+            padding: "10px 15px",
+            border: "none",
+            borderRadius: "5px",
+            marginBottom: "20px",
+            width: "100%",
+          }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
         >
-          {selectedStyle === "mapbox://styles/mapbox/satellite-streets-v11" ? "Standard" : "Satellite"}
+          {selectedStyle === "mapbox://styles/mapbox/streets-v11"
+            ? "Switch Satellite"
+            : "Switch Standard"}
         </motion.button>
-  
-        {/* Coordinates Data Display */}
-        {coordinates && coordinates.length > 0 ? (
-          <div className="coordinates-data">
-            <h3>{title}</h3>
-            <ul style={{ listStyleType: "none", padding: 0 }}>
-              {coordinates.map((coordinate, index) =>
-                coordinate.coordinates.lat && coordinate.coordinates.lon ? (
-                  <li key={index} style={{ marginBottom: "20px" }}>
-                    <div
-                      className={`coordinate-name ${coordinate.type ? coordinate.type.toLowerCase() : ""}`}
-                      style={{
-                        fontWeight: "bold",
-                        textDecoration: "underline",
-                        color:
-                          coordinate.type === "Reservoir"
-                            ? "blue"
-                            : coordinate.type === "Hydropower"
-                            ? "red"
-                            : "black", // Conditional color
-                      }}
-                    >
-                      {coordinate.name}
-                    </div>
-                    <div className="coordinate-details">
-                      <strong>Type:</strong> {coordinate.type || "Unknown"} {/* Fallback to "Unknown" if type is undefined */}
-                    </div>
-                  </li>
-                ) : null
-              )}
-            </ul>
+
+        {/* Model Selection - Multi-select Checkbox */}
+        <div className="model-select" style={{ marginBottom: "20px" }}>
+          <label
+            htmlFor="modelSelect"
+            style={{
+              fontWeight: "bold",
+              display: "block",
+              marginBottom: "5px",
+              color: "#000",
+            }}
+          >
+            Select Model
+          </label>
+          <div id="modelSelect">
+            {models.map((model) => (
+              <label
+                key={model}
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  cursor: "pointer",
+                  color: "#000",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedModels.includes(model)}
+                  onChange={() => handleModelToggle(model)}
+                  style={{ marginRight: "8px" }}
+                />
+                {model}
+              </label>
+            ))}
           </div>
-        ) : (
-          <p>No coordinates available for the selected model.</p>
+        </div>
+
+        {/* Custom Component Type Dropdown */}
+        <div
+          className="type-select"
+          style={{ marginBottom: "20px", position: "relative" }}
+        >
+          <label
+            htmlFor="typeFilter"
+            style={{
+              fontWeight: "bold",
+              display: "block",
+              marginBottom: "5px",
+              color: "#000",
+            }}
+          >
+            Select Component Type
+          </label>
+          <motion.div
+            onClick={() => setIsDropdownOpen((prev) => !prev)}
+            style={{
+              width: "100%",
+              padding: "8px",
+              borderRadius: "4px",
+              backgroundColor: "#fff",
+              color: "#000",
+              border: "1px solid #ccc",
+              cursor: "pointer",
+              userSelect: "none",
+            }}
+          >
+            {selectedType}
+          </motion.div>
+          <AnimatePresence>
+            {isDropdownOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 5px)",
+                  left: 0,
+                  right: 0,
+                  backgroundColor: "#fff",
+                  border: "1px solid #ccc",
+                  borderRadius: "4px",
+                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  zIndex: 10,
+                }}
+              >
+                {typeOptions.map((option) => (
+                  <div
+                    key={option}
+                    onClick={() => {
+                      setSelectedType(option);
+                      onTypeChange(option);
+                      setIsDropdownOpen(false);
+                    }}
+                    style={{
+                      padding: "8px",
+                      cursor: "pointer",
+                      backgroundColor:
+                        selectedType === option ? "#f0f0f0" : "#fff",
+                    }}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Selected Component Info Display */}
+        {selectedComponent && (
+          <div
+            className="component-info"
+            style={{
+              marginTop: "20px",
+              backgroundColor: "#f0f0f0", // light gray box
+              color: "#000",
+              padding: "15px",
+              borderRadius: "8px",
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            }}
+          >
+            <h3
+              style={{
+                marginBottom: "10px",
+                fontWeight: "bold",
+                fontSize: "1.4rem",
+              }}
+            >
+              {selectedComponent.name}
+            </h3>
+            <p style={{ marginBottom: "5px" }}>
+              <strong>Type:</strong> {selectedComponent.type || "Unknown"}
+            </p>
+            <p style={{ marginBottom: "5px" }}>
+              <strong>Coordinates:</strong> {selectedComponent.coordinates.lat},{" "}
+              {selectedComponent.coordinates.lon}
+            </p>
+          </div>
         )}
       </div>
     </div>
