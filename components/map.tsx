@@ -6,7 +6,8 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import useGetModelData from "@/hooks/useGetModelData";
 import AnimatedPopup from "mapbox-gl-animated-popup";
 // Import GeoJSON types
-import { Feature, FeatureCollection, LineString, Point } from "geojson";
+import { Feature, FeatureCollection, LineString } from "geojson";
+
 
 mapboxgl.accessToken =
   "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
@@ -154,132 +155,139 @@ const Map: React.FC<MapProps> = ({
   // Draw flow edges with directed arrows if showFlow is enabled.
   useEffect(() => {
     if (!mapRef.current) return;
-
-    // Remove any existing flow layers/sources.
-    if (mapRef.current.getLayer("flowLines")) {
-      mapRef.current.removeLayer("flowLines");
+  
+    // Remove existing flow layers and sources
+    if (mapRef.current.getLayer("line-dashed")) {
+      mapRef.current.removeLayer("line-dashed");
+    }
+    if (mapRef.current.getLayer("line-background")) {
+      mapRef.current.removeLayer("line-background");
     }
     if (mapRef.current.getSource("flowLines")) {
       mapRef.current.removeSource("flowLines");
     }
-    if (mapRef.current.getLayer("flowArrows")) {
-      mapRef.current.removeLayer("flowArrows");
-    }
-    if (mapRef.current.getSource("flowArrows")) {
-      mapRef.current.removeSource("flowArrows");
-    }
-
+  
+  
     if (showFlow && edges && edges.length > 0) {
-      // Build GeoJSON features for each edge.
-      const lineFeatures: Feature<LineString, { source: string; target: string }>[] =
+      const lineFeatures: Feature<LineString, { source: string; target: string }>[]= 
         edges
           .map((edge) => {
             const [sourceName, targetName] = edge;
             const sourceNode = coordinates.find((n) => n.name === sourceName);
             const targetNode = coordinates.find((n) => n.name === targetName);
-            if (
-              sourceNode &&
-              targetNode &&
-              sourceNode.coordinates.lat !== null &&
-              targetNode.coordinates.lat !== null
-            ) {
+  
+            if (!sourceNode || !targetNode) return null;
+  
+            const sourceCoordinates = sourceNode.coordinates;
+            const targetCoordinates = targetNode.coordinates;
+  
+            if (sourceCoordinates?.lat != null && sourceCoordinates?.lon != null &&
+              targetCoordinates?.lat != null && targetCoordinates?.lon != null) {
               return {
                 type: "Feature",
                 geometry: {
                   type: "LineString",
                   coordinates: [
-                    [sourceNode.coordinates.lon, sourceNode.coordinates.lat],
-                    [targetNode.coordinates.lon, targetNode.coordinates.lat],
+                    [sourceCoordinates.lon, sourceCoordinates.lat],
+                    [targetCoordinates.lon, targetCoordinates.lat],
                   ],
                 },
-                properties: {
-                  source: sourceName,
-                  target: targetName,
-                },
-              } as Feature<LineString, { source: string; target: string }>;
+                properties: { source: sourceName, target: targetName },
+              };
             }
             return null;
           })
-          .filter(
-            (feature): feature is Feature<LineString, { source: string; target: string }> =>
-              feature !== null
+          .filter((feature): feature is Feature<LineString, { source: string; target: string }> =>
+            feature !== null
           );
-
-      const flowGeojson: FeatureCollection<LineString, { source: string; target: string }> =
-        {
-          type: "FeatureCollection",
-          features: lineFeatures,
-        };
-
-      // Add the GeoJSON source for flow lines.
+  
+      const flowGeojson: FeatureCollection<LineString, { source: string; target: string }> = {
+        type: "FeatureCollection",
+        features: lineFeatures,
+      };
+  
+      // Add GeoJSON source with lineMetrics enabled
       mapRef.current.addSource("flowLines", {
         type: "geojson",
         data: flowGeojson,
+        lineMetrics: true,
       });
-
-      // Add a line layer for a solid, thick red flow line.
-      mapRef.current.addLayer({
-        id: "flowLines",
-        type: "line",
-        source: "flowLines",
-        layout: {
-          "line-cap": "round",
-          "line-join": "round",
-        },
-        paint: {
-          "line-color": "#ff0000",
-          "line-width": 4,
-        },
-      });
-
-      // Compute midpoints and arrow rotation for arrow placement.
-      const arrowFeatures: Feature<Point, { rotation: number }>[] = lineFeatures.map(
-        (lineFeature) => {
-          const coords = lineFeature.geometry.coordinates;
-          const midLon = (coords[0][0] + coords[1][0]) / 2;
-          const midLat = (coords[0][1] + coords[1][1]) / 2;
-          const dx = coords[1][0] - coords[0][0];
-          const dy = coords[1][1] - coords[0][1];
-          const angle = (Math.atan2(dy, dx) * 180) / Math.PI; // Angle in degrees.
-          return {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [midLon, midLat],
-            },
-            properties: { rotation: angle },
-          } as Feature<Point, { rotation: number }>;
+  
+      // Add the background line layer with low opacity
+      if (!mapRef.current.getLayer("line-background")) {
+        mapRef.current.addLayer({
+          id: "line-background",
+          type: "line",
+          source: "flowLines",
+          paint: {
+            'line-color': 'blue',
+            'line-width': 6,
+            'line-opacity': 0.4
+          }
+        });
+      }
+  
+      // Add the dashed line layer on top of the background line
+      if (!mapRef.current.getLayer("line-dashed")) {
+        mapRef.current.addLayer({
+          id: "line-dashed",
+          type: "line",
+          source: "flowLines",
+          paint: {
+            'line-color': 'blue',
+            'line-width': 6,
+            'line-dasharray': [0, 4, 3]
+          }
+        });
+      }
+  
+      // Define the dash array sequence for animation
+      const dashArraySequence = [
+        [0, 4, 3],
+        [0.5, 4, 2.5],
+        [1, 4, 2],
+        [1.5, 4, 1.5],
+        [2, 4, 1],
+        [2.5, 4, 0.5],
+        [3, 4, 0],
+        [0, 0.5, 3, 3.5],
+        [0, 1, 3, 3],
+        [0, 1.5, 3, 2.5],
+        [0, 2, 3, 2],
+        [0, 2.5, 3, 1.5],
+        [0, 3, 3, 1],
+        [0, 3.5, 3, 0.5],
+      ];
+  
+      let step = 0;
+  
+      const animateDashArray = (timestamp: number) => {
+        // Calculate the new step based on the timestamp
+        const newStep = Math.floor(timestamp / 50) % dashArraySequence.length;
+  
+        // If the step has changed, update the dash pattern
+        if (newStep !== step) {
+          const dashArray = dashArraySequence[newStep];
+  
+          // Apply the new dashArray to the dashed line layer
+          mapRef.current?.setPaintProperty(
+            'line-dashed',
+            'line-dasharray',
+            dashArray
+          );
+  
+          step = newStep;  // Update step to the current step
         }
-      );
-
-      const arrowGeojson: FeatureCollection<Point, { rotation: number }> = {
-        type: "FeatureCollection",
-        features: arrowFeatures,
+  
+        // Request the next frame of the animation
+        requestAnimationFrame(animateDashArray);
       };
-
-      // Add a new source for arrow markers.
-      mapRef.current.addSource("flowArrows", {
-        type: "geojson",
-        data: arrowGeojson,
-      });
-
-      // Add a symbol layer for arrow markers.
-      mapRef.current.addLayer({
-        id: "flowArrows",
-        type: "symbol",
-        source: "flowArrows",
-        layout: {
-          "symbol-placement": "point",
-          "icon-image": "arrow-15",
-          "icon-size": 1.0,
-          "icon-allow-overlap": true,
-          "icon-rotation-alignment": "map",
-          "icon-rotate": ["get", "rotation"],
-        },
-      });
+  
+      // Start the animation loop
+      animateDashArray(0);
     }
-  }, [showFlow, edges, coordinates]);
-
+  }, [showFlow, edges, coordinates]);  
+  
   return (
     <div
       className="max-w-full max-h-full"

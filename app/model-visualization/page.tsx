@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import MapSidebar from "@/components/mapSidebar";
+import MapSidebar from "@/components/mapSideBar";
 import Map from "@/components/map";
 import { FaSpinner } from "react-icons/fa";
 
