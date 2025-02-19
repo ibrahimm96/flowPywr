@@ -2,15 +2,25 @@
 
 import { useEffect, useState } from "react";
 
+interface Coordinates {
+  lat: number | null;
+  lon: number | null;
+}
+
+interface Node {
+  name: string;
+  coordinates: Coordinates;
+  type?: string;
+}
+
+interface Edge {
+  source: string;
+  target: string;
+}
+
 const useGetModelData = (modelNames: string[]) => {
-  const [coordinates, setCoordinates] = useState<
-    {
-      name: string;
-      coordinates: { lat: number | null; lon: number | null };
-      type?: string;
-    }[]
-  >([]);
-  const [edges, setEdges] = useState<string[][]>([]);
+  const [coordinates, setCoordinates] = useState<Node[]>([]);
+  const [edges, setEdges] = useState<Edge[]>([]);
   const [title, setTitle] = useState<string>("");
 
   // Map from friendly names to internal filenames
@@ -47,7 +57,7 @@ const useGetModelData = (modelNames: string[]) => {
         setCoordinates(combinedNodes);
 
         // Combine edges from all models (if available)
-        const combinedEdges = allData.flatMap((data) => data.edges ? data.edges : []);
+        const combinedEdges = allData.flatMap((data) => data.edges ? data.edges.map(([source, target]: [string, string]) => ({ source, target })) : []);
         setEdges(combinedEdges);
 
         // Set title based on number of models
@@ -80,4 +90,3 @@ const useGetModelData = (modelNames: string[]) => {
 };
 
 export default useGetModelData;
-
