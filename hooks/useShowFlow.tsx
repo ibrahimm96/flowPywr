@@ -121,7 +121,7 @@ const useShowFlow = (
       let step = 0;
 
       const animateDashArray = (timestamp: number) => {
-        const newStep = Math.floor(timestamp / 50) % dashArraySequence.length;
+        const newStep = Math.floor(timestamp / 80) % dashArraySequence.length; // Updates Animation Speed
 
         if (newStep !== step) {
           const dashArray = dashArraySequence[newStep];

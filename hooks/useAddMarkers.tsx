@@ -70,7 +70,7 @@ const useAddMarkers = (
         }
       });
     },
-    [mapRef, onComponentClick]
+    [mapRef]
   );
 
   return addMarkers;
