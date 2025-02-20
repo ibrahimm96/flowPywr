@@ -6,6 +6,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import useGetModelData from "@/hooks/useGetModelData";
 import useAddMarkers from "@/hooks/useAddMarkers";
 import useShowFlow from "@/hooks/useShowFlow";
+import useAddBoundaries from "@/hooks/useAddBoundaries";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
@@ -36,8 +37,11 @@ const Map: React.FC<MapProps> = ({
   const { coordinates, edges } = useGetModelData(modelNames);
   const addMarkers = useAddMarkers(mapRef, onComponentClick);
   const showFlowCallback = useShowFlow(mapRef, showFlow, edges, coordinates);
-  const markerCoordinates = type === "All" ? coordinates : coordinates.filter((item) => item.type === type);
+  const addBoundaries = useAddBoundaries(mapRef);
 
+
+  const markerCoordinates = type === "All" ? coordinates : coordinates.filter((item) => item.type === type);
+  
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
       mapRef.current = new mapboxgl.Map({
@@ -51,6 +55,7 @@ const Map: React.FC<MapProps> = ({
         setMapLoaded(true);
         console.log("Map loaded");
       });
+
 
       mapRef.current.on('idle', () => {
         if (mapRef.current?.isStyleLoaded()) {
@@ -76,6 +81,7 @@ const Map: React.FC<MapProps> = ({
 
   useEffect(() => {
     if (mapLoaded && styleLoaded) {
+      addBoundaries();
       addMarkers(markerCoordinates);
       showFlowCallback();
     }
