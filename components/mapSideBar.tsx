@@ -31,6 +31,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   const [selectedType, setSelectedType] = useState("All");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showFlow, setShowFlow] = useState(false);
+  const [lastSelectedComponent, setLastSelectedComponent] = useState<ComponentData | null>(null);
 
   const models = [
     "Merced River",
@@ -53,6 +54,12 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   useEffect(() => {
     onModelChange(selectedModels);
   }, [selectedModels, onModelChange]);
+
+  useEffect(() => {
+    if (selectedComponent) {
+      setLastSelectedComponent(selectedComponent);
+    }
+  }, [selectedComponent]);
 
   const toggleMapStyle = () => {
     const newStyle =
@@ -227,20 +234,20 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
         </motion.button>
 
         {/* Selected Component Info Display */}
-        {selectedComponent && (
+        {lastSelectedComponent && (
           <div className="component-info">
             <h3 className="component-info-title">
-              {selectedComponent.name}
+              {lastSelectedComponent.name}
             </h3>
             <p className="component-info-type">
-              <strong>Type:</strong> {selectedComponent.type || "Unknown"}
+              <strong>Type:</strong> {lastSelectedComponent.type || "Unknown"}
             </p>
             <p className="component-info-coordinates">
-              <strong>Coordinates:</strong> {selectedComponent.coordinates.lat},{" "}
-              {selectedComponent.coordinates.lon}
+              <strong>Coordinates:</strong> {lastSelectedComponent.coordinates.lat},{" "}
+              {lastSelectedComponent.coordinates.lon}
             </p>
             <div className="component-info-attributes">
-              {selectedComponent.attributes && Object.entries(selectedComponent.attributes).map(([key, value]) => (
+              {lastSelectedComponent.attributes && Object.entries(lastSelectedComponent.attributes).map(([key, value]) => (
                 <p key={key} className="component-info-attribute">
                   <strong>{key}:</strong> {value !== null && value !== undefined ? value.toString() : "N/A"}
                 </p>
