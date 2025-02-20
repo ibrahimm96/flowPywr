@@ -8,6 +8,7 @@ type ComponentData = {
   name: string;
   coordinates: { lat: number | null; lon: number | null };
   type?: string;
+  attributes?: Record<string, unknown>;
 };
 
 type MapSideBarProps = {
@@ -227,27 +228,24 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
 
         {/* Selected Component Info Display */}
         {selectedComponent && (
-          <div
-            className="component-info"
-            style={{
-              marginTop: "20px",
-              backgroundColor: "#f0f0f0",
-              color: "#000",
-              padding: "15px",
-              borderRadius: "8px",
-              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-            }}
-          >
-            <h3 style={{ marginBottom: "10px", fontWeight: "bold", fontSize: "1.4rem" }}>
+          <div className="component-info">
+            <h3 className="component-info-title">
               {selectedComponent.name}
             </h3>
-            <p style={{ marginBottom: "5px" }}>
+            <p className="component-info-type">
               <strong>Type:</strong> {selectedComponent.type || "Unknown"}
             </p>
-            <p style={{ marginBottom: "5px" }}>
+            <p className="component-info-coordinates">
               <strong>Coordinates:</strong> {selectedComponent.coordinates.lat},{" "}
               {selectedComponent.coordinates.lon}
             </p>
+            <div className="component-info-attributes">
+              {selectedComponent.attributes && Object.entries(selectedComponent.attributes).map(([key, value]) => (
+                <p key={key} className="component-info-attribute">
+                  <strong>{key}:</strong> {value !== null && value !== undefined ? value.toString() : "N/A"}
+                </p>
+              ))}
+            </div>
           </div>
         )}
       </div>

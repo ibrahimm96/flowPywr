@@ -7,10 +7,34 @@ interface Coordinates {
   lon: number | null;
 }
 
-interface Node {
+interface NodeAttributes {
+  comment?: string;
+  min_volume?: number;
+  initial_volume?: number;
+  max_volume?: number;
+  level?: string;
+  cost?: string;
+  gauge?: string;
+  turbine_capacity?: string;
+  flow_capacity?: string;
+  water_elevation_reservoir?: string;
+  tailwater_elevation?: number;
+  costs?: number[];
+  max_flows?: (string | null)[];
+  nsteps?: number;
+  head?: number;
+  min_flow_cost?: number;
+  min_flows?: string;
+  max_flow_cost?: number;
+  ifr_type?: string;
+  max_flow?: number;
+}
+
+interface Node<T = NodeAttributes> {
   name: string;
   coordinates: Coordinates;
   type?: string;
+  attributes?: T; // Dynamic attributes
 }
 
 interface Edge {
@@ -46,13 +70,17 @@ const useGetModelData = (modelNames: string[]) => {
 
         // Combine nodes from all models.
         const combinedNodes = allData.flatMap((data) => {
-          return data.nodes.map((node: { name: string; coordinates?: number[]; type?: string }) => ({
-            name: node.name,
-            coordinates: node.coordinates
-              ? { lat: node.coordinates[0], lon: node.coordinates[1] }
-              : { lat: null, lon: null },
-            type: node.type || "Unknown",
-          }));
+          return data.nodes.map((node: { name: string; coordinates?: number[]; type?: string }) => {
+            const { name, type, coordinates, ...rest } = node;
+            return {
+              name,
+              type,
+              coordinates: coordinates
+                ? { lat: coordinates[0], lon: coordinates[1] }
+                : { lat: null, lon: null },
+              attributes: rest as NodeAttributes, // Include dynamic attributes with type safety
+            };
+          });
         });
         setCoordinates(combinedNodes);
 
@@ -69,6 +97,10 @@ const useGetModelData = (modelNames: string[]) => {
           );
           setTitle(titles.join(" | "));
         }
+
+        // Log the fetched data
+        console.log("Fetched data:", { combinedNodes, combinedEdges, title });
+
       } catch (error) {
         console.error("Error loading the JSON data:", error);
         setCoordinates([]);

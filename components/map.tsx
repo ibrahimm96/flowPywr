@@ -29,9 +29,9 @@ const Map: React.FC<MapProps> = ({
   onComponentClick,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<mapboxgl.Map | null>(null);
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const [styleLoaded, setStyleLoaded] = useState(false);
+  const mapRef = useRef<mapboxgl.Map | null>(null); // Map reference
+  const [mapLoaded, setMapLoaded] = useState(false); // Tracks whether map is loaded
+  const [styleLoaded, setStyleLoaded] = useState(false); // Tracks whether style is loaded
 
   const { coordinates, edges } = useGetModelData(modelNames);
   const addMarkers = useAddMarkers(mapRef, onComponentClick);
@@ -65,21 +65,21 @@ const Map: React.FC<MapProps> = ({
         mapRef.current = null;
       }
     };
-  }, []);
+  }, []); // Initial Map Load
 
   useEffect(() => {
     if (mapRef.current && style) {
       setStyleLoaded(false); // Reset style loaded state
       mapRef.current.setStyle(style);
     }
-  }, [style]);
+  }, [style]); // Style Change
 
   useEffect(() => {
     if (mapLoaded && styleLoaded) {
       addMarkers(markerCoordinates);
       showFlowCallback();
     }
-  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback]);
+  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback]); // Update markers, flow edges  
 
   return (
     <div

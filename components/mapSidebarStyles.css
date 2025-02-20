@@ -17,86 +17,54 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 260px;
-  max-height: 800px; /* Increase the max height to make the sidebar longer */
+  max-height: 800px; /* Decrease the max height to make the sidebar shorter */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  overflow-y: hidden; /* Prevent scrolling */
 }
 
-/* Model Selection */
-.model-select, .type-select {
-  margin-bottom: 15px;
-  width: 100%; /* Ensure the select elements take up full width */
+/* Component Info Display */
+.component-info {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  color: #000;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
+  flex-shrink: 1; /* Allow the component info to shrink */
+  overflow: hidden; /* Prevent scrolling */
 }
 
-/* Center the Style Toggle Button */
-.style-toggle-button {
-  align-self: center; /* Center the button horizontally */
-  padding: 8px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 3px;
-  height: 35px;
-  min-width: 90px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease-in-out;
-  margin-top: 20px;
-}
-
-.style-toggle-button:hover {
-  background-color: #0056b3;
-}
-
-/* Center the Coordinates Data Display */
-.coordinates-data {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  max-height: 650px; /* Increase max height for coordinates */
-  max-width: 200px;
-  overflow-y: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  align-self: center;
-}
-
-/* Model Data Header */
-.coordinates-data h3 {
-  font-size: 1.4rem;
-  font-weight: bold;
+.component-info-title {
   margin-bottom: 10px;
-  color: #333;
-}
-
-.coordinate-name.reservoir {
-  color: #007bff; /* Blue for Reservoir */
-  font-size: 1.1rem;
   font-weight: bold;
-  margin-bottom: 8px;
-  text-decoration: underline;
+  font-size: 1rem; /* Shrink the title font size */
+  flex-shrink: 0; /* Prevent the title from shrinking */
 }
 
-.coordinate-name.hydropower {
-  color: #e74c3c; /* Red for Hydropower */
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 8px;
-  text-decoration: underline;
+.component-info-type {
+  margin-bottom: 5px;
+  font-size: 0.95rem; /* Shrink the type and coordinates font size */
+  flex-shrink: 0; /* Prevent the type and coordinates from shrinking */
 }
 
-/* Coordinate Details */
-.coordinate-details {
-  font-size: 0.9rem;
-  margin-bottom: 6px;
-  color: #555;
+.component-info-coordinates {
+  margin-bottom: 5px;
+  font-size: 0.7rem; /* Shrink the type and coordinates font size */
+  flex-shrink: 1; /* Allow each attribute to shrink */
 }
 
-/* Styling for empty coordinates message */
-.coordinates-data p {
-  font-size: 0.9rem;
-  color: #6c757d;
-  font-style: italic;
+.component-info-attributes {
+  font-size: 0.7rem; /* Shrink the attributes font size */
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1; /* Allow the attributes to shrink */
+}
+
+.component-info-attribute {
+  margin-bottom: 5px;
+  flex-shrink: 1; /* Allow each attribute to shrink */
 }
