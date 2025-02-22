@@ -26,8 +26,8 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   onShowFlowChange,
   selectedComponent,
 }) => {
-  const [selectedModels, setSelectedModels] = useState<string[]>(["Merced River"]);
-  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/mapbox/streets-v11");
+  const [selectedModels, setSelectedModels] = useState<string[]>(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
+  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa");
   const [selectedType, setSelectedType] = useState("All");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [showFlow, setShowFlow] = useState(false);
@@ -63,9 +63,9 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
 
   const toggleMapStyle = () => {
     const newStyle =
-      selectedStyle === "mapbox://styles/mapbox/streets-v11"
-        ? "mapbox://styles/mapbox/satellite-streets-v11"
-        : "mapbox://styles/mapbox/streets-v11";
+      selectedStyle === "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa"
+        ? "mapbox://styles/ibrahimm96/cm7feth7600dh01rgha9l5j8c"
+        : "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa";
     setSelectedStyle(newStyle);
     onStyleChange(newStyle);
   };
@@ -105,7 +105,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
         >
-          {selectedStyle === "mapbox://styles/mapbox/streets-v11"
+          {selectedStyle === "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa"
             ? "Switch Satellite"
             : "Switch Standard"}
         </motion.button>

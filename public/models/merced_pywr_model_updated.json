@@ -16,7 +16,11 @@
         {
             "name": "Lake McClure Inflow",
             "type": "Catchment",
-            "flow": "Lake McClure Inflow/Runoff"
+            "flow": "Lake McClure Inflow/Runoff",
+            "coordinates": [
+                37.737531, 
+                -119.559691
+            ]
         },
         {
             "name": "Exchequer Dam Flood Release",
@@ -28,7 +32,11 @@
             "costs": [
                 -1000,
                 1
-            ], "nsteps":2
+            ], "nsteps":2,
+            "coordinates": [
+                37.585456, 
+                -120.270550
+            ]
         },
         {
             "name": "IFR bl New Exchequer Dam",
@@ -44,7 +52,11 @@
             "type": "Reservoir",
             "initial_volume": 0.0,
             "initial_volume_pc": 0.0,
-            "max_volume": 0.0
+            "max_volume": 0.0,
+            "coordinates": [
+                37.514035, 
+                -120.371350
+            ]
         },
         {
             "name": "Lake McClure",
@@ -116,11 +128,19 @@
             "max_flows": ["IFR at Shaffer Bridge/Max Flow"],
             "ifr_type": "enhanced",
             "costs": [0],
-            "nsteps":1
+            "nsteps":1,
+            "coordinates": [
+                37.454403, 
+                -120.608921
+            ]
         },
         {
             "name": "Merced River Outflow",
-            "type": "Output"
+            "type": "Output",
+            "coordinates": [
+                37.402347, 
+                -120.737096
+            ]
         },
         {
             "name": "MID Main",

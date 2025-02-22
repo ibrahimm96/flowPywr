@@ -82,7 +82,7 @@ const useShowFlow = (
           source: "flowLines",
           paint: {
             'line-color': 'blue',
-            'line-width': 6,
+            'line-width': 4,
             'line-opacity': 0.4
           }
         });
@@ -95,7 +95,7 @@ const useShowFlow = (
           source: "flowLines",
           paint: {
             'line-color': 'blue',
-            'line-width': 6,
+            'line-width': 4,
             'line-dasharray': [0, 4, 3]
           }
         });

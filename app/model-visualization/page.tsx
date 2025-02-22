@@ -6,18 +6,17 @@ import MapSidebar from "@/components/mapSideBar";
 import Map from "@/components/map";
 import { FaSpinner } from "react-icons/fa";
 
-const models = [
-  "Merced River",
-  "Tuolumne River",
-  "San Joaquin River",
-  "Stanislaus River",
-];
-
 export default function ModelVisualization() {
+  const models = [
+    "Merced River",
+    "Tuolumne River",
+    "San Joaquin River",
+    "Stanislaus River",
+  ];
   // Now an array of selected models
   const [selectedModels, setSelectedModels] = useState<string[]>([models[0]]);
   const [selectedType, setSelectedType] = useState("All");
-  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/mapbox/streets-v11");
+  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa");
   const [loading, setLoading] = useState(true);
   const [selectedComponent, setSelectedComponent] = useState<{
     name: string;

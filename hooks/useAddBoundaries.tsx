@@ -1,35 +1,44 @@
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 
-const useAddBoundaries = (mapRef: React.RefObject<mapboxgl.Map | null>) => {
+const useAddBoundaries = (mapRef: React.RefObject<mapboxgl.Map | null>, modelNames: string[]) => {
   const models = [
-    { name: "SJN", geojsonUrl: "/model-boundaries/SJN.geojson" },
-    { name: "Merced", geojsonUrl: "/model-boundaries/Merced.geojson" },
-    { name: "Stanislaus", geojsonUrl: "/model-boundaries/Stanislaus.geojson" },
-    { name: "Tuolumne", geojsonUrl: "/model-boundaries/Tuolumne.geojson" },
+    { name: "Merced River", geojsonUrl: "/model-boundaries/Merced.geojson" },
+    { name: "Tuolumne River", geojsonUrl: "/model-boundaries/Tuolumne.geojson" },
+    { name: "San Joaquin River", geojsonUrl: "/model-boundaries/SJN.geojson" },
+    { name: "Stanislaus River", geojsonUrl: "/model-boundaries/Stanislaus.geojson" },
   ];
 
-//   const modelNameMap: Record<string, string> = {
-//     "Merced River": "merced_pywr_model_updated",
-//     "Tuolumne River": "tuolumne_pywr_model_updated",
-//     "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
-//     "Stanislaus River": "stanislaus_pywr_model_updated",
-//   };
-
   const modelColors: { [key: string]: string } = {
-    "SJN": "#FF0000", // Red
-    "Merced": "#00FF00", // Green
-    "Stanislaus": "#0000FF", // Blue
-    "Tuolumne": "#FFFF00", // Yellow
+    "Merced River": "#00FF00", // Green
+    "Tuolumne River": "#FFFF00", // Yellow
+    "San Joaquin River": "#FF0000", // Red
+    "Stanislaus River": "#0000FF", // Blue
   };
 
   const addBoundaries = useCallback(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current || !mapRef.current.isStyleLoaded()) return;
 
     const map = mapRef.current;
 
+    // Remove layers and sources for models that are not selected
     models.forEach((model) => {
-      if (!map.getSource(model.name)) {
+      if (!modelNames.includes(model.name)) {
+        if (map.getLayer(model.name)) {
+          map.removeLayer(model.name);
+        }
+        if (map.getLayer(model.name + "-border")) {
+          map.removeLayer(model.name + "-border");
+        }
+        if (map.getSource(model.name)) {
+          map.removeSource(model.name);
+        }
+      }
+    });
+
+    // Add layers and sources for selected models
+    models.forEach((model) => {
+      if (modelNames.includes(model.name) && !map.getSource(model.name)) {
         map.addSource(model.name, {
           type: "geojson",
           data: model.geojsonUrl,
@@ -58,7 +67,25 @@ const useAddBoundaries = (mapRef: React.RefObject<mapboxgl.Map | null>) => {
         });
       }
     });
-  }, [mapRef]);
+  }, [mapRef, modelNames]);
+
+  useEffect(() => {
+    if (!mapRef.current) return;
+
+    const map = mapRef.current;
+
+    const handleStyleData = () => {
+      if (map.isStyleLoaded()) {
+        addBoundaries();
+      }
+    };
+
+    map.on("styledata", handleStyleData);
+
+    return () => {
+      map.off("styledata", handleStyleData);
+    };
+  }, [mapRef, addBoundaries]);
 
   return addBoundaries;
 };

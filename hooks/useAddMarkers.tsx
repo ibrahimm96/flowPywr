@@ -42,8 +42,8 @@ const useAddMarkers = (
           const markerEl = document.createElement("img");
           markerEl.src = iconUrl;
           markerEl.alt = item.type || "default marker";
-          markerEl.style.width = "30px";
-          markerEl.style.height = "30px";
+          markerEl.style.width = "19px";
+          markerEl.style.height = "19px";
 
           const marker = new mapboxgl.Marker({ element: markerEl })
             .setLngLat([item.coordinates.lon, item.coordinates.lat])

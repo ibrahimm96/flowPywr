@@ -171,7 +171,11 @@
         {
             "name": "Beaver Creek Diversion",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.233829, 
+                -120.279034
+            ]
         },
         {
             "name": "Collierville PH",
@@ -497,7 +501,11 @@
         {
             "name": "McKays Point Diversion",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.233207, 
+                -120.292096
+            ]
         },
         {
             "name": "Murphys PH",
@@ -653,7 +661,11 @@
         {
             "name": "Beardsley Afterbay",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.199481, 
+                -120.084275
+            ]
         },
         {
             "name": "Spring Gap PH",
@@ -721,7 +733,11 @@
             "name": "Stanislaus River Outflow",
             "type": "Output",
             "cost": 10.0,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.861339, 
+                -120.632958
+            ]
         },
         {
             "name": "STN_01 Inflow",
@@ -753,7 +769,11 @@
                 -40,
                 1
             ],"nsteps":2, 
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.875116, 
+                -120.603163
+            ]
         },
         {
             "name": "Donnell Lake Spill",
@@ -769,7 +789,11 @@
         {
             "name": "Goodwin Reservoir",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.869110, 
+                -120.618882
+            ]
         },
         {
             "name": "Union-Utica Reservoir",
@@ -821,7 +845,11 @@
         {
             "name": "New Melones Spillway",
             "type": "Link",
-            "cost": 5
+            "cost": 5,
+            "coordinates": [
+                37.970439, 
+                -120.547310
+            ]
         },
         {
             "name": "STN_below_Melons.2.2",

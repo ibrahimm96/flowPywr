@@ -37,7 +37,7 @@ const Map: React.FC<MapProps> = ({
   const { coordinates, edges } = useGetModelData(modelNames);
   const addMarkers = useAddMarkers(mapRef, onComponentClick);
   const showFlowCallback = useShowFlow(mapRef, showFlow, edges, coordinates);
-  const addBoundaries = useAddBoundaries(mapRef);
+  const addBoundaries = useAddBoundaries(mapRef, modelNames);
 
 
   const markerCoordinates = type === "All" ? coordinates : coordinates.filter((item) => item.type === type);
@@ -50,6 +50,8 @@ const Map: React.FC<MapProps> = ({
         center: [-119.93699070783447, 37.563100124794175],
         zoom: 8.1,
       });
+
+      mapRef.current.addControl(new mapboxgl.NavigationControl());
 
       mapRef.current.on('load', () => {
         setMapLoaded(true);
@@ -85,7 +87,7 @@ const Map: React.FC<MapProps> = ({
       addMarkers(markerCoordinates);
       showFlowCallback();
     }
-  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback]); // Update markers, flow edges  
+  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback, addBoundaries,  modelNames]); // Update markers, flow edges  
 
   return (
     <div
