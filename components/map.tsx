@@ -48,7 +48,7 @@ const Map: React.FC<MapProps> = ({
         container: mapContainerRef.current,
         style: style,
         center: [-119.93699070783447, 37.563100124794175],
-        zoom: 8.1,
+        zoom: 7.9,
       });
 
       mapRef.current.addControl(new mapboxgl.NavigationControl());

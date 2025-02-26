@@ -28,22 +28,25 @@ const useAddMarkers = (
       markers.current.forEach((marker) => marker.remove());
       markers.current = [];
 
+      // Marker .pngs are 16px by default
       markerCoordinates.forEach((item) => {
         if (item.coordinates.lat && item.coordinates.lon && mapRef.current) {
           let iconUrl = "/icons/default.svg";
           if (item.type === "Hydropower") iconUrl = "/hydropower.png";
           else if (item.type === "Reservoir") iconUrl = "/reservoir.png";
           else if (item.type === "Catchment") iconUrl = "/catchment.png";
-          else if (item.type === "Link") iconUrl = "/link.svg";
+          else if (item.type === "Link") iconUrl = "/link.png";
           else if (item.type === "InstreamFlowRequirement") iconUrl = "/instream_flow_requirement.png";
           else if (item.type === "BreakLink") iconUrl = "/breakline.png";
           else if (item.type === "Output") iconUrl = "/output.png";
+          else if (item.type === "PiecewiseLink") iconUrl = "/piecewiseLink.png";
+
 
           const markerEl = document.createElement("img");
           markerEl.src = iconUrl;
           markerEl.alt = item.type || "default marker";
-          markerEl.style.width = "19px";
-          markerEl.style.height = "19px";
+          markerEl.style.width = "16px";
+          markerEl.style.height = "16px";
 
           const marker = new mapboxgl.Marker({ element: markerEl })
             .setLngLat([item.coordinates.lon, item.coordinates.lat])

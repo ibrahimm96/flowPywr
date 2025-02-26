@@ -29,7 +29,11 @@
             "name": "Hunter Reservoir Inflow",
             "type": "Catchment",
             "flow": "Hunter Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.204348,
+                -120.319994
+            ]
         },
         {
             "name": "IFR bl confluence of NF Stanislaus and Beaver Creek Inflow",
@@ -41,7 +45,11 @@
             "name": "McKays Point Diversion Inflow",
             "type": "Catchment",
             "flow": "McKays Point Diversion Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.246141, 
+                -120.289633
+            ]
         },
         {
             "name": "Upper Collierville Tunnel Outflow Inflow",
@@ -53,19 +61,31 @@
             "name": "Union-Utica Reservoir Inflow",
             "type": "Catchment",
             "flow": "Union-Utica Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.459326, 
+                -119.961452
+            ]
         },
         {
             "name": "New Spicer Meadow Reservoir Inflow",
             "type": "Catchment",
             "flow": "New Spicer Meadow Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.455972, 
+                -119.851177
+            ]
         },
         {
             "name": "Beaver Creek Diversion Inflow",
             "type": "Catchment",
             "flow": "Beaver Creek Diversion Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.247210, 
+                -120.262581
+            ]
         },
         {
             "name": "Stanislaus Tunnel Outflow Inflow",
@@ -77,31 +97,51 @@
             "name": "Beardsley Afterbay Inflow",
             "type": "Catchment",
             "flow": "Beardsley Afterbay Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.205544, 
+                -120.088775
+            ]
         },
         {
             "name": "Beardsley Reservoir Inflow",
             "type": "Catchment",
             "flow": "Beardsley Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.236722, 
+                -120.073072
+            ]
         },
         {
             "name": "Donnells Reservoir Inflow",
             "type": "Catchment",
             "flow": "Donnells Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.352905, 
+                -119.906680
+            ]
         },
         {
             "name": "Relief Reservoir Inflow",
             "type": "Catchment",
             "flow": "Relief Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.259351, 
+                -119.719755
+            ]
         },
         {
             "name": "Lyons Reservoir Inflow",
             "type": "Catchment",
             "flow": "Lyons Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}", 
+            "coordinates": [
+                38.126397, 
+                -120.144331
+            ]
         },
         {
             "name": "Philadelphia Aquaduct Outflow Inflow",
@@ -113,7 +153,11 @@
             "name": "Pinecrest Reservoir Inflow",
             "type": "Catchment",
             "flow": "Pinecrest Reservoir Inflow/Runoff",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.208038, 
+                -119.949970
+            ]
         },
         {
             "name": "Angels PH",
@@ -130,12 +174,20 @@
                 "Angels PH/Cost/2",
                 "Angels PH/Cost/3"
             ], "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.147133, 
+                -120.446387
+            ]
         },
         {
             "name": "Angels Canal Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.152294, 
+                -120.439694   
+            ]
         },
         {
             "name": "Beardsley Reservoir",
@@ -238,7 +290,11 @@
         {
             "name": "Donnell Lake Low Flow Release",
             "type": "Link",
-            "max_flow": 0.147
+            "max_flow": 0.147,
+            "coordinates": [
+                38.327987, 
+                -119.969113
+            ]
         },
         {
             "name": "IFR bl Angels Div",
@@ -324,7 +380,11 @@
             "min_flows": "Water Supply Release bl New Spicer Meadow Reservoir/Requirement",
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                38.390938,
+                -120.000547
+            ]
         },
         {
             "name": "IFR bl New Spicer Meadow Reservoir",
@@ -514,7 +574,11 @@
             "costs": [0.0],
             "max_flows":[null],
             "nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.152306, 
+                -120.439680
+            ]
         },
         {
             "name": "New Melones Lake",
@@ -581,13 +645,21 @@
         {
             "name": "Philadelphia Aquaduct Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.168324, 
+                -120.102093
+            ]
         },
         {
             "name": "Phoenix Canal Outflow",
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
-            "cost": -500
+            "cost": -500,
+            "coordinates": [
+                38.003242, 
+                -120.321553
+            ]
         },
         {
             "name": "Phoenix PH",
@@ -604,7 +676,11 @@
                 "Phoenix PH/Cost/2",
                 "Phoenix PH/Cost/3"
             ],"nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.03242,                
+                -120.32658
+            ]
         },
         {
             "name": "Pinecrest Reservoir",
@@ -713,21 +789,33 @@
         {
             "name": "Stanislaus Tunnel Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.146095, 
+                -120.356552
+            ]
         },
         {
             "name": "South San Joaquin Irrigation District",
             "type": "Output",
             "max_flow": "South San Joaquin Irrigation District/Demand",
             "cost": -750,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.806539, 
+                -121.165294
+            ]
         },
         {
             "name": "Oakdale Irrigation District",
             "type": "Output",
             "max_flow": "Oakdale Irrigation District/Demand",
             "cost": -750,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.766619, 
+                -120.846962
+            ]
         },
         {
             "name": "Stanislaus River Outflow",
@@ -812,17 +900,27 @@
             "name": "UPA Tunnel Tap",
             "type": "Link",
             "max_flow": 1,
-            "comment": "{\"resource_class\": \"link\"}"
+            "comment": "{\"resource_class\": \"link\"}",
+            "coordinates": [
+                38.188680, 
+                -120.435171
+            ]
         },
         {
             "name": "UPA Tunnel Tap Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+            ]
         },
         {
             "name": "Upper Collierville Tunnel Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.231404, 
+                -121.261183
+            ]
         },
         {
             "name": "Upper Collierville Tunnel 1",
@@ -840,7 +938,11 @@
                 -50,
                 1
             ],"nsteps":2,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.946664, 
+                -120.531866
+            ]
         },
         {
             "name": "New Melones Spillway",
