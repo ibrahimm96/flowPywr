@@ -23,13 +23,21 @@
             "name": "Manzanita Diversion Dam Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Manzanita Diversion Dam Inflow/Runoff"
+            "flow": "Manzanita Diversion Dam Inflow/Runoff",
+            "coordinates": [
+                37.271450, 
+                -119.526883
+            ]
         },
         {
             "name": "Millerton Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Millerton Lake Inflow/Runoff"
+            "flow": "Millerton Lake Inflow/Runoff",
+            "coordinates": [
+                37.101659, 
+                -119.538616
+            ]
         },
         {
             "name": "Below Kerckhoff 2 Tunnel Inflow Inflow",
@@ -41,7 +49,11 @@
             "name": "Kerckhoff Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Kerckhoff Lake Inflow/Runoff"
+            "flow": "Kerckhoff Lake Inflow/Runoff",
+            "coordinates": [
+                37.110626, 
+                -119.470729
+            ]
         },
         {
             "name": "Browns Creek Outflow Inflow",
@@ -53,7 +65,11 @@
             "name": "Bass Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Bass Lake Inflow/Runoff"
+            "flow": "Bass Lake Inflow/Runoff",
+            "coordinates": [
+                37.284700, 
+                -119.506863
+            ]
         },
         {
             "name": "Redinger Lake Inflow",
@@ -806,7 +822,11 @@
             "min_flow_cost": -1000000000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.244066, 
+                -119.515976
+            ]
         },
         {
             "name": "IFR bl Millerton Lake",
@@ -1013,7 +1033,11 @@
         {
             "name": "Manzanita Diversion Dam",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.244783, 
+                -119.516254
+            ]
         },
         {
             "name": "Millerton Lake",

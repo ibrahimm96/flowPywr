@@ -34,8 +34,8 @@
                 1
             ], "nsteps":2,
             "coordinates": [
-                37.585456, 
-                -120.270550
+                37.583820, 
+                -120.273573
             ]
         },
         {
@@ -45,7 +45,12 @@
             "min_flows": "IFR bl New Exchequer Dam/Min Flow",
             "costs":[0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.583544, 
+                -120.274080
+            ]
+
         },
         {
             "name": "Crocker-Huffman Diversion Reservoir",
@@ -146,13 +151,21 @@
             "name": "MID Main",
             "type": "Output",
             "max_flow": "MID Main/Demand",
-            "cost": "MID Main/Cost"
+            "cost": "MID Main/Cost",
+            "coordinates": [
+                37.305126, 
+                -120.479469
+            ]
         },
         {
             "name": "MID Northside",
             "type": "Output",
             "max_flow": "MID Northside/Demand",
-            "cost": "MID Northside/Cost"
+            "cost": "MID Northside/Cost",
+            "coordinates": [
+                37.406560, 
+                -120.529868
+            ]
         },
         {
             "name": "New Exchequer PH",
