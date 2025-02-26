@@ -75,13 +75,21 @@
             "name": "Redinger Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Redinger Lake Inflow/Runoff"
+            "flow": "Redinger Lake Inflow/Runoff",
+            "coordinates": [
+                37.242538, 
+                -119.328672
+            ]
         },
         {
             "name": "Shaver Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Shaver Lake Inflow/Runoff"
+            "flow": "Shaver Lake Inflow/Runoff",
+            "coordinates": [
+                37.155149, 
+                -119.213376
+            ]
         },
         {
             "name": "Big Creek 3 Conduit Outflow Inflow",
@@ -99,7 +107,11 @@
             "name": "Mammoth Pool Reservoir Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Mammoth Pool Reservoir Inflow/Runoff"
+            "flow": "Mammoth Pool Reservoir Inflow/Runoff",
+            "coordinates": [
+                37.442655, 
+                -119.243499
+            ]
         },
         {
             "name": "Big Creek 8 Penstock Outflow Inflow",
@@ -117,19 +129,31 @@
             "name": "Huntington Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Huntington Lake Inflow/Runoff"
+            "flow": "Huntington Lake Inflow/Runoff",
+            "coordinates": [
+                37.219248, 
+                -119.213556
+            ]
         },
         {
             "name": "Lake Thomas A Edison Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Lake Thomas A Edison Inflow/Runoff"
+            "flow": "Lake Thomas A Edison Inflow/Runoff",
+            "coordinates": [
+                37.411235, 
+                -118.926929
+            ]
         },
         {
             "name": "Portal Forebay Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Portal Forebay Inflow/Runoff"
+            "flow": "Portal Forebay Inflow/Runoff",
+            "coordinates": [
+                37.333865, 
+                -119.062754
+            ]
         },
         {
             "name": "Bolsillo Cr. Div. Outflow Inflow",
@@ -159,7 +183,11 @@
             "name": "Florence Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Florence Lake Inflow/Runoff"
+            "flow": "Florence Lake Inflow/Runoff",
+            "coordinates": [
+                37.745873, 
+                -119.314494
+            ]
         },
         {
             "name": "IFR No. Fk. Stevenson Creek above Shaver Lake Inflow",
@@ -183,20 +211,31 @@
             "name": "Pitman Creek Diversion Dam Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Pitman Creek Diversion Dam Inflow/Runoff"
+            "flow": "Pitman Creek Diversion Dam Inflow/Runoff",
+            "coordinates": [
+                37.196744, 
+                -119.213128            ]
         },
         {
             "name": "IFR bl San Joaquin R and Willow Cr confluence Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "IFR bl San Joaquin R and Willow Cr confluence Inflow/Runoff"
+            "flow": "IFR bl San Joaquin R and Willow Cr confluence Inflow/Runoff",
+            "coordinates": [
+                37.145431, 
+                -119.461579
+            ]
         },
         {
             "name": "Bear Diversion Tunnel",
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
             "max_flow": 1.1007359975343514,
-            "cost": 100
+            "cost": 100,
+            "coordinates": [
+                37.335702, 
+                -118.97523
+            ]
         },
         {
             "name": "Below Balsam Meadows Tunnel Outflow",
@@ -209,7 +248,11 @@
             "name": "Below Bear Diversion Tunnel Inflow",
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
-            "max_flow": 1.5906239964370021
+            "max_flow": 1.5906239964370021,
+            "coordinates": [
+                37.325650, 
+                -119.017205
+            ]
         },
         {
             "name": "Below Bolsillo Cr. Div. Diverted Inflow",
@@ -654,8 +697,8 @@
             "cost": "Huntington Lake/Cost",
             "gauge": "USGS 11236000 HUNTINGTON LK NR BIG CREEK CA",
             "coordinates": [
-                37.24003993113583, 
-                -119.1983600259511
+                37.232617, 
+                -119.226414
             ]
         },
         {
@@ -1077,7 +1120,11 @@
         {
             "name": "Portal Forebay",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.318799, 
+                -119.069485
+            ]
         },
         {
             "name": "Portal PH",

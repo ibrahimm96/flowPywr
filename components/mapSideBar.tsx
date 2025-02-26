@@ -26,7 +26,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   onShowFlowChange,
   selectedComponent,
 }) => {
-  const [selectedModels, setSelectedModels] = useState<string[]>(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
+  const [selectedModels, setSelectedModels] = useState<string[]>(["San Joaquin River"]);
   const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa");
   const [selectedType, setSelectedType] = useState("All");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
