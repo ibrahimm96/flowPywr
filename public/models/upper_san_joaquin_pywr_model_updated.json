@@ -35,8 +35,8 @@
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "Millerton Lake Inflow/Runoff",
             "coordinates": [
-                37.101659, 
-                -119.538616
+                37.067734, 
+                -119.606902
             ]
         },
         {
@@ -941,7 +941,11 @@
             "ifr_type": "enhanced",
               "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                36.990184, 
+                -119.714812
+            ]
         },
         {
             "name": "IFR bl Mono Creek Div",
@@ -1038,7 +1042,11 @@
                 "Kerckhoff 1 PH/Water Demand/1",
                 "Kerckhoff 1 PH/Water Demand/2",
                 null
-            ],"nsteps":3
+            ],"nsteps":3,
+            "coordinates": [
+                37.092507, 
+                -119.552826
+            ]
         },
         {
             "name": "Kerckhoff 1 Tunnel Inflow",
@@ -1064,7 +1072,11 @@
                 "Kerckhoff 2 PH/Water Demand/1",
                 "Kerckhoff 2 PH/Water Demand/2",
                 null
-            ],"nsteps":3
+            ],"nsteps":3,
+            "coordinates": [
+                37.071844, 
+                -119.558091
+            ]
         },
         {
             "name": "Kerckhoff Lake",
@@ -1160,7 +1172,11 @@
         {
             "name": "Mono Diversion Reservoir",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.359597, 
+                -118.997271
+            ]
         },
         {
             "name": "No. 1A Conduit Outflow",
@@ -1175,7 +1191,11 @@
         {
             "name": "Pitman Creek Diversion Dam",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.203386, 
+                -119.240759
+            ]
         },
         {
             "name": "Portal Forebay",
@@ -1242,7 +1262,11 @@
                 "San Joaquin 1 PH/Water Demand/1",
                 "San Joaquin 1 PH/Water Demand/2",
                 null
-            ],"nsteps":3
+            ],"nsteps":3,
+            "coordinates": [
+                37.253750, 
+                -119.519068
+            ]
         },
         {
             "name": "San Joaquin 1A Div Inflow",
@@ -1293,7 +1317,11 @@
                 "San Joaquin 2 PH/Water Demand/1",
                 "San Joaquin 2 PH/Water Demand/2",
                 null
-            ],"nsteps":3 
+            ],"nsteps":3,
+            "coordinates": [
+                37.203563, 
+                -119.496894
+            ]
         },
         {
             "name": "San Joaquin 3 PH",
@@ -1318,7 +1346,11 @@
         {
             "name": "San Joaquin River Outflow",
             "type": "Output",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                36.786380, 
+                -120.361212
+            ]
         },
         {
             "name": "Shaver Lake",

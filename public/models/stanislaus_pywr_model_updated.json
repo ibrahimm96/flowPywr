@@ -490,7 +490,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.862957, 
+                -120.629170
+            ]
         },
         {
             "name": "IFR bl Pinecrest Lake",
@@ -823,8 +827,8 @@
             "cost": 10.0,
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.861339, 
-                -120.632958
+                37.740097, 
+                -121.105220
             ]
         },
         {

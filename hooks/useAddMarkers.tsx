@@ -40,6 +40,7 @@ const useAddMarkers = (
           else if (item.type === "BreakLink") iconUrl = "/breakline.png";
           else if (item.type === "Output") iconUrl = "/output.png";
           else if (item.type === "PiecewiseLink") iconUrl = "/piecewiseLink.png";
+          else iconUrl = "/catchment.png";
 
 
           const markerEl = document.createElement("img");

@@ -103,7 +103,11 @@
                 -25,
                 1
             ],"nsteps":2,
-            "comment": "{\"resource_class\": \"link\"}"
+            "comment": "{\"resource_class\": \"link\"}",
+            "coordinates": [
+                37.681367, 
+                -120.429445
+            ]
         },
         {
             "name": "Hetch Hetch Aquaduct.1.1",
@@ -285,7 +289,11 @@
             "ifr_type": "enhanced",
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.666389, 
+                -120.463374
+            ]
         },
         {
             "name": "IFR bl Hetch Hetchy Reservoir",
@@ -435,14 +443,18 @@
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.644685,
-                -120.496537
+                37.622638, 
+                -120.962303
             ]
         },
         {
             "name": "TUO_01 Inflow",
             "type": "River",
-            "comment": "{\"resource_class\": \"node\", \"keep\": true}"
+            "comment": "{\"resource_class\": \"node\", \"keep\": true}",
+            "coordinates": [
+                37.848775, 
+                -120.336043
+            ]
         },
         {
             "name": "TUO_R-N-JUN12",
