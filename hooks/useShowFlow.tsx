@@ -36,7 +36,7 @@ const useShowFlow = (
     }
 
     if (showFlow && edges && edges.length > 0) {
-      const lineFeatures: Feature<LineString, { source: string; target: string }>[] = edges
+      const lineFeatures: Feature<LineString, { source: string; target: string; color: string }>[] = edges
         .map((edge) => {
           const sourceNode = coordinates.find((n) => n.name === edge.source);
           const targetNode = coordinates.find((n) => n.name === edge.target);
@@ -48,6 +48,8 @@ const useShowFlow = (
 
           if (sourceCoordinates?.lat != null && sourceCoordinates?.lon != null &&
             targetCoordinates?.lat != null && targetCoordinates?.lon != null) {
+            const color = edge.source.toLowerCase().includes("tunnel") || edge.source.toLowerCase().includes("aquaduct") ||
+                          edge.target.toLowerCase().includes("tunnel") || edge.target.toLowerCase().includes("aquaduct") ? "red" : "blue";
             return {
               type: "Feature",
               geometry: {
@@ -57,14 +59,14 @@ const useShowFlow = (
                   [targetCoordinates.lon, targetCoordinates.lat],
                 ],
               },
-              properties: { source: edge.source, target: edge.target },
+              properties: { source: edge.source, target: edge.target, color },
             };
           }
           return null;
         })
-        .filter((feature): feature is Feature<LineString, { source: string; target: string }> => feature !== null);
+        .filter((feature): feature is Feature<LineString, { source: string; target: string; color: string }> => feature !== null);
 
-      const flowGeojson: FeatureCollection<LineString, { source: string; target: string }> = {
+      const flowGeojson: FeatureCollection<LineString, { source: string; target: string; color: string }> = {
         type: "FeatureCollection",
         features: lineFeatures,
       };
@@ -81,7 +83,7 @@ const useShowFlow = (
           type: "line",
           source: "flowLines",
           paint: {
-            'line-color': 'blue',
+            'line-color': ['get', 'color'],
             'line-width': 4,
             'line-opacity': 0.4
           }
@@ -94,7 +96,7 @@ const useShowFlow = (
           type: "line",
           source: "flowLines",
           paint: {
-            'line-color': 'blue',
+            'line-color': ['get', 'color'],
             'line-width': 4,
             'line-dasharray': [0, 4, 3]
           }

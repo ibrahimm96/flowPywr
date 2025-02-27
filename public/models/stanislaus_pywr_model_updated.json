@@ -319,7 +319,11 @@
                 "IFR bl Collierville PH discharge/Min Flow",
                 "IFR bl Collierville PH discharge/Max Flow",null
             ], "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.142575, 
+                -120.377263
+            ]
         },
         {
             "name": "IFR at Murphys Park",
@@ -398,7 +402,11 @@
                 "IFR bl New Spicer Meadow Reservoir/Min Flow",
                 "IFR bl New Spicer Meadow Reservoir/Max Flow",null
             ],"nsteps":3, 
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.390184, 
+                -120.001186
+            ]
         },
         {
             "name": "IFR bl Philadelphia Div",
@@ -519,7 +527,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,            
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.426646, 
+                -119.998781
+            ]
         },
         {
             "name": "IFR bl Beardsley Afterbay",
@@ -834,7 +846,11 @@
         {
             "name": "STN_01 Inflow",
             "comment": "{\"keep\": true, \"resource_class\": \"node\"}",
-            "type": "River"
+            "type": "River",
+            "coordinates": [
+                38.028484, 
+                -120.460964
+            ]
         },
         {
             "name": "Lake Tulloch",
@@ -906,8 +922,8 @@
             "max_flow": 1,
             "comment": "{\"resource_class\": \"link\"}",
             "coordinates": [
-                38.188680, 
-                -120.435171
+                38.204868, 
+                -120.338396
             ]
         },
         {
@@ -915,16 +931,14 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
+                38.207531, 
+                -120.323718
             ]
         },
         {
             "name": "Upper Collierville Tunnel Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}",
-            "coordinates": [
-                38.231404, 
-                -121.261183
-            ]
+            "comment": "{\"resource_class\": \"node\"}"
         },
         {
             "name": "Upper Collierville Tunnel 1",
@@ -960,7 +974,11 @@
         {
             "name": "STN_below_Melons.2.2",
             "comment": "{\"keep\": true, \"resource_class\": \"node\"}",
-            "type": "River"
+            "type": "River",
+            "coordinates": [
+                37.917583, 
+                -120.554800
+            ]
         }
     ],
     "edges": [
