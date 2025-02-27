@@ -177,7 +177,11 @@
             "name": "IFR bl Hooper Creek Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "IFR bl Hooper Creek Inflow/Runoff"
+            "flow": "IFR bl Hooper Creek Inflow/Runoff",
+            "coordinates": [
+                37.306885, 
+                -118.935898
+            ]
         },
         {
             "name": "Florence Lake Inflow",
@@ -185,15 +189,19 @@
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "Florence Lake Inflow/Runoff",
             "coordinates": [
-                37.745873, 
-                -119.314494
+                37.243586, 
+                -118.895303
             ]
         },
         {
             "name": "IFR No. Fk. Stevenson Creek above Shaver Lake Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "IFR No. Fk. Stevenson Creek above Shaver Lake Inflow/Runoff"
+            "flow": "IFR No. Fk. Stevenson Creek above Shaver Lake Inflow/Runoff",
+            "coordinates": [
+                37.144525, 
+                -119.311821
+            ]
         },
         {
             "name": "IFR bl Big Creek 5 Div Inflow",
@@ -242,7 +250,11 @@
             "type": "Link",
             "max_flow": 0.012,
             "comment": "{\"resource_class\": \"link\"}",
-            "cost": -15000
+            "cost": -15000,
+            "coordinates": [
+                37.129227, 
+                -119.273590
+            ]
         },
         {
             "name": "Below Bear Diversion Tunnel Inflow",
@@ -338,26 +350,42 @@
             "name": "Browns Creek Ditch",
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
-            "max_flow": 0.19612799956067328
+            "max_flow": 0.19612799956067328,
+            "coordinates": [
+                37.290141, 
+                -119.50422
+            ]
         },
         {
             "name": "Friant-Kern Canal Demand",
             "type": "Link",
             "max_flow": "Friant-Kern Canal Demand/Demand",
-            "cost": -510
+            "cost": -510,
+            "coordinates": [
+                36.952805, 
+                -119.692493
+            ]
         },
         {
             "name": "Madera Canal.1",
             "type": "Link",
             "max_flow": 3.132,
-            "comment": "{\"resource_class\": \"link\"}"
+            "comment": "{\"resource_class\": \"link\"}",
+            "coordinates": [
+                36.978701, 
+                -119.740724
+            ]
         },
         {
             "name": "Mono Tunnel",
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
             "max_flow": 1.5906239964370021,
-            "cost": -285
+            "cost": -285,
+            "coordinates": [
+                37.798861, 
+                -118.878454
+            ]
         },
         {
             "name": "Pitman - Tunnel No. 7 Tunnel",
@@ -382,12 +410,20 @@
         {
             "name": "Balsam Forebay",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.161643, 
+                -119.252861
+            ]
         },
         {
             "name": "Balsam Meadows Tunnel Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.160255, 
+                -119.252761
+            ]
         },
         {
             "name": "Bass Lake",
@@ -597,13 +633,21 @@
             "name": "CVP Friant-Kern Canal",
             "type": "Output",
             "cost": -1000,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                36.812195, 
+                -119.523667
+            ]
         },
         {
             "name": "CVP Madera Canal",
             "type": "Output",
             "cost": -11,
-            "max_flow": 3.132
+            "max_flow": 3.132,
+            "coordinates": [
+                37.157482, 
+                -120.120770
+            ]
         },
         {
             "name": "CVP Madera Canal Demand",
@@ -616,7 +660,11 @@
             "costs": [
                 -330,
                 1
-            ],"nsteps":2
+            ],"nsteps":2,
+            "coordinates": [
+                37.060359, 
+                -119.903946
+            ]
         },
         {
             "name": "Eastwood PH",
@@ -652,15 +700,19 @@
             "cost": -130,
             "gauge": "USGS 11229600 FLORENCE LK NR BIG C CA",
             "coordinates": [ 
-                37.74922950283498, 
-                -119.3448522083955
+                37.260918, 
+                -118.960776
             ]
         },
         {
             "name": "Friant Dam Spillway",
             "type": "Link",
             "cost": 1000,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.000414, 
+                -119.705038
+            ]
         },
         {
             "name": "Millerton Lake Flood Release",
@@ -672,7 +724,11 @@
             "costs": [
                 -50,
                 10
-            ], "nsteps":2
+            ], "nsteps":2,
+            "coordinates": [
+                36.999456, 
+                -119.705256
+            ]
         },
         {
             "name": "Friant PH",
@@ -685,7 +741,11 @@
             "max_flows": [
                 1
             ],"nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                36.997718, 
+                -119.703574            
+            ]
         },
         {
             "name": "Huntington Lake",
