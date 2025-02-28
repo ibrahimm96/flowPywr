@@ -176,8 +176,8 @@
             ], "nsteps":3,
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                38.147133, 
-                -120.446387
+                38.094949, 
+                -120.536603
             ]
         },
         {
@@ -225,8 +225,8 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                38.233829, 
-                -120.279034
+                38.234011, 
+                -120.279137
             ]
         },
         {
@@ -292,8 +292,8 @@
             "type": "Link",
             "max_flow": 0.147,
             "coordinates": [
-                38.327987, 
-                -119.969113
+                38.329316, 
+                -119.961143
             ]
         },
         {
@@ -344,7 +344,11 @@
             "max_flows": ["IFR bl Donnell Lake/Max Flow"],
             "costs": [0],
             "nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.328062, 
+                -119.966551
+            ]
         },
         {
             "name": "IFR bl Hunter Reservoir",
@@ -354,7 +358,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.186216, 
+                -120.352341
+            ]
         },
         {
             "name": "IFR bl Lyons Res",
@@ -364,7 +372,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.090522, 
+                -120.170673
+            ]
         },
         {
             "name": "IFR bl McKays Point Div",
@@ -476,7 +488,11 @@
                 "IFR bl Beaver Creek Diversion Dam/Min Flow",
                 "IFR bl Beaver Creek Diversion Dam/Max Flow",null
             ],"nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.233392, 
+                -120.279432
+            ]
         },
         {
             "name": "IFR bl confluence of NF Stanislaus and Beaver Creek",
@@ -487,7 +503,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.206431, 
+                -120.317724
+            ]
         },
         {
             "name": "IFR bl Goodwin Reservoir",
@@ -529,8 +549,8 @@
             "nsteps":3,            
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                38.426646, 
-                -119.998781
+                38.438328, 
+                -120.006136
             ]
         },
         {
@@ -545,7 +565,11 @@
                 "IFR bl Beardsley Afterbay/Min Flow",
                 "IFR bl Beardsley Afterbay/Max Flow", null
             ],"nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.195852, 
+                -120.093420
+            ]
         },
         {
             "name": "Hunter Reservoir",
@@ -938,7 +962,11 @@
         {
             "name": "Upper Collierville Tunnel Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.149179, 
+                -120.381395
+            ]
         },
         {
             "name": "Upper Collierville Tunnel 1",

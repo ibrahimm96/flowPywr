@@ -583,7 +583,11 @@
             "name": "Big Creek 8 Penstock Outflow",
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
-            "cost": 200
+            "cost": 200,
+            "coordinates": [
+                37.204225, 
+                -119.324715
+            ]
         },
         {
             "name": "Big Creek 8 PH",
@@ -617,7 +621,11 @@
         {
             "name": "Browns Creek Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.296323, 
+                -119.49732
+            ]
         },
         {
             "name": "Camp 62 Cr. Div. Outflow",
@@ -770,7 +778,11 @@
             "min_flow_cost": 1,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.331204, 
+                -119.377970
+            ]
         },
         {
             "name": "IFR bl Balsam Forebay",
@@ -781,7 +793,11 @@
             "min_flow_cost": -1000000000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.164302, 
+                -119.254754
+            ]
         },
         {
             "name": "IFR bl Bass Lake",
@@ -792,7 +808,11 @@
             "min_flow_cost": -1000000000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates": [
+                37.281388, 
+                -119.530036
+            ]
         },
         {
             "name": "IFR bl Bear Div",

@@ -48,8 +48,7 @@ const useShowFlow = (
 
           if (sourceCoordinates?.lat != null && sourceCoordinates?.lon != null &&
             targetCoordinates?.lat != null && targetCoordinates?.lon != null) {
-            const color = edge.source.toLowerCase().includes("tunnel") || edge.source.toLowerCase().includes("aquaduct") ||
-                          edge.target.toLowerCase().includes("tunnel") || edge.target.toLowerCase().includes("aquaduct") ? "red" : "blue";
+            const color = "blue";
             return {
               type: "Feature",
               geometry: {
