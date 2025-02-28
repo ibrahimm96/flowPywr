@@ -17,13 +17,15 @@
             "name": "TUO_01 Inflow Inflow",
             "type": "Catchment", 
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "TUO_01 Inflow Inflow/Runoff"
+            "flow": "TUO_01 Inflow Inflow/Runoff",
+            "coordinates": [37.868242, -120.359752]
         },
         {
             "name": "Upper Hetch Hetchy Tunnel Outflow Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Upper Hetch Hetchy Tunnel Outflow Inflow/Runoff"
+            "flow": "Upper Hetch Hetchy Tunnel Outflow Inflow/Runoff", 
+            "coordinates": [ 37.838567, -120.051911        ]
         },
         {
             "name": "Cherry Lake Inflow",
@@ -79,7 +81,11 @@
             "name": "Hetch Hetchy Aquaduct Outflow Inflow",
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
-            "flow": "Hetch Hetchy Aquaduct Outflow Inflow/Runoff"
+            "flow": "Hetch Hetchy Aquaduct Outflow Inflow/Runoff", 
+            "coordinates": [
+                37.855269, -120.232480
+            ]
+
         },
         {
             "name": "Below Hetch Hetchy Aquaduct Diverted Inflow",
@@ -118,8 +124,7 @@
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
             "coordinates": [
-                37.883190, 
-                -119.968796
+                37.844569, -120.187590
             ]
         },
         {
@@ -226,8 +231,7 @@
             "max_flow": "Eleanor-Cherry Gravity/Requirement",
             "cost": -10000,
             "coordinates": [
-                37.936097, 
-                -119.896814
+                37.995856, -119.883109
             ]
         },
         {
@@ -246,9 +250,7 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.80296, 
-                -120.33254
-            ]
+                37.847484, -120.259336   ]
         },
         {
             "name": "Hetch Hetchy Reservoir",
@@ -442,7 +444,10 @@
         {
             "name": "TUO_01 Inflow",
             "type": "River",
-            "comment": "{\"resource_class\": \"node\", \"keep\": true}"
+            "comment": "{\"resource_class\": \"node\", \"keep\": true}",
+            "coordinates":[37.848904,
+                 -120.336226
+            ]
         },
         {
             "name": "TUO_R-N-JUN12",
@@ -463,7 +468,11 @@
         {
             "name": "Upper Hetch Hetchy Tunnel Outflow",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.821465, -120.114431
+            ]
+
         }
     ],
     "edges": [
@@ -478,14 +487,10 @@
         ],
         [
             "Lake Eleanor",
-            "Below Lake Eleanor Tunnel Diverted Inflow.1"
-        ],
-        [
-            "Below Lake Eleanor Tunnel Diverted Inflow.1",
             "Eleanor-Cherry Pumping"
         ],
         [
-            "Below Lake Eleanor Tunnel Diverted Inflow.1",
+            "Lake Eleanor",
             "Eleanor-Cherry Gravity"
         ],
         [

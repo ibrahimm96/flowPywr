@@ -46,6 +46,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
     "Hydropower",
     "Catchment",
     "Link",
+    "River",
     "InstreamFlowRequirement",
     "BreakLink",
     "Output",

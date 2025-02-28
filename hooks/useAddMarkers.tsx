@@ -35,6 +35,7 @@ const useAddMarkers = (
           if (item.type === "Hydropower") iconUrl = "/hydropower.png";
           else if (item.type === "Reservoir") iconUrl = "/reservoir.png";
           else if (item.type === "Catchment") iconUrl = "/catchment.png";
+          else if (item.type === "River") iconUrl = "/catchment.png";
           else if (item.type === "Link") iconUrl = "/link.png";
           else if (item.type === "InstreamFlowRequirement") iconUrl = "/instream_flow_requirement.png";
           else if (item.type === "BreakLink") iconUrl = "/breakline.png";
