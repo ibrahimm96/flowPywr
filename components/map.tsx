@@ -3,10 +3,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import useGetModelData from "@/hooks/useGetModelData";
 import useAddMarkers from "@/hooks/useAddMarkers";
 import useShowFlow from "@/hooks/useShowFlow";
 import useAddBoundaries from "@/hooks/useAddBoundaries";
+import { useDataContext } from "@/contexts/ModelDataContext";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
@@ -34,13 +34,13 @@ const Map: React.FC<MapProps> = ({
   const [mapLoaded, setMapLoaded] = useState(false); // Tracks whether map is loaded
   const [styleLoaded, setStyleLoaded] = useState(false); // Tracks whether style is loaded
 
-  const { coordinates, edges } = useGetModelData(modelNames);
+  const { nodeData, edges } = useDataContext();
   const addMarkers = useAddMarkers(mapRef, onComponentClick);
-  const showFlowCallback = useShowFlow(mapRef, showFlow, edges, coordinates);
+  const showFlowCallback = useShowFlow(mapRef, showFlow, edges, nodeData);
   const addBoundaries = useAddBoundaries(mapRef, modelNames);
 
 
-  const markerCoordinates = type === "All" ? coordinates : coordinates.filter((item) => item.type === type);
+  const markerCoordinates = type === "All" ? nodeData : nodeData.filter((item) => item.type === type);
   
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
