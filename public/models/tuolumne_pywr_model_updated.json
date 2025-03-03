@@ -25,7 +25,7 @@
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "Upper Hetch Hetchy Tunnel Outflow Inflow/Runoff", 
-            "coordinates": [ 37.838567, -120.051911        ]
+            "coordinates": [  37.894488, -119.943966        ]
         },
         {
             "name": "Cherry Lake Inflow",
@@ -83,7 +83,7 @@
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "Hetch Hetchy Aquaduct Outflow Inflow/Runoff", 
             "coordinates": [
-                37.855269, -120.232480
+                37.837977, -120.167504
             ]
 
         },
@@ -109,7 +109,8 @@
                 -25,
                 1
             ],"nsteps":2,
-            "comment": "{\"resource_class\": \"link\"}"
+            "comment": "{\"resource_class\": \"link\"}",
+            "coordinates":[37.679974, -120.435172]
         },
         {
             "name": "Hetch Hetch Aquaduct.1.1",
@@ -124,7 +125,7 @@
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
             "coordinates": [
-                37.844569, -120.187590
+                37.875127, -120.019739
             ]
         },
         {
@@ -250,7 +251,9 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.847484, -120.259336   ]
+                37.848481, -120.190223
+
+            ]
         },
         {
             "name": "Hetch Hetchy Reservoir",
@@ -276,7 +279,11 @@
             "min_flow_cost": -10000000000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates":[
+                37.969986, -119.910814
+            ]
+
         },
         {
             "name": "IFR at La Grange",
@@ -287,7 +294,9 @@
             "ifr_type": "enhanced",
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates":[37.643977, -120.489141
+            ]
         },
         {
             "name": "IFR bl Hetch Hetchy Reservoir",
@@ -298,7 +307,9 @@
             "max_flow_cost": 100000000000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates":[37.880935, -119.958693
+        ]
         },
         {
             "name": "IFR bl Lake Eleanor",
@@ -309,7 +320,9 @@
             "max_flow_cost": 10000000,
             "costs": [0,0,0],
             "max_flows":[null,null,null],
-            "nsteps":3
+            "nsteps":3,
+            "coordinates":[37.969164, -119.881575
+        ]
         },
         {
             "name": "Moccasin Fish Hatchery",
@@ -390,9 +403,7 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.810386, 
-                -120.303125
-            ]
+                37.809458, -120.302643            ]
         },
         {
             "name": "Modesto Irrigation District",
@@ -407,7 +418,7 @@
         },
         {
             "name": "Priest Reservoir",
-            "type": "BreakLink",
+            "type": "Reservoir",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
                 37.803112, 
@@ -419,26 +430,29 @@
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
             "cost": 1,
-            "max_flow": 1.1
+            "max_flow": 1.1, 
+            "coordinates":[37.813531, -120.298929
+            ]
         },
         {
             "name": "SFPUC requirement",
             "type": "Link",
             "max_flow": "SFPUC requirement/Demand",
-            "cost": -5000
+            "cost": -5000,
+            "coordinates":[37.812037, -120.298378]
         },
         {
             "name": "TUOLU-N-JUN1",
             "type": "BreakLink",
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates":[37.820899, -120.136569]
         },
         {
             "name": "Tuolumne River Outflow",
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.644685,
-                -120.496537
+                37.634148, -120.507311
             ]
         },
         {
@@ -470,7 +484,8 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.821465, -120.114431
+                37.887718, -119.956123  
+
             ]
 
         }
@@ -613,6 +628,14 @@
             "Moccasin Reservoir Inflow",
             "Moccasin Reservoir"
         ],
+        
+        [ "Kirkwood PH",
+         "TUOLU-N-JUN1" ]
+        ,
+        ["TUOLU-N-JUN1",
+        "Priest Reservoir"
+         ]
+        ,
         [
             "Priest Reservoir",
             "Moccasin Reservoir"
