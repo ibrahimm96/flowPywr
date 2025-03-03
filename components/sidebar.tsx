@@ -41,15 +41,20 @@ export function Sidebar() {
       animate={{ width: isOpen ? 250 : 80 }}
       className="h-screen bg-gray-800 text-white flex flex-col"
     >
-      <motion.div className="p-4 flex items-center justify-between">
+      {/* Logo and Toggle Button Container */}
+      <motion.div className="relative p-4 flex flex-col items-center">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="absolute top-0 right-0 text-white focus:outline-none"
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
+        <img src="/logo.png" alt="Logo" className="w-34 h-20" />
         {isOpen && (
-          <h1 className="text-xl font-bold">
+          <h1 className="mt-2 text-xl font-bold">
             FlowPywr
           </h1>
         )}
-        <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </motion.div>
 
       <nav className="flex-1">
