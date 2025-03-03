@@ -2,6 +2,13 @@
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+interface ComponentData {
+  name: string;
+  coordinates: { lat: number | null; lon: number | null };
+  type?: string;
+  attributes?: Record<string, unknown>;
+}
+
 interface MapContextProps {
   style: string;
   setStyle: React.Dispatch<React.SetStateAction<string>>;
@@ -11,16 +18,8 @@ interface MapContextProps {
   setModelNames: React.Dispatch<React.SetStateAction<string[]>>;
   showFlow: boolean;
   setShowFlow: React.Dispatch<React.SetStateAction<boolean>>;
-  onComponentClick?: (node: {
-    name: string;
-    coordinates: { lat: number | null; lon: number | null };
-    type?: string;
-  } | null) => void;
-  setOnComponentClick: React.Dispatch<React.SetStateAction<((node: {
-    name: string;
-    coordinates: { lat: number | null; lon: number | null };
-    type?: string;
-  } | null) => void) | undefined>>;
+  onComponentClick: (node: ComponentData | null) => void;
+  setOnComponentClick: React.Dispatch<React.SetStateAction<(node: ComponentData | null) => void>>;
 }
 
 const MapContext = createContext<MapContextProps | undefined>(undefined);
@@ -30,11 +29,7 @@ export const MapProvider = ({ children }: { children: ReactNode }) => {
   const [type, setType] = useState("All");
   const [modelNames, setModelNames] = useState(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
   const [showFlow, setShowFlow] = useState(false);
-  const [onComponentClick, setOnComponentClick] = useState<((node: {
-    name: string;
-    coordinates: { lat: number | null; lon: number | null };
-    type?: string;
-  } | null) => void) | undefined>(undefined);
+  const [onComponentClick, setOnComponentClick] = useState<(node: ComponentData | null) => void>(() => () => {});
 
   return (
     <MapContext.Provider value={{ style, setStyle, type, setType, modelNames, setModelNames, showFlow, setShowFlow, onComponentClick, setOnComponentClick }}>
