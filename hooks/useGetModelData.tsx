@@ -42,10 +42,14 @@ interface Edge {
   target: string;
 }
 
+interface Model {
+  modelName: string;
+  nodeData: Node[];
+  edges: Edge[];
+}
+
 const useGetModelData = () => {
-  const [nodeData, setNodeData] = useState<Node[]>([]);
-  const [edges, setEdges] = useState<Edge[]>([]);
-  const [title, setTitle] = useState<string>("");
+  const [modelData, setModelData] = useState<Model[]>([]);
 
   // Map from friendly names to internal filenames
   const modelNameMap: Record<string, string> = {
@@ -64,13 +68,13 @@ const useGetModelData = () => {
             if (!internalModelName) return { nodes: [], metadata: {}, edges: [] };
             const response = await fetch(`/models/${internalModelName}.json`);
             const data = await response.json();
-            return data;
+            return { ...data, modelName }; // Include model name in the data
           })
         );
 
-        // Combine nodes from all models.
-        const combinedNodes = allData.flatMap((data) => {
-          return data.nodes.map((node: { name: string; coordinates?: number[]; type?: string }) => {
+        // Combine nodes and edges from all models.
+        const combinedModels = allData.map((data) => {
+          const nodes = data.nodes.map((node: { name: string; coordinates?: number[]; type?: string }) => {
             const { name, type, coordinates, ...rest } = node;
             return {
               name,
@@ -81,34 +85,30 @@ const useGetModelData = () => {
               attributes: rest as NodeAttributes, // Include dynamic attributes with type safety
             };
           });
+
+          const edges = data.edges ? data.edges.map(([source, target]: [string, string]) => ({
+            source,
+            target,
+          })) : [];
+
+          return { modelName: data.modelName, nodeData: nodes, edges };
         });
-        setNodeData(combinedNodes);
 
-        // Combine edges from all models (if available)
-        const combinedEdges = allData.flatMap((data) => data.edges ? data.edges.map(([source, target]: [string, string]) => ({ source, target })) : []);
-        setEdges(combinedEdges);
-
-        // Set title based on number of models
-        const titles = allData.map(
-          (data, index) => data.metadata?.title || Object.keys(modelNameMap)[index]
-        );
-        setTitle(titles.join(" | "));
+        setModelData(combinedModels);
 
         // Log the fetched data
-        console.log("Fetched data:", { combinedNodes, combinedEdges, title });
+        console.log("Fetched data:", { combinedModels });
 
       } catch (error) {
         console.error("Error loading the JSON data:", error);
-        setNodeData([]);
-        setEdges([]);
-        setTitle("Error Loading Title");
+        setModelData([]);
       }
     };
 
     fetchAllData();
   }, []); // Empty dependency array to run only once
 
-  return { nodeData, title, edges };
+  return { modelData };
 };
 
 export default useGetModelData;

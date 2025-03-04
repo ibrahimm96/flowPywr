@@ -1,15 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useMapContext } from "@/contexts/MapContext"; // Import useMapContext
 import "./mapSidebarStyles.css";
 
 const MapSidebar: React.FC = () => {
-  const { style, setStyle, type, setType, modelNames, setModelNames, showFlow, setShowFlow } = useMapContext();
-  const [selectedModels, setSelectedModels] = useState<string[]>(modelNames);
-  const [selectedStyle, setSelectedStyle] = useState(style);
-  const [selectedType, setSelectedType] = useState(type);
+  const { style, setStyle, type, setType, selectedModels, setSelectedModels, showFlow, setShowFlow } = useMapContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const models = [
@@ -31,17 +28,11 @@ const MapSidebar: React.FC = () => {
     "Output",
   ];
 
-  useEffect(() => {
-    setModelNames(selectedModels); // Update modelNames in MapContext
-  }, [selectedModels, setModelNames]);
-
-
   const toggleMapStyle = () => {
     const newStyle =
-      selectedStyle === "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa"
+      style === "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa"
         ? "mapbox://styles/ibrahimm96/cm7feth7600dh01rgha9l5j8c"
         : "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa";
-    setSelectedStyle(newStyle);
     setStyle(newStyle);
   };
 
@@ -56,8 +47,7 @@ const MapSidebar: React.FC = () => {
   };
 
   const toggleShowFlow = () => {
-    const newShowFlow = !showFlow;
-    setShowFlow(newShowFlow);
+    setShowFlow(!showFlow);
   };
 
   return (
@@ -79,7 +69,7 @@ const MapSidebar: React.FC = () => {
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.96 }}
         >
-          {selectedStyle === "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa"
+          {style === "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa"
             ? "Switch Satellite"
             : "Switch Standard"}
         </motion.button>
@@ -146,7 +136,7 @@ const MapSidebar: React.FC = () => {
               userSelect: "none",
             }}
           >
-            {selectedType}
+            {type}
           </motion.div>
           <AnimatePresence>
             {isDropdownOpen && (
@@ -170,14 +160,13 @@ const MapSidebar: React.FC = () => {
                   <div
                     key={option}
                     onClick={() => {
-                      setSelectedType(option);
                       setType(option);
                       setIsDropdownOpen(false);
                     }}
                     style={{
                       padding: "8px",
                       cursor: "pointer",
-                      backgroundColor: selectedType === option ? "#f0f0f0" : "#fff",
+                      backgroundColor: type === option ? "#f0f0f0" : "#fff",
                     }}
                   >
                     {option}

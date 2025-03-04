@@ -43,9 +43,14 @@ interface Node<T = NodeAttributes> {
   attributes?: T; // Dynamic attributes
 }
 
-interface DataContextProps {
-  nodeData: Node[]; 
+interface Model {
+  modelName: string;
+  nodeData: Node[];
   edges: Edge[];
+}
+
+interface DataContextProps {
+  modelData: Model[];
   modelNames: string[];
   setModelNames: React.Dispatch<React.SetStateAction<string[]>>;
 }
@@ -54,10 +59,13 @@ const DataContext = createContext<DataContextProps | undefined>(undefined);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [modelNames, setModelNames] = useState(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
-  const { nodeData, edges } = useGetModelData(); // Will only run on modelName change, but modelNames are pre-set and will not change
-    
+  const { modelData } = useGetModelData(); // Fetch model data using the hook
+
+  console.log("*********** FETCHED DATA ************");
+  console.log("MODEL DATA:  ", modelData);
+
   return (
-    <DataContext.Provider value={{ nodeData, edges, modelNames, setModelNames }}>
+    <DataContext.Provider value={{ modelData, modelNames, setModelNames }}>
       {children}
     </DataContext.Provider>
   );

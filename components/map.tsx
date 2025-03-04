@@ -17,13 +17,24 @@ const Map: React.FC = () => {
   const [mapLoaded, setMapLoaded] = useState(false); // Tracks whether map is loaded
   const [styleLoaded, setStyleLoaded] = useState(false); // Tracks whether style is loaded
 
-  const { nodeData, edges } = useDataContext();
-  const { style, type, modelNames, showFlow, onComponentClick } = useMapContext();
+  const { modelData } = useDataContext();
+  const { style, type, selectedModels, showFlow, onComponentClick } = useMapContext();
   const addMarkers = useAddMarkers(mapRef, onComponentClick);
-  const showFlowCallback = useShowFlow(mapRef, showFlow, edges, nodeData);
-  const addBoundaries = useAddBoundaries(mapRef, modelNames);
 
-  const markerCoordinates = type === "All" ? nodeData : nodeData.filter((item) => item.type === type);
+
+  // Filter nodes and edges based on selected models
+  const filteredNodes = modelData
+    .filter(model => selectedModels.includes(model.modelName))
+    .flatMap(model => model.nodeData);
+
+  const filteredEdges = modelData
+    .filter(model => selectedModels.includes(model.modelName))
+    .flatMap(model => model.edges);
+    
+  const showFlowCallback = useShowFlow(mapRef, showFlow, filteredEdges, filteredNodes);
+  const addBoundaries = useAddBoundaries(mapRef, selectedModels);
+
+  const markerCoordinates = type === "All" ? filteredNodes : filteredNodes.filter((item) => item.type === type);
 
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
@@ -69,7 +80,7 @@ const Map: React.FC = () => {
       addMarkers(markerCoordinates);
       showFlowCallback();
     }
-  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback, addBoundaries, modelNames]); // Update markers, flow edges
+  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback, addBoundaries]); // Update markers, flow edges
 
   return (
     <div
