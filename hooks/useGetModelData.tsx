@@ -42,7 +42,7 @@ interface Edge {
   target: string;
 }
 
-const useGetModelData = (modelNames: string[]) => {
+const useGetModelData = () => {
   const [nodeData, setNodeData] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [title, setTitle] = useState<string>("");
@@ -59,7 +59,7 @@ const useGetModelData = (modelNames: string[]) => {
     const fetchAllData = async () => {
       try {
         const allData = await Promise.all(
-          modelNames.map(async (modelName) => {
+          Object.keys(modelNameMap).map(async (modelName) => {
             const internalModelName = modelNameMap[modelName];
             if (!internalModelName) return { nodes: [], metadata: {}, edges: [] };
             const response = await fetch(`/models/${internalModelName}.json`);
@@ -89,14 +89,10 @@ const useGetModelData = (modelNames: string[]) => {
         setEdges(combinedEdges);
 
         // Set title based on number of models
-        if (modelNames.length === 1) {
-          setTitle(allData[0].metadata?.title || "Untitled Model");
-        } else {
-          const titles = allData.map(
-            (data, index) => data.metadata?.title || modelNames[index]
-          );
-          setTitle(titles.join(" | "));
-        }
+        const titles = allData.map(
+          (data, index) => data.metadata?.title || Object.keys(modelNameMap)[index]
+        );
+        setTitle(titles.join(" | "));
 
         // Log the fetched data
         console.log("Fetched data:", { combinedNodes, combinedEdges, title });
@@ -109,14 +105,8 @@ const useGetModelData = (modelNames: string[]) => {
       }
     };
 
-    if (modelNames.length > 0) {
-      fetchAllData();
-    } else {
-      setNodeData([]);
-      setEdges([]);
-      setTitle("");
-    }
-  }, [modelNames]);
+    fetchAllData();
+  }, []); // Empty dependency array to run only once
 
   return { nodeData, title, edges };
 };

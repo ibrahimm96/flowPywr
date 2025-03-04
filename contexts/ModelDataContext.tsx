@@ -54,7 +54,7 @@ const DataContext = createContext<DataContextProps | undefined>(undefined);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [modelNames, setModelNames] = useState(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
-  const { nodeData, edges } = useGetModelData(modelNames); // Will only run on modelName change, but modelNames are pre-set and will not change
+  const { nodeData, edges } = useGetModelData(); // Will only run on modelName change, but modelNames are pre-set and will not change
     
   return (
     <DataContext.Provider value={{ nodeData, edges, modelNames, setModelNames }}>
