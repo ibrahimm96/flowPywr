@@ -176,8 +176,8 @@
             ], "nsteps":3,
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                38.147133, 
-                -120.446387
+                38.094949, 
+                -120.536603
             ]
         },
         {
@@ -225,8 +225,8 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                38.233829, 
-                -120.279034
+                38.234011, 
+                -120.279137
             ]
         },
         {
@@ -292,8 +292,8 @@
             "type": "Link",
             "max_flow": 0.147,
             "coordinates": [
-                38.327987, 
-                -119.969113
+                38.329316, 
+                -119.961143
             ]
         },
         {
@@ -319,7 +319,11 @@
                 "IFR bl Collierville PH discharge/Min Flow",
                 "IFR bl Collierville PH discharge/Max Flow",null
             ], "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.142575, 
+                -120.377263
+            ]
         },
         {
             "name": "IFR at Murphys Park",
@@ -340,7 +344,11 @@
             "max_flows": ["IFR bl Donnell Lake/Max Flow"],
             "costs": [0],
             "nsteps":1,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.328062, 
+                -119.966551
+            ]
         },
         {
             "name": "IFR bl Hunter Reservoir",
@@ -350,7 +358,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.186216, 
+                -120.352341
+            ]
         },
         {
             "name": "IFR bl Lyons Res",
@@ -360,7 +372,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.090522, 
+                -120.170673
+            ]
         },
         {
             "name": "IFR bl McKays Point Div",
@@ -398,7 +414,11 @@
                 "IFR bl New Spicer Meadow Reservoir/Min Flow",
                 "IFR bl New Spicer Meadow Reservoir/Max Flow",null
             ],"nsteps":3, 
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.390184, 
+                -120.001186
+            ]
         },
         {
             "name": "IFR bl Philadelphia Div",
@@ -468,7 +488,11 @@
                 "IFR bl Beaver Creek Diversion Dam/Min Flow",
                 "IFR bl Beaver Creek Diversion Dam/Max Flow",null
             ],"nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.233392, 
+                -120.279432
+            ]
         },
         {
             "name": "IFR bl confluence of NF Stanislaus and Beaver Creek",
@@ -479,7 +503,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.206431, 
+                -120.317724
+            ]
         },
         {
             "name": "IFR bl Goodwin Reservoir",
@@ -490,7 +518,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                37.862957, 
+                -120.629170
+            ]
         },
         {
             "name": "IFR bl Pinecrest Lake",
@@ -515,7 +547,11 @@
             "costs": [0,0,0],
             "max_flows":[null,null,null],
             "nsteps":3,            
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.438328, 
+                -120.006136
+            ]
         },
         {
             "name": "IFR bl Beardsley Afterbay",
@@ -529,7 +565,11 @@
                 "IFR bl Beardsley Afterbay/Min Flow",
                 "IFR bl Beardsley Afterbay/Max Flow", null
             ],"nsteps":3,
-            "comment": "{\"resource_class\": \"node\"}"
+            "comment": "{\"resource_class\": \"node\"}",
+            "coordinates": [
+                38.195852, 
+                -120.093420
+            ]
         },
         {
             "name": "Hunter Reservoir",
@@ -823,14 +863,18 @@
             "cost": 10.0,
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                37.861339, 
-                -120.632958
+                37.740097, 
+                -121.105220
             ]
         },
         {
             "name": "STN_01 Inflow",
             "comment": "{\"keep\": true, \"resource_class\": \"node\"}",
-            "type": "River"
+            "type": "River",
+            "coordinates": [
+                38.028484, 
+                -120.460964
+            ]
         },
         {
             "name": "Lake Tulloch",
@@ -902,8 +946,8 @@
             "max_flow": 1,
             "comment": "{\"resource_class\": \"link\"}",
             "coordinates": [
-                38.188680, 
-                -120.435171
+                38.204868, 
+                -120.338396
             ]
         },
         {
@@ -911,6 +955,8 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
+                38.207531, 
+                -120.323718
             ]
         },
         {
@@ -918,8 +964,8 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
-                38.231404, 
-                -121.261183
+                38.149179, 
+                -120.381395
             ]
         },
         {
@@ -956,7 +1002,11 @@
         {
             "name": "STN_below_Melons.2.2",
             "comment": "{\"keep\": true, \"resource_class\": \"node\"}",
-            "type": "River"
+            "type": "River",
+            "coordinates": [
+                37.917583, 
+                -120.554800
+            ]
         }
     ],
     "edges": [

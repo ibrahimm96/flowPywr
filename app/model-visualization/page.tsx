@@ -7,24 +7,7 @@ import Map from "@/components/map";
 import { FaSpinner } from "react-icons/fa";
 
 export default function ModelVisualization() {
-  const models = [
-    "Merced River",
-    "Tuolumne River",
-    "San Joaquin River",
-    "Stanislaus River",
-  ];
-  // Now an array of selected models
-  const [selectedModels, setSelectedModels] = useState<string[]>([models[0]]);
-  const [selectedType, setSelectedType] = useState("All");
-  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa");
   const [loading, setLoading] = useState(true);
-  const [selectedComponent, setSelectedComponent] = useState<{
-    name: string;
-    coordinates: { lat: number | null; lon: number | null };
-    type?: string;
-  } | null>(null);
-  // New state for showing flow edges
-  const [showFlow, setShowFlow] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -52,23 +35,11 @@ export default function ModelVisualization() {
         <div className="flex h-full">
           {/* Sidebar */}
           <div className="h-screen w-[250px] bg-gray-800">
-            <MapSidebar
-              onModelChange={(models) => setSelectedModels(models)}
-              onStyleChange={(style) => setSelectedStyle(style)}
-              onTypeChange={(type) => setSelectedType(type)}
-              onShowFlowChange={(show) => setShowFlow(show)}
-              selectedComponent={selectedComponent}
-            />
+            <MapSidebar />
           </div>
           {/* Map */}
           <div className="h-full w-full -ml-[250px]">
-            <Map
-              modelNames={selectedModels}
-              type={selectedType}
-              style={selectedStyle}
-              showFlow={showFlow}
-              onComponentClick={(component) => setSelectedComponent(component)}
-            />
+            <Map />
           </div>
         </div>
       </div>

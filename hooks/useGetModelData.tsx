@@ -43,7 +43,7 @@ interface Edge {
 }
 
 const useGetModelData = (modelNames: string[]) => {
-  const [coordinates, setCoordinates] = useState<Node[]>([]);
+  const [nodeData, setNodeData] = useState<Node[]>([]);
   const [edges, setEdges] = useState<Edge[]>([]);
   const [title, setTitle] = useState<string>("");
 
@@ -82,7 +82,7 @@ const useGetModelData = (modelNames: string[]) => {
             };
           });
         });
-        setCoordinates(combinedNodes);
+        setNodeData(combinedNodes);
 
         // Combine edges from all models (if available)
         const combinedEdges = allData.flatMap((data) => data.edges ? data.edges.map(([source, target]: [string, string]) => ({ source, target })) : []);
@@ -103,7 +103,7 @@ const useGetModelData = (modelNames: string[]) => {
 
       } catch (error) {
         console.error("Error loading the JSON data:", error);
-        setCoordinates([]);
+        setNodeData([]);
         setEdges([]);
         setTitle("Error Loading Title");
       }
@@ -112,13 +112,13 @@ const useGetModelData = (modelNames: string[]) => {
     if (modelNames.length > 0) {
       fetchAllData();
     } else {
-      setCoordinates([]);
+      setNodeData([]);
       setEdges([]);
       setTitle("");
     }
   }, [modelNames]);
 
-  return { coordinates, title, edges };
+  return { nodeData, title, edges };
 };
 
 export default useGetModelData;

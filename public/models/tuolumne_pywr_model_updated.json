@@ -25,7 +25,11 @@
             "type": "Catchment",
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "Upper Hetch Hetchy Tunnel Outflow Inflow/Runoff", 
+<<<<<<< HEAD
             "coordinates": [  37.894488, -119.943966        ]
+=======
+            "coordinates": [ 37.838567, -120.051911        ]
+>>>>>>> wip
         },
         {
             "name": "Cherry Lake Inflow",
@@ -83,7 +87,11 @@
             "comment": "{\"resource_class\": \"node\"}",
             "flow": "Hetch Hetchy Aquaduct Outflow Inflow/Runoff", 
             "coordinates": [
+<<<<<<< HEAD
                 37.837977, -120.167504
+=======
+                37.855269, -120.232480
+>>>>>>> wip
             ]
 
         },
@@ -125,7 +133,11 @@
             "type": "Link",
             "comment": "{\"resource_class\": \"link\"}",
             "coordinates": [
+<<<<<<< HEAD
                 37.875127, -120.019739
+=======
+                37.844569, -120.187590
+>>>>>>> wip
             ]
         },
         {
@@ -251,8 +263,13 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
+<<<<<<< HEAD
                 37.848481, -120.190223
 
+=======
+                37.847484, 
+                -120.259336   
+>>>>>>> wip
             ]
         },
         {
@@ -430,8 +447,15 @@
             "type": "Output",
             "comment": "{\"resource_class\": \"node\"}",
             "cost": 1,
+<<<<<<< HEAD
             "max_flow": 1.1, 
             "coordinates":[37.813531, -120.298929
+=======
+            "max_flow": 1.1,
+            "coordinates": [
+                37.774561, 
+                -122.418500
+>>>>>>> wip
             ]
         },
         {
@@ -439,7 +463,14 @@
             "type": "Link",
             "max_flow": "SFPUC requirement/Demand",
             "cost": -5000,
+<<<<<<< HEAD
             "coordinates":[37.812037, -120.298378]
+=======
+            "coordinates": [
+                37.707873, 
+                -120.584584
+            ]
+>>>>>>> wip
         },
         {
             "name": "TUOLU-N-JUN1",
@@ -459,8 +490,14 @@
             "name": "TUO_01 Inflow",
             "type": "River",
             "comment": "{\"resource_class\": \"node\", \"keep\": true}",
+<<<<<<< HEAD
             "coordinates":[37.848904,
                  -120.336226
+=======
+            "coordinates":[
+                37.848904,
+                -120.336226
+>>>>>>> wip
             ]
         },
         {
@@ -484,8 +521,13 @@
             "type": "BreakLink",
             "comment": "{\"resource_class\": \"node\"}",
             "coordinates": [
+<<<<<<< HEAD
                 37.887718, -119.956123  
 
+=======
+                37.821465, 
+                -120.114431
+>>>>>>> wip
             ]
 
         }

@@ -2,36 +2,15 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useMapContext } from "@/contexts/MapContext"; // Import useMapContext
 import "./mapSidebarStyles.css";
 
-type ComponentData = {
-  name: string;
-  coordinates: { lat: number | null; lon: number | null };
-  type?: string;
-  attributes?: Record<string, unknown>;
-};
-
-type MapSideBarProps = {
-  onModelChange: (models: string[]) => void;
-  onStyleChange: (style: string) => void;
-  onTypeChange: (type: string) => void;
-  onShowFlowChange: (showFlow: boolean) => void;
-  selectedComponent?: ComponentData | null;
-};
-
-const MapSidebar: React.FC<MapSideBarProps> = ({
-  onModelChange,
-  onStyleChange,
-  onTypeChange,
-  onShowFlowChange,
-  selectedComponent,
-}) => {
-  const [selectedModels, setSelectedModels] = useState<string[]>(["San Joaquin River"]);
-  const [selectedStyle, setSelectedStyle] = useState("mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa");
-  const [selectedType, setSelectedType] = useState("All");
+const MapSidebar: React.FC = () => {
+  const { style, setStyle, type, setType, modelNames, setModelNames, showFlow, setShowFlow } = useMapContext();
+  const [selectedModels, setSelectedModels] = useState<string[]>(modelNames);
+  const [selectedStyle, setSelectedStyle] = useState(style);
+  const [selectedType, setSelectedType] = useState(type);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [showFlow, setShowFlow] = useState(false);
-  const [lastSelectedComponent, setLastSelectedComponent] = useState<ComponentData | null>(null);
 
   const models = [
     "Merced River",
@@ -53,14 +32,9 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   ];
 
   useEffect(() => {
-    onModelChange(selectedModels);
-  }, [selectedModels, onModelChange]);
+    setModelNames(selectedModels); // Update modelNames in MapContext
+  }, [selectedModels, setModelNames]);
 
-  useEffect(() => {
-    if (selectedComponent) {
-      setLastSelectedComponent(selectedComponent);
-    }
-  }, [selectedComponent]);
 
   const toggleMapStyle = () => {
     const newStyle =
@@ -68,7 +42,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
         ? "mapbox://styles/ibrahimm96/cm7feth7600dh01rgha9l5j8c"
         : "mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa";
     setSelectedStyle(newStyle);
-    onStyleChange(newStyle);
+    setStyle(newStyle);
   };
 
   const handleModelToggle = (model: string) => {
@@ -84,7 +58,6 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
   const toggleShowFlow = () => {
     const newShowFlow = !showFlow;
     setShowFlow(newShowFlow);
-    onShowFlowChange(newShowFlow);
   };
 
   return (
@@ -198,7 +171,7 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
                     key={option}
                     onClick={() => {
                       setSelectedType(option);
-                      onTypeChange(option);
+                      setType(option);
                       setIsDropdownOpen(false);
                     }}
                     style={{
@@ -233,29 +206,6 @@ const MapSidebar: React.FC<MapSideBarProps> = ({
         >
           {showFlow ? "Hide Flow" : "Show Flow"}
         </motion.button>
-
-        {/* Selected Component Info Display */}
-        {lastSelectedComponent && (
-          <div className="component-info">
-            <h3 className="component-info-title">
-              {lastSelectedComponent.name}
-            </h3>
-            <p className="component-info-type">
-              <strong>Type:</strong> {lastSelectedComponent.type || "Unknown"}
-            </p>
-            <p className="component-info-coordinates">
-              <strong>Coordinates:</strong> {lastSelectedComponent.coordinates.lat},{" "}
-              {lastSelectedComponent.coordinates.lon}
-            </p>
-            <div className="component-info-attributes">
-              {lastSelectedComponent.attributes && Object.entries(lastSelectedComponent.attributes).map(([key, value]) => (
-                <p key={key} className="component-info-attribute">
-                  <strong>{key}:</strong> {value !== null && value !== undefined ? value.toString() : "N/A"}
-                </p>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

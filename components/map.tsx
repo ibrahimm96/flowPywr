@@ -3,45 +3,28 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import useGetModelData from "@/hooks/useGetModelData";
 import useAddMarkers from "@/hooks/useAddMarkers";
 import useShowFlow from "@/hooks/useShowFlow";
 import useAddBoundaries from "@/hooks/useAddBoundaries";
+import { useDataContext } from "@/contexts/ModelDataContext";
+import { useMapContext } from "@/contexts/MapContext";
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaWJyYWhpbW05NiIsImEiOiJjbTZqbmJsaGowMnAwMmtxOHJhZGtsa2UyIn0.VWsBiWtnRzwfh0BQoHD1dA";
 
-interface MapProps {
-  modelNames: string[];
-  style: string;
-  type: string;
-  showFlow: boolean;
-  onComponentClick?: (node: {
-    name: string;
-    coordinates: { lat: number | null; lon: number | null };
-    type?: string;
-  } | null) => void;
-}
-
-const Map: React.FC<MapProps> = ({
-  style,
-  type,
-  modelNames,
-  showFlow,
-  onComponentClick,
-}) => {
+const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null); // Map reference
   const [mapLoaded, setMapLoaded] = useState(false); // Tracks whether map is loaded
   const [styleLoaded, setStyleLoaded] = useState(false); // Tracks whether style is loaded
 
-  const { coordinates, edges } = useGetModelData(modelNames);
+  const { nodeData, edges } = useDataContext();
+  const { style, type, modelNames, showFlow, onComponentClick } = useMapContext();
   const addMarkers = useAddMarkers(mapRef, onComponentClick);
-  const showFlowCallback = useShowFlow(mapRef, showFlow, edges, coordinates);
+  const showFlowCallback = useShowFlow(mapRef, showFlow, edges, nodeData);
   const addBoundaries = useAddBoundaries(mapRef, modelNames);
 
+  const markerCoordinates = type === "All" ? nodeData : nodeData.filter((item) => item.type === type);
 
-  const markerCoordinates = type === "All" ? coordinates : coordinates.filter((item) => item.type === type);
-  
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
       mapRef.current = new mapboxgl.Map({
@@ -57,7 +40,6 @@ const Map: React.FC<MapProps> = ({
         setMapLoaded(true);
         console.log("Map loaded");
       });
-
 
       mapRef.current.on('idle', () => {
         if (mapRef.current?.isStyleLoaded()) {
@@ -87,7 +69,7 @@ const Map: React.FC<MapProps> = ({
       addMarkers(markerCoordinates);
       showFlowCallback();
     }
-  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback, addBoundaries,  modelNames]); // Update markers, flow edges  
+  }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback, addBoundaries, modelNames]); // Update markers, flow edges
 
   return (
     <div
