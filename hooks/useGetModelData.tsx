@@ -93,12 +93,7 @@ const useGetModelData = () => {
 
           return { modelName: data.modelName, nodeData: nodes, edges };
         });
-
         setModelData(combinedModels);
-
-        // Log the fetched data
-        console.log("Fetched data:", { combinedModels });
-
       } catch (error) {
         console.error("Error loading the JSON data:", error);
         setModelData([]);
