@@ -14,8 +14,6 @@ interface MapContextProps {
   setStyle: React.Dispatch<React.SetStateAction<string>>;
   type: string;
   setType: React.Dispatch<React.SetStateAction<string>>;
-  modelNames: string[];
-  setModelNames: React.Dispatch<React.SetStateAction<string[]>>;
   selectedModels: string[];
   setSelectedModels: React.Dispatch<React.SetStateAction<string[]>>;
   showFlow: boolean;
@@ -29,13 +27,12 @@ const MapContext = createContext<MapContextProps | undefined>(undefined);
 export const MapProvider = ({ children }: { children: ReactNode }) => {
   const [style, setStyle] = useState("mapbox://styles/ibrahimm96/cm7ch4lom006n01sogpqdguxa");
   const [type, setType] = useState("All");
-  const [modelNames, setModelNames] = useState(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [showFlow, setShowFlow] = useState(false);
   const [onComponentClick, setOnComponentClick] = useState<(node: ComponentData | null) => void>(() => () => {});
 
   return (
-    <MapContext.Provider value={{ style, setStyle, type, setType, modelNames, setModelNames, selectedModels, setSelectedModels, showFlow, setShowFlow, onComponentClick, setOnComponentClick }}>
+    <MapContext.Provider value={{ style, setStyle, type, setType, selectedModels, setSelectedModels, showFlow, setShowFlow, onComponentClick, setOnComponentClick }}>
       {children}
     </MapContext.Provider>
   );

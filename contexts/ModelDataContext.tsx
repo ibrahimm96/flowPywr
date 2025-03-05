@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
 import useGetModelData from "@/hooks/useGetModelData";
 
 interface Coordinates {
@@ -51,21 +51,18 @@ interface Model {
 
 interface DataContextProps {
   modelData: Model[];
-  modelNames: string[];
-  setModelNames: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 const DataContext = createContext<DataContextProps | undefined>(undefined);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
-  const [modelNames, setModelNames] = useState(["Merced River", "Tuolumne River", "San Joaquin River", "Stanislaus River"]);
-  const { modelData } = useGetModelData(); // Fetch model data using the hook
+    const { modelData } = useGetModelData(); // Fetch model data using the hook
 
   console.log("*********** FETCHED DATA ************");
   console.log("MODEL DATA:  ", modelData);
 
   return (
-    <DataContext.Provider value={{ modelData, modelNames, setModelNames }}>
+    <DataContext.Provider value={{ modelData }}>
       {children}
     </DataContext.Provider>
   );

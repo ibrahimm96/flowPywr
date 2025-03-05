@@ -1,13 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useMapContext } from "@/contexts/MapContext"; // Import useMapContext
+import { useMapContext } from "@/contexts/MapContext";
 import "./mapSidebarStyles.css";
 
 const MapSidebar: React.FC = () => {
   const { style, setStyle, type, setType, selectedModels, setSelectedModels, showFlow, setShowFlow } = useMapContext();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const models = [
     "Merced River",
@@ -49,6 +50,28 @@ const MapSidebar: React.FC = () => {
   const toggleShowFlow = () => {
     setShowFlow(!showFlow);
   };
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      setIsDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   return (
     <div className="sidebar-container">
@@ -123,8 +146,9 @@ const MapSidebar: React.FC = () => {
           >
             Select Component Type
           </label>
-          <motion.div
-            onClick={() => setIsDropdownOpen((prev) => !prev)}
+          <div
+            ref={dropdownRef}
+            onClick={handleDropdownToggle}
             style={{
               width: "100%",
               padding: "8px",
@@ -137,7 +161,7 @@ const MapSidebar: React.FC = () => {
             }}
           >
             {type}
-          </motion.div>
+          </div>
           <AnimatePresence>
             {isDropdownOpen && (
               <motion.div
@@ -146,20 +170,24 @@ const MapSidebar: React.FC = () => {
                 exit={{ opacity: 0, y: -10 }}
                 style={{
                   position: "absolute",
-                  top: "calc(100% + 5px)",
+                  top: "100%",
                   left: 0,
-                  right: 0,
+                  width: "100%",
                   backgroundColor: "#fff",
                   border: "1px solid #ccc",
                   borderRadius: "4px",
                   boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
                   zIndex: 10,
+                  maxHeight: "150px", // Fixed height for scrollability
+                  overflowY: "auto", // Enable vertical scrolling
                 }}
+                onClick={(e) => e.stopPropagation()} // Stop event propagation
               >
                 {typeOptions.map((option) => (
                   <div
                     key={option}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation(); // Stop event propagation
                       setType(option);
                       setIsDropdownOpen(false);
                     }}
