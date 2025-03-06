@@ -101,7 +101,7 @@ const useGetModelData = () => {
     };
 
     fetchAllData();
-  }, []); // Empty dependency array to run only once
+  }); // Empty dependency array to run only once
 
   return { modelData };
 };
