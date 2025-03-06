@@ -56,7 +56,7 @@ interface DataContextProps {
 const DataContext = createContext<DataContextProps | undefined>(undefined);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
-    const { modelData } = useGetModelData(); // Fetch model data using the hook
+  const { modelData } = useGetModelData(); // Fetch model data using the hook
 
   console.log("*********** FETCHED DATA ************");
   console.log("MODEL DATA:  ", modelData);
