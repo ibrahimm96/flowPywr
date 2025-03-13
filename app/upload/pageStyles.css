@@ -3,8 +3,10 @@ body.no-scroll {
 }
 
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  position: absolute;
+  top: 0;
+  left: 256; /* Adjust this value based on the sidebar's collapsed width */
+  width: 512px; /* Set the width to 512px */
   padding: 20px;
 }
 
@@ -17,7 +19,6 @@ body.no-scroll {
 
 .form {
   padding: 20px;
-  padding-right: 40px; /* Add padding to the right side of the form */
   display: flex;
   flex-direction: column;
   max-height: 85vh; /* Adjust the height as needed */
@@ -64,9 +65,3 @@ body.no-scroll {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
-
-.borderRed {
-  border: 2px solid red;
-  background-color: #ffe5e5;
-}
-

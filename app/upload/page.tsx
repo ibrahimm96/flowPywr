@@ -6,14 +6,9 @@ import "./pageStyles.css";
 
 const Page = () => {
   const [formData, setFormData] = useState({
-    multiprocessing: "",
-    num_cores: "",
     scenario_set: "",
     start_year: "",
     end_year: "",
-    years: "",
-    run_name: "",
-    data_path: "/content/cen_sierra_pywr_new/data/",
     gcm_model: "",
     lgcm_model: ""
   });
@@ -27,7 +22,44 @@ const Page = () => {
     };
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    // Prefill the years and model name based on the selected scenario set
+    if (formData.scenario_set === "LOCA2 GCMS") {
+      setFormData(prev => ({
+        ...prev,
+        start_year: "2020",
+        end_year: "2050",
+        gcm_model: "LOCA2 Model",
+        lgcm_model: "LOCA2 GCM"
+      }));
+    } else if (formData.scenario_set === "GCMS") {
+      setFormData(prev => ({
+        ...prev,
+        start_year: "2020",
+        end_year: "2050",
+        gcm_model: "GCM Model",
+        lgcm_model: "GCM"
+      }));
+    } else if (formData.scenario_set === "HISTORICAL LIVENH") {
+      setFormData(prev => ({
+        ...prev,
+        start_year: "1980",
+        end_year: "2010",
+        gcm_model: "Historical Model",
+        lgcm_model: "Historical GCM"
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        start_year: "",
+        end_year: "",
+        gcm_model: "",
+        lgcm_model: ""
+      }));
+    }
+  }, [formData.scenario_set]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -44,40 +76,21 @@ const Page = () => {
   return (
     <div className="container">
       <h1 className="title">Model Parameter and Inputs</h1>
-      <form onSubmit={handleSubmit} className="form">
-        <div className="form-group">
-          <label htmlFor="multiprocessing" className="label">Multiprocessing</label>
-          <input
-            type="text"
-            name="multiprocessing"
-            value={formData.multiprocessing}
-            onChange={handleChange}
-            className={`input ${submitted && formData.multiprocessing === "" ? "borderRed" : ""}`}
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="num_cores" className="label">Number of Cores</label>
-          <input
-            type="text"
-            name="num_cores"
-            value={formData.num_cores}
-            onChange={handleChange}
-            className={`input ${submitted && formData.num_cores === "" ? "borderRed" : ""}`}
-          />
-        </div>
-
+      <form onSubmit={handleSubmit} className="form">        
         <div className="form-group">
           <label htmlFor="scenario_set" className="label">Scenario Set</label>
-          <input
-            type="text"
+          <select
             name="scenario_set"
             value={formData.scenario_set}
             onChange={handleChange}
             className={`input ${submitted && formData.scenario_set === "" ? "borderRed" : ""}`}
-          />
+          >
+            <option value="">Select a scenario</option>
+            <option value="LOCA2 GCMS">LOCA2 GCMS</option>
+            <option value="GCMS">GCMS</option>
+            <option value="HISTORICAL LIVENH">HISTORICAL LIVENH</option>
+          </select>
         </div>
-
         <div className="form-group">
           <label htmlFor="start_year" className="label">Start Year</label>
           <input
@@ -97,39 +110,6 @@ const Page = () => {
             value={formData.end_year}
             onChange={handleChange}
             className={`input ${submitted && formData.end_year === "" ? "borderRed" : ""}`}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="years" className="label">Years to Run</label>
-          <input
-            type="text"
-            name="years"
-            value={formData.years}
-            onChange={handleChange}
-            className={`input ${submitted && formData.years === "" ? "borderRed" : ""}`}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="run_name" className="label">Run Name</label>
-          <input
-            type="text"
-            name="run_name"
-            value={formData.run_name}
-            onChange={handleChange}
-            className={`input ${submitted && formData.run_name === "" ? "borderRed" : ""}`}
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="data_path" className="label">Path to the Data Directory</label>
-          <input
-            type="text"
-            name="data_path"
-            value={formData.data_path}
-            onChange={handleChange}
-            className={`input ${submitted && formData.data_path === "" ? "borderRed" : ""}`}
           />
         </div>
 
