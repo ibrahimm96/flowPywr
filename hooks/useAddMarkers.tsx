@@ -3,6 +3,7 @@
 import { useCallback, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import AnimatedPopup from "mapbox-gl-animated-popup";
+import { useMapContext } from "@/contexts/MapContext";
 
 interface Coordinates {
   lat: number | null;
@@ -22,6 +23,7 @@ const useAddMarkers = (
   onComponentClick?: (node: MarkerItem | null) => void
 ) => {
   const markers = useRef<mapboxgl.Marker[]>([]);
+  const { setLastSelectedNode } = useMapContext();
 
   const addMarkers = useCallback(
     (markerCoordinates: MarkerItem[]) => {
@@ -41,7 +43,6 @@ const useAddMarkers = (
           else if (item.type === "BreakLink") iconUrl = "/breakline.png";
           else if (item.type === "Output") iconUrl = "/output.png";
           else if (item.type === "PiecewiseLink") iconUrl = "/piecewiseLink.png";
-
 
           const markerEl = document.createElement("img");
           markerEl.src = iconUrl;
@@ -67,7 +68,10 @@ const useAddMarkers = (
           marker.setPopup(popup);
 
           const markerElement = marker.getElement();
-          markerElement.addEventListener("mouseenter", () => onComponentClick?.(item));
+          markerElement.addEventListener("mouseenter", () => {
+            setLastSelectedNode(item); // Update last selected node on hover
+            onComponentClick?.(item);
+          });
           markerElement.addEventListener("mouseleave", () => onComponentClick?.(null));
 
           markers.current.push(marker);

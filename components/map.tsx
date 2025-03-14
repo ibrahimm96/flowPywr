@@ -19,8 +19,6 @@ const Map: React.FC = () => {
 
   const { modelData } = useDataContext();
   const { style, type, selectedModels, showFlow, onComponentClick } = useMapContext();
-  const addMarkers = useAddMarkers(mapRef, onComponentClick);
-
 
   // Filter nodes and edges based on selected models
   const filteredNodes = modelData
@@ -30,11 +28,13 @@ const Map: React.FC = () => {
   const filteredEdges = modelData
     .filter(model => selectedModels.includes(model.modelName))
     .flatMap(model => model.edges);
-    
+
+  const markerCoordinates = type === "All" ? filteredNodes : filteredNodes.filter((item) => item.type === type);
+  
+  const addMarkers = useAddMarkers(mapRef, onComponentClick);
   const showFlowCallback = useShowFlow(mapRef, showFlow, filteredEdges, filteredNodes);
   const addBoundaries = useAddBoundaries(mapRef, selectedModels);
 
-  const markerCoordinates = type === "All" ? filteredNodes : filteredNodes.filter((item) => item.type === type);
 
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
@@ -83,11 +83,13 @@ const Map: React.FC = () => {
   }, [mapLoaded, styleLoaded, addMarkers, markerCoordinates, showFlowCallback, addBoundaries]); // Update markers, flow edges
 
   return (
-    <div
-      className="max-w-full max-h-full"
-      ref={mapContainerRef}
-      style={{ height: "100%", width: "100%" }}
-    />
+    <div className="flex h-full w-full">
+      <div
+        ref={mapContainerRef}
+        className="flex-1"
+        style={{ height: "100%", width: "100%" }}
+      />
+    </div>
   );
 };
 

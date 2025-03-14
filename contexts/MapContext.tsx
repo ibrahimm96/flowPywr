@@ -20,6 +20,8 @@ interface MapContextProps {
   setShowFlow: React.Dispatch<React.SetStateAction<boolean>>;
   onComponentClick: (node: ComponentData | null) => void;
   setOnComponentClick: React.Dispatch<React.SetStateAction<(node: ComponentData | null) => void>>;
+  lastSelectedNode: ComponentData | null;
+  setLastSelectedNode: React.Dispatch<React.SetStateAction<ComponentData | null>>;
 }
 
 const MapContext = createContext<MapContextProps | undefined>(undefined);
@@ -30,9 +32,25 @@ export const MapProvider = ({ children }: { children: ReactNode }) => {
   const [selectedModels, setSelectedModels] = useState<string[]>([]);
   const [showFlow, setShowFlow] = useState(false);
   const [onComponentClick, setOnComponentClick] = useState<(node: ComponentData | null) => void>(() => () => {});
+  const [lastSelectedNode, setLastSelectedNode] = useState<ComponentData | null>(null); // Add state for last selected node
 
   return (
-    <MapContext.Provider value={{ style, setStyle, type, setType, selectedModels, setSelectedModels, showFlow, setShowFlow, onComponentClick, setOnComponentClick }}>
+    <MapContext.Provider
+      value={{
+        style,
+        setStyle,
+        type,
+        setType,
+        selectedModels,
+        setSelectedModels,
+        showFlow,
+        setShowFlow,
+        onComponentClick,
+        setOnComponentClick,
+        lastSelectedNode,
+        setLastSelectedNode, // Provide setter for last selected node
+      }}
+    >
       {children}
     </MapContext.Provider>
   );

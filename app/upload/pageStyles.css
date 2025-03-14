@@ -3,9 +3,9 @@ body.no-scroll {
 }
 
 .container {
-  position: absolute;
+  position: relative;
   top: 0;
-  left: 256; /* Adjust this value based on the sidebar's collapsed width */
+  left: 20; /* Adjust this value based on the sidebar's collapsed width */
   width: 512px; /* Set the width to 512px */
   padding: 20px;
 }
@@ -42,6 +42,10 @@ body.no-scroll {
   border-radius: 4px;
 }
 
+.borderRed {
+  border-color: red;
+}
+
 .submit-button {
   background-color: #1e3a8a;
   color: #fff;
@@ -56,7 +60,7 @@ body.no-scroll {
 .popup {
   position: fixed;
   top: 20px;
-  left: 50%;
+  left: 384px; /* Move the popup 256 pixels to the left */
   transform: translateX(-50%);
   background-color: #4caf50;
   color: white;

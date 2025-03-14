@@ -14,6 +14,13 @@ const Page = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({
+    scenario_set: false,
+    start_year: false,
+    end_year: false,
+    gcm_model: false,
+    lgcm_model: false
+  });
 
   useEffect(() => {
     document.body.classList.add("no-scroll");
@@ -27,24 +34,24 @@ const Page = () => {
     if (formData.scenario_set === "LOCA2 GCMS") {
       setFormData(prev => ({
         ...prev,
-        start_year: "2020",
-        end_year: "2050",
+        start_year: "2015",
+        end_year: "2099",
         gcm_model: "LOCA2 Model",
         lgcm_model: "LOCA2 GCM"
       }));
     } else if (formData.scenario_set === "GCMS") {
       setFormData(prev => ({
         ...prev,
-        start_year: "2020",
-        end_year: "2050",
+        start_year: "2006",
+        end_year: "2099",
         gcm_model: "GCM Model",
         lgcm_model: "GCM"
       }));
     } else if (formData.scenario_set === "HISTORICAL LIVENH") {
       setFormData(prev => ({
         ...prev,
-        start_year: "1980",
-        end_year: "2010",
+        start_year: "1990",
+        end_year: "2012",
         gcm_model: "Historical Model",
         lgcm_model: "Historical GCM"
       }));
@@ -65,12 +72,40 @@ const Page = () => {
       ...prev,
       [name]: value
     }));
+    setErrors(prev => ({
+      ...prev,
+      [name]: false
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Validate form data
+    const newErrors = {
+      scenario_set: formData.scenario_set === "",
+      start_year: formData.start_year === "",
+      end_year: formData.end_year === "",
+      gcm_model: formData.gcm_model === "",
+      lgcm_model: formData.lgcm_model === ""
+    };
+
+    setErrors(newErrors);
+
+    // Check if there are any errors
+    const hasErrors = Object.values(newErrors).some(error => error);
+
+    if (hasErrors) {
+      return;
+    }
+
     setSubmitted(true);
     console.log(formData);
+
+    // Hide the popup after 3 seconds
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 3000);
   };
 
   return (
@@ -83,7 +118,7 @@ const Page = () => {
             name="scenario_set"
             value={formData.scenario_set}
             onChange={handleChange}
-            className={`input ${submitted && formData.scenario_set === "" ? "borderRed" : ""}`}
+            className={`input ${errors.scenario_set ? "borderRed" : ""}`}
           >
             <option value="">Select a scenario</option>
             <option value="LOCA2 GCMS">LOCA2 GCMS</option>
@@ -98,7 +133,7 @@ const Page = () => {
             name="start_year"
             value={formData.start_year}
             onChange={handleChange}
-            className={`input ${submitted && formData.start_year === "" ? "borderRed" : ""}`}
+            className={`input ${errors.start_year ? "borderRed" : ""}`}
           />
         </div>
 
@@ -109,7 +144,7 @@ const Page = () => {
             name="end_year"
             value={formData.end_year}
             onChange={handleChange}
-            className={`input ${submitted && formData.end_year === "" ? "borderRed" : ""}`}
+            className={`input ${errors.end_year ? "borderRed" : ""}`}
           />
         </div>
 
@@ -120,7 +155,7 @@ const Page = () => {
             name="gcm_model"
             value={formData.gcm_model}
             onChange={handleChange}
-            className={`input ${submitted && formData.gcm_model === "" ? "borderRed" : ""}`}
+            className={`input ${errors.gcm_model ? "borderRed" : ""}`}
           />
         </div>
 
@@ -131,7 +166,7 @@ const Page = () => {
             name="lgcm_model"
             value={formData.lgcm_model}
             onChange={handleChange}
-            className={`input ${submitted && formData.lgcm_model === "" ? "borderRed" : ""}`}
+            className={`input ${errors.lgcm_model ? "borderRed" : ""}`}
           />
         </div>
 
@@ -144,6 +179,18 @@ const Page = () => {
           Submit
         </motion.button>
       </form>
+
+      {submitted && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ duration: 0.5 }}
+          className="popup"
+        >
+          Successfully Submitted Parameters!
+        </motion.div>
+      )}
     </div>
   );
 };

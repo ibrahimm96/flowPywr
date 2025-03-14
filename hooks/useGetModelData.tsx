@@ -51,16 +51,14 @@ interface Model {
 const useGetModelData = () => {
   const [modelData, setModelData] = useState<Model[]>([]);
 
-  // Map from friendly names to internal filenames
-  const modelNameMap: Record<string, string> = {
-    "Merced River": "merced_pywr_model_updated",
-    "Tuolumne River": "tuolumne_pywr_model_updated",
-    "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
-    "Stanislaus River": "stanislaus_pywr_model_updated",
-  };
-
   useEffect(() => {
     const fetchAllData = async () => {
+      const modelNameMap: Record<string, string> = {
+        "Merced River": "merced_pywr_model_updated",
+        "Tuolumne River": "tuolumne_pywr_model_updated",
+        "San Joaquin River": "upper_san_joaquin_pywr_model_updated",
+        "Stanislaus River": "stanislaus_pywr_model_updated",
+      };
       try {
         const allData = await Promise.all(
           Object.keys(modelNameMap).map(async (modelName) => {

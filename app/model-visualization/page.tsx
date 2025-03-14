@@ -16,6 +16,13 @@ export default function ModelVisualization() {
     return () => clearTimeout(timer);
   }, []);
 
+    useEffect(() => {
+      document.body.classList.add("no-scroll");
+      return () => {
+        document.body.classList.remove("no-scroll");
+      };
+    }, []);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
