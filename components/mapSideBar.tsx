@@ -79,10 +79,10 @@ const MapSidebar: React.FC = () => {
       <AnimatePresence>
         {isSidebarVisible && (
           <motion.div
-            initial={{ x: -250 }}
+            initial={{ x: -300 }}
             animate={{ x: 0 }}
-            exit={{ x: -250 }}
-            transition={{ duration: 0.5 }}
+            exit={{ x: -300 }}
+            transition={{ duration: 0.3 }}
             className="sidebar-content"
           >
             {/* Map Style Toggle Button */}
@@ -268,8 +268,8 @@ const MapSidebar: React.FC = () => {
         className="toggle-sidebar-button"
         style={{
           position: "absolute",
-          top: "95%",
-          left: "-2px",
+          top: "800px",
+          left: "126px",
           // transform: "translateY(-50%)",
           zIndex: 1000,
           padding: "10px 15px",
@@ -284,7 +284,7 @@ const MapSidebar: React.FC = () => {
         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#163a8a")}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#1e3a8a")}
       >
-        {isSidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
+        {isSidebarVisible ? "Open" : "Close"}
       </button>
     </div>
   );

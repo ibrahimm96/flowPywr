@@ -17,7 +17,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 260px;
-  max-height: 800px; /* Decrease the max height to make the sidebar shorter */
+  max-height: 750px; /* Decrease the max height to make the sidebar shorter */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
