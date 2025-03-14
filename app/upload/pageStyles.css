@@ -2,70 +2,107 @@ body.no-scroll {
   overflow: hidden;
 }
 
-.container {
-  position: relative;
-  top: 0;
-  left: 20; /* Adjust this value based on the sidebar's collapsed width */
-  width: 512px; /* Set the width to 512px */
+.outer-container {
+  display: flex;
+  left: 20px;
   padding: 20px;
+}
+
+.container {
+  max-width: 550px; 
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  font-size: 24px;
+  font-size: 32px; 
   font-weight: bold;
   margin-bottom: 20px;
   text-align: center;
+  color: #333;
 }
 
 .form {
-  padding: 20px;
   display: flex;
   flex-direction: column;
-  max-height: 85vh; /* Adjust the height as needed */
-  overflow-y: auto;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px; /* Increased margin to create more space between form groups */
 }
 
 .label {
-  font-weight: bold;
-  margin-bottom: 5px;
-  display: block;
+  font-size: 16px; /* Changed to px */
+  font-weight: 600;
+  margin-right: 15px; /* Added margin to create space between label and input */
+  color: #555;
+  flex: 0 0 150px; /* Fixed width for labels */
 }
 
 .input {
-  width: 100%;
-  padding: 10px;
+  padding: 12px; /* Increased padding to give more space inside the input */
+  font-size: 16px; /* Changed to px */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
+  transition: border-color 0.3s, background-color 0.3s; /* Added transition for background color */
+  flex: 1; /* Input takes the remaining space */
+}
+
+.input:focus {
+  border-color: #007bff;
+  outline: none;
 }
 
 .borderRed {
-  border-color: red;
+  border-color: #ff4d4d;
+  background-color: #ffcccc; /* Added background color for error state */
+  color: #FF7F7F;
 }
 
 .submit-button {
-  background-color: #1e3a8a;
-  color: #fff;
   padding: 10px 15px;
+  font-size: 16px; /* Changed to px */
+  font-weight: 600;
+  color: #fff;
+  background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
 }
 
 .popup {
-  position: fixed;
-  top: 20px;
-  left: 384px; /* Move the popup 256 pixels to the left */
-  transform: translateX(-50%);
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #28a745;
+  color: #fff;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
+  text-align: center;
+  font-size: 16px; /* Changed to px */
+  font-weight: 600;
+}
+
+/* Custom styles for datalist options */
+datalist option {
+  font-size: 18px; /* Increased font size */
+  padding: 12px; /* Increased padding */
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000; /* Changed border color to black */
+  border-radius: 5px;
+  cursor: pointer;
+  max-height: 200px; /* Set max height for scrollability */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+datalist option:hover {
+  background-color: #f0f0f0;
 }
