@@ -35,7 +35,6 @@ const Map: React.FC = () => {
   const showFlowCallback = useShowFlow(mapRef, showFlow, filteredEdges, filteredNodes);
   const addBoundaries = useAddBoundaries(mapRef, selectedModels);
 
-
   useEffect(() => {
     if (mapContainerRef.current && !mapRef.current) {
       mapRef.current = new mapboxgl.Map({
@@ -58,13 +57,19 @@ const Map: React.FC = () => {
           console.log("Style loaded");
         }
       });
-    }
-    return () => {
-      if (mapRef.current) {
-        mapRef.current.remove();
+
+      const resizeObserver = new ResizeObserver(() => {
+        mapRef.current?.resize();
+      });
+
+      resizeObserver.observe(mapContainerRef.current, );
+
+      return () => {
+        resizeObserver.disconnect();
+        mapRef.current?.remove();
         mapRef.current = null;
-      }
-    };
+      };
+    }
   }, []); // Initial Map Load
 
   useEffect(() => {

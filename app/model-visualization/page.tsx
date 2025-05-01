@@ -16,12 +16,12 @@ export default function ModelVisualization() {
     return () => clearTimeout(timer);
   }, []);
 
-    useEffect(() => {
-      document.body.classList.add("no-scroll");
-      return () => {
-        document.body.classList.remove("no-scroll");
-      };
-    }, []);
+  useEffect(() => {
+    document.body.classList.add("no-scroll");
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -40,13 +40,13 @@ export default function ModelVisualization() {
     >
       <div className="relative h-screen">
         <div className="flex h-full">
-          {/* Sidebar */}
-          <div className="h-screen w-[250px] bg-gray-800">
-            <MapSidebar />
-          </div>
           {/* Map */}
-          <div className="h-full w-full -ml-[250px]">
+          <div className="flex-1 relative">
             <Map />
+            {/* Sidebar */}
+            <div className="absolute top-0 left-0 h-screen w-[250px] z-10">
+              <MapSidebar />
+            </div>
           </div>
         </div>
       </div>

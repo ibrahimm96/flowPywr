@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth"
-import { auth } from "@/lib/firebase"
+import { supabase } from "@/lib/supabase"
+
 
 export default function AuthPage() {
   const [email, setEmail] = useState("")
@@ -15,19 +15,32 @@ export default function AuthPage() {
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
-
+  
     try {
+      let result
       if (isSignUp) {
-        await createUserWithEmailAndPassword(auth, email, password)
+        result = await supabase.auth.signUp({
+          email,
+          password,
+        })
       } else {
-        await signInWithEmailAndPassword(auth, email, password)
+        result = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        })
       }
+  
+      if (result.error) {
+        throw result.error
+      }
+  
       router.push("/")
     } catch (error) {
-      setError("Authentication failed. Please check your credentials.")
+      setError((error as Error).message || "Authentication failed. Please try again.")
       console.error(error)
     }
   }
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

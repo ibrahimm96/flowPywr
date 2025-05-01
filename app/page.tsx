@@ -1,32 +1,20 @@
 "use client"
 
-import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { useAuth } from "@/contexts/AuthContext"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 
-const images = ["/home_img1.jpg", "/home_img1.jpg"]
+const images = ["/tuolumne.jpeg", "/home_img1.jpg", "/millerton.jpeg"]
 
 export default function Home() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push("/auth")
-    }
-  }, [user, loading, router])
+  const { loading } = useAuth()
 
   if (loading) {
     return <div>Loading...</div>
   }
 
-  if (!user) {
-    return null
-  }
 
   const settings = {
     dots: true,
@@ -49,7 +37,10 @@ export default function Home() {
                   src={src || "/placeholder.svg"}
                   alt={`Slide ${index + 1}`}
                   fill
-                  style={{ objectFit: "cover" }}
+                  style={{
+                    objectFit: "cover", // Ensures the image fills the entire container width, cropping if needed
+                    objectPosition: "bottom", // Centers the image to avoid awkward cropping
+                  }}
                   priority={index === 0}
                 />
               </div>

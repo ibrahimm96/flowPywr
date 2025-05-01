@@ -82,7 +82,7 @@ const MapSidebar: React.FC = () => {
             initial={{ x: -300 }}
             animate={{ x: 0 }}
             exit={{ x: -300 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
             className="sidebar-content"
           >
             {/* Map Style Toggle Button */}
@@ -177,6 +177,7 @@ const MapSidebar: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                     style={{
                       position: "absolute",
                       top: "100%",
@@ -270,7 +271,6 @@ const MapSidebar: React.FC = () => {
           position: "absolute",
           top: "800px",
           left: "126px",
-          // transform: "translateY(-50%)",
           zIndex: 1000,
           padding: "10px 15px",
           backgroundColor: "#1e3a8a",
@@ -284,7 +284,7 @@ const MapSidebar: React.FC = () => {
         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#163a8a")}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#1e3a8a")}
       >
-        {isSidebarVisible ? "Open" : "Close"}
+        {isSidebarVisible ? "Close" : "Open"}
       </button>
     </div>
   );

@@ -97,7 +97,7 @@ const Page = () => {
     }, 3000);
   };
 
-  const modelOptions = [
+  const loca2Models = [
     "ACCESS-CM2",
     "CESM2-LENS",
     "CNRM-ESM2-1",
@@ -111,6 +111,18 @@ const Page = () => {
     "MPI-ESM1-2-HR",
     "MRI-ESM2-0",
     "TaiESM1",
+  ];
+
+  const gcmModels = [
+    "MIROC5", 
+    "HadGEM2-ES", 
+    "HadGEM2-CC", 
+    "GFDL-CM3", 
+    "CNRM-CM5", 
+    "CMCС-CMS", 
+    "CESM1-BGC", 
+    "CCSM4", 
+    "CanESM2"
   ];
 
   return (
@@ -163,9 +175,15 @@ const Page = () => {
               className={`input ${errors.model_name ? "borderRed" : ""}`}
             >
               <option value="">Select Model Name</option>
-              {formData.scenario_set === "LOCA2 GCMS" && modelOptions.map((model) => (
+              {formData.scenario_set === "LOCA2 GCMS" && loca2Models.map((model) => (
                 <option key={model} value={model}>{model}</option>
               ))}
+              {formData.scenario_set === "GCMS" && gcmModels.map((model) => (
+                <option key={model} value={model}>{model}</option>
+              ))}
+              {formData.scenario_set === "HISTORICAL LIVENH" && (
+                <option value="LIVENH">LIVENH</option>
+              )}
             </select>
           </div>
 
@@ -184,7 +202,11 @@ const Page = () => {
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            transition={{ duration: 0.5 }}
+            transition={{
+              duration: 0.5, // Duration for both initial and animate
+              opacity: { duration: 0.3 }, // Optional, if you want a different duration for opacity
+              y: { duration: 0.3 }, // Optional, if you want a different duration for the y-axis animation
+            }}
             className="popup"
           >
             Successfully Submitted Parameters!
